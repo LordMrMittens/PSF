@@ -6,6 +6,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInput/Public/EnhancedInputComponent.h"
 #include "InputActionValue.h"
+#include "InputDataAsset.h"
 
 // Sets default values
 APlayerPawn::APlayerPawn()
@@ -43,22 +44,16 @@ void APlayerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
     Subsystem->AddMappingContext(InputMapping, 0);
 
     UEnhancedInputComponent* PEI = Cast<UEnhancedInputComponent>(PlayerInputComponent);
+    if( InputActions != nullptr){
 // Bind the actions
-    PEI->BindAction(InputMoveVertical, ETriggerEvent::Triggered, this, &APlayerPawn::MoveVertical);
-    PEI->BindAction(InputMoveHorizontal, ETriggerEvent::Triggered, this, &APlayerPawn::MoveHorizontal);
-
-
+    PEI->BindAction(InputActions->InputSteer, ETriggerEvent::Triggered, this, &APlayerPawn::Steer);
+}
 }
 
-void APlayerPawn::MoveVertical(const FInputActionValue& Value)
+void APlayerPawn::Steer(const FInputActionValue& Value)
 {
     FString ValueString = Value.ToString();
     UE_LOG(LogTemp, Display, TEXT("vert Value: %s"), *ValueString );
 }
 
-void APlayerPawn::MoveHorizontal(const FInputActionValue& Value)
-{
-    FString ValueString = Value.ToString();
-    UE_LOG(LogTemp, Display, TEXT(" horz Value: %s"), *ValueString );
-}
 

@@ -26,11 +26,8 @@ protected:
 
 
 public:	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-    class UInputAction* InputMoveVertical;
-		UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-    UInputAction* InputMoveHorizontal;
- 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
+	class UInputDataAsset* InputActions;
 	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -38,7 +35,6 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	void MoveVertical(const FInputActionValue& Value);
-	void MoveHorizontal(const FInputActionValue& Value);
+	void Steer(const FInputActionValue& Value);
 
 };
