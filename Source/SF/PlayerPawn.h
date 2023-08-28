@@ -2,10 +2,11 @@
 
 #pragma once
 
-#include "InputActionValue.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "PlayerPawn.generated.h"
+
+struct FInputActionValue;
 
 UCLASS()
 class SF_API APlayerPawn : public APawn
