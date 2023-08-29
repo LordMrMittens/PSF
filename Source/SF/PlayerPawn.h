@@ -27,15 +27,20 @@ protected:
 
 
 public:	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
-	class UInputDataAsset* InputActions;
-	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
+	class UInputDataAsset* InputActions;
+	UPROPERTY(EditAnywhere)
+	float Speed;
+	UPROPERTY(EditAnywhere)
+	FVector MoveDirection;
+
 	void Steer(const FInputActionValue& Value);
+
+private:
+
+	void Move();
 
 };

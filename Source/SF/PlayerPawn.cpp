@@ -7,6 +7,7 @@
 #include "EnhancedInput/Public/EnhancedInputComponent.h"
 #include "InputActionValue.h"
 #include "InputDataAsset.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 APlayerPawn::APlayerPawn()
@@ -27,6 +28,7 @@ void APlayerPawn::BeginPlay()
 void APlayerPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+    Move();
 
 }
 
@@ -54,6 +56,13 @@ void APlayerPawn::Steer(const FInputActionValue& Value)
 {
     FString ValueString = Value.ToString();
     UE_LOG(LogTemp, Display, TEXT("vert Value: %s"), *ValueString );
+}
+
+void APlayerPawn::Move()
+{
+    FVector CurrentLoc = GetActorLocation();
+    FVector NewLocation = CurrentLoc+MoveDirection * Speed * GetWorld()->GetDeltaSeconds();
+    SetActorLocation(NewLocation);
 }
 
 
