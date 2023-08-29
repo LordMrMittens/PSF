@@ -36,6 +36,7 @@ public:
 	float Speed;
 	UPROPERTY(EditAnywhere)
 	FVector MoveDirection;
+	FVector OriginalMoveDirection;
 
 	void Steer(const FInputActionValue& Value);
 

@@ -21,7 +21,8 @@ APlayerPawn::APlayerPawn()
 void APlayerPawn::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Error, TEXT("Alive"));
+    OriginalMoveDirection = MoveDirection;
+
 }
 
 // Called every frame
@@ -29,6 +30,7 @@ void APlayerPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
     Move();
+
 
 }
 
@@ -54,8 +56,10 @@ void APlayerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 void APlayerPawn::Steer(const FInputActionValue& Value)
 {
-    FString ValueString = Value.ToString();
-    UE_LOG(LogTemp, Display, TEXT("vert Value: %s"), *ValueString );
+    FVector2D SteerValue = FVector2D::ZeroVector;
+    SteerValue = Value.Get<FVector2D>();
+    MoveDirection.Z = SteerValue.Y;
+    MoveDirection.Y = SteerValue.X;
 }
 
 void APlayerPawn::Move()
@@ -63,6 +67,7 @@ void APlayerPawn::Move()
     FVector CurrentLoc = GetActorLocation();
     FVector NewLocation = CurrentLoc+MoveDirection * Speed * GetWorld()->GetDeltaSeconds();
     SetActorLocation(NewLocation);
+    MoveDirection = OriginalMoveDirection;
 }
 
 
