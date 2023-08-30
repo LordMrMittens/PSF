@@ -64,9 +64,8 @@ void APlayerPawn::Steer(const FInputActionValue& Value)
 
 void APlayerPawn::Move()
 {
-    FVector CurrentLoc = GetActorLocation();
-    FVector NewLocation = CurrentLoc+MoveDirection * Speed * GetWorld()->GetDeltaSeconds();
-    SetActorLocation(NewLocation);
+    FVector MoveDelta = MoveDirection * Speed * GetWorld()->GetDeltaSeconds();
+    AddActorWorldOffset(MoveDelta, true);
     MoveDirection = OriginalMoveDirection;
 }
 
