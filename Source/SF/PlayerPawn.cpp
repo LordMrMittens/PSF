@@ -8,12 +8,18 @@
 #include "InputDataAsset.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Projectile.h"
 
 // Sets default values
 APlayerPawn::APlayerPawn()
 {
     // Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
     PrimaryActorTick.bCanEverTick = true;
+    MainBodyComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MainBody"));
+    SetRootComponent(MainBodyComponent);
+    
+    SingleLaserSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPoint"));
+    SingleLaserSpawnPoint->SetupAttachment(MainBodyComponent);
 }
 
 // Called when the game starts or when spawned

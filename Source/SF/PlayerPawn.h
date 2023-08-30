@@ -7,6 +7,7 @@
 #include "PlayerPawn.generated.h"
 
 struct FInputActionValue;
+class AProjectile;
 
 UCLASS()
 class SF_API APlayerPawn : public APawn
@@ -52,5 +53,14 @@ private:
 
 	void Move();
 	void SetRotation();
+
+	UPROPERTY(EditAnywhere)
+	USceneComponent* SingleLaserSpawnPoint;
+	UPROPERTY(EditAnywhere)
+	UStaticMeshComponent* MainBodyComponent;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AProjectile> ProjectileClass;
+	AProjectile *Projectile;
 
 };
