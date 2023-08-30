@@ -26,6 +26,11 @@ void AProjectile::Tick(float DeltaTime)
 
 }
 
+void AProjectile::SetSpeed(float InputSpeed)
+{
+	Speed = InputSpeed;
+}
+
 void AProjectile::Move()
 {
 	FVector LocalMoveDelta = Direction * Speed * GetWorld()->GetDeltaSeconds();

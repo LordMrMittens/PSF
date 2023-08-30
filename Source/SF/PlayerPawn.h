@@ -53,6 +53,7 @@ private:
 
 	void Move();
 	void SetRotation();
+	void FireLasers();
 
 	UPROPERTY(EditAnywhere)
 	USceneComponent* SingleLaserSpawnPoint;
@@ -61,6 +62,8 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AProjectile> ProjectileClass;
-	AProjectile *Projectile;
+	
+
+	
 
 };

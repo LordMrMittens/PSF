@@ -22,6 +22,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	void SetSpeed(float InputSpeed);
 
 private:
 	float Speed = 200.0f;

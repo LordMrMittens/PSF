@@ -55,6 +55,7 @@ void APlayerPawn::SetupPlayerInputComponent(UInputComponent *PlayerInputComponen
     {
         // Bind the actions
         PEI->BindAction(InputActions->InputSteer, ETriggerEvent::Triggered, this, &APlayerPawn::Steer);
+        PEI->BindAction(InputActions->FireLaser, ETriggerEvent::Triggered, this, &APlayerPawn::FireLasers);
     }
 }
 
@@ -89,4 +90,15 @@ void APlayerPawn::SetRotation()
         SpringArmComponent->SetRelativeRotation(SpringArmRotation);
     }
     SetActorRotation(NewRotation);
+}
+
+void APlayerPawn::FireLasers()
+{
+    UE_LOG(LogTemp, Warning, TEXT("Firing location: %s, rotation %s"), *SingleLaserSpawnPoint->GetComponentLocation().ToString(), *SingleLaserSpawnPoint->GetComponentRotation().ToString());
+    AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, 
+    SingleLaserSpawnPoint->GetComponentLocation(), 
+    SingleLaserSpawnPoint->GetComponentRotation());
+    if(Projectile){
+        Projectile->SetSpeed(Speed*2);
+    }
 }
