@@ -56,8 +56,7 @@ void APlayerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 void APlayerPawn::Steer(const FInputActionValue& Value)
 {
-    FVector2D SteerValue = FVector2D::ZeroVector;
-    SteerValue = Value.Get<FVector2D>();
+        FVector2D SteerValue = Value.Get<FVector2D>();
     MoveDirection.Z = SteerValue.Y;
     MoveDirection.Y = SteerValue.X;
 }
@@ -66,7 +65,21 @@ void APlayerPawn::Move()
 {
     FVector MoveDelta = MoveDirection * Speed * GetWorld()->GetDeltaSeconds();
     AddActorWorldOffset(MoveDelta, true);
+    SetRotation();
     MoveDirection = OriginalMoveDirection;
+}
+
+void APlayerPawn::SetRotation()
+{
+    float DesiredPitch = FMath::Clamp(MoveDirection.Z, -1.0f, 1.0f) * MaxTiltAngle/2;
+    float DesiredRoll = FMath::Clamp(MoveDirection.Y, -1.0f, 1.0f) * MaxTiltAngle;
+
+    FRotator CurrentRotation = GetActorRotation();
+    FRotator DesiredRotation = FRotator(DesiredPitch, 0.0f, DesiredRoll);
+    FRotator NewRotation = FMath::RInterpTo(CurrentRotation, DesiredRotation, GetWorld()->GetDeltaSeconds(), RotationInterpSpeed);
+
+
+    SetActorRotation(NewRotation);
 }
 
 

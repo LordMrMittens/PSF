@@ -38,10 +38,16 @@ public:
 	FVector MoveDirection;
 	FVector OriginalMoveDirection;
 
+	UPROPERTY(EditAnywhere)
+	float MaxTiltAngle;
+	UPROPERTY(EditAnywhere)
+	float RotationInterpSpeed;
+
 	void Steer(const FInputActionValue& Value);
 
 private:
 
 	void Move();
+	void SetRotation();
 
 };
