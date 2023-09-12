@@ -75,6 +75,9 @@ void APlayerPawn::Steer(const FInputActionValue &Value)
 void APlayerPawn::Move()
 {
     FVector MoveDelta = MoveDirection * Speed * GetWorld()->GetDeltaSeconds();
+    FVector CurrentLocation = GetActorLocation();
+    LimitMovement(CurrentLocation, MoveDelta);
+    CheckIfOutOfBounds(CurrentLocation, MoveDelta);
     AddActorWorldOffset(MoveDelta, true);
     SetRotation();
     MoveDirection = OriginalMoveDirection;
@@ -96,6 +99,45 @@ void APlayerPawn::SetRotation()
         SpringArmComponent->SetRelativeRotation(SpringArmRotation);
     }
     SetActorRotation(NewRotation);
+}
+
+void APlayerPawn::LimitMovement(FVector CurrentActorLocation, FVector& MovementDelta)
+{
+    FVector NewLocation = CurrentActorLocation + MovementDelta;
+        if (NewLocation.Z > MaxBoundary.Z || NewLocation.Z < MinBoundary.Z)
+    {
+        MovementDelta.Z = 0;
+        MoveDirection.Z=0;
+    }
+    if (NewLocation.Y > MaxBoundary.Y || NewLocation.Y < MinBoundary.Y)
+    {
+        MovementDelta.Y = 0;
+        MoveDirection.Y =0;
+    }
+}
+
+void APlayerPawn::CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& MovementDelta)
+{
+    if (CurrentActorLocation.Z > MaxBoundary.Z)
+    {
+        MovementDelta.Z = -100;
+        MoveDirection.Z =-1;
+    }
+    if (CurrentActorLocation.Z < MinBoundary.Z)
+    {
+        MovementDelta.Z = 100;
+        MoveDirection.Z =1;
+    }
+        if (CurrentActorLocation.Y > MaxBoundary.Y)
+    {
+        MovementDelta.Y = -100;
+        MoveDirection.Y =-1;
+    }
+    if (CurrentActorLocation.Y < MinBoundary.Y)
+    {
+        MovementDelta.Y = 100;
+        MoveDirection.Y =1;
+    }
 }
 
 void APlayerPawn::FireLasers()

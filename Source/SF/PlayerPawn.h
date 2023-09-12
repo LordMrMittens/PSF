@@ -53,6 +53,8 @@ private:
 
 	void Move();
 	void SetRotation();
+	void LimitMovement(FVector CurrentActorLocation, FVector& MovementDelta);
+	void CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& MovementDelta);
 	void FireLasers();
 	void SpawnLaser(USceneComponent* SpawnPoint);
 
@@ -73,6 +75,9 @@ private:
 	
 	UPROPERTY(EditAnywhere)
 	bool DoubleLaser = false;
+
+	FVector MinBoundary = FVector(0.0f, -5000.0f, 0.0f);
+    FVector MaxBoundary = FVector(0.0f, 5000.0f, 3000.0f);
 	
 
 };
