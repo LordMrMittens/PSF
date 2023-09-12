@@ -57,6 +57,11 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	USceneComponent* SingleLaserSpawnPoint;
+		UPROPERTY(EditAnywhere)
+	USceneComponent* DoubleLaserSpawnPointL;
+		UPROPERTY(EditAnywhere)
+	USceneComponent* DoubleLaserSpawnPointR;
+	
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* MainBodyComponent;
 

@@ -20,6 +20,10 @@ APlayerPawn::APlayerPawn()
     
     SingleLaserSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPoint"));
     SingleLaserSpawnPoint->SetupAttachment(MainBodyComponent);
+    DoubleLaserSpawnPointL = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPointL"));
+    DoubleLaserSpawnPointL->SetupAttachment(MainBodyComponent);
+    DoubleLaserSpawnPointR = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPointR"));
+    DoubleLaserSpawnPointR->SetupAttachment(MainBodyComponent);
 }
 
 // Called when the game starts or when spawned
