@@ -22,8 +22,10 @@ APlayerPawn::APlayerPawn()
     SingleLaserSpawnPoint->SetupAttachment(MainBodyComponent);
     DoubleLaserSpawnPointL = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPointL"));
     DoubleLaserSpawnPointL->SetupAttachment(MainBodyComponent);
+    LaserSpawnPoints.Add(DoubleLaserSpawnPointL);
     DoubleLaserSpawnPointR = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPointR"));
     DoubleLaserSpawnPointR->SetupAttachment(MainBodyComponent);
+    LaserSpawnPoints.Add(DoubleLaserSpawnPointR);
 }
 
 // Called when the game starts or when spawned
@@ -98,11 +100,26 @@ void APlayerPawn::SetRotation()
 
 void APlayerPawn::FireLasers()
 {
-    AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, 
-    SingleLaserSpawnPoint->GetComponentLocation(), 
-    SingleLaserSpawnPoint->GetComponentRotation());
-    if(Projectile){
+    if(DoubleLaser){
+        for (USceneComponent* SpawnPoint : LaserSpawnPoints)
+        {
+            SpawnLaser(SpawnPoint);
+        }
+        
+    } else {
+        SpawnLaser(SingleLaserSpawnPoint);
+    }
+
+}
+
+void APlayerPawn::SpawnLaser(USceneComponent *SpawnPoint)
+{
+    AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
+                                                                  SpawnPoint->GetComponentLocation(),
+                                                                  SpawnPoint->GetComponentRotation());
+    if (Projectile)
+    {
         Projectile->SetOwner(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
-        Projectile->SetSpeed(Speed*4);
+        Projectile->SetSpeed(Speed * 4);
     }
 }

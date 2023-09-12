@@ -54,6 +54,7 @@ private:
 	void Move();
 	void SetRotation();
 	void FireLasers();
+	void SpawnLaser(USceneComponent* SpawnPoint);
 
 	UPROPERTY(EditAnywhere)
 	USceneComponent* SingleLaserSpawnPoint;
@@ -61,6 +62,8 @@ private:
 	USceneComponent* DoubleLaserSpawnPointL;
 		UPROPERTY(EditAnywhere)
 	USceneComponent* DoubleLaserSpawnPointR;
+
+	TArray<USceneComponent*> LaserSpawnPoints;
 	
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* MainBodyComponent;
@@ -68,7 +71,8 @@ private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AProjectile> ProjectileClass;
 	
-
+	UPROPERTY(EditAnywhere)
+	bool DoubleLaser = false;
 	
 
 };
