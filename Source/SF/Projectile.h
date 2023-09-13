@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "Mover.h"
 #include "Projectile.generated.h"
 
 UCLASS()
-class SF_API AProjectile : public AActor
+class SF_API AProjectile : public AMover
 {
 	GENERATED_BODY()
 	
@@ -27,10 +27,6 @@ public:
 	UStaticMeshComponent* MainBodyComponent;
 
 private:
-	float Speed = 200.0f;
-	float Damage;
-	FVector Direction = FVector(1,0,0);
-	void Move();
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);

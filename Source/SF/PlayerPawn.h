@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
+#include "MovingPawn.h"
 #include "PlayerPawn.generated.h"
 
 struct FInputActionValue;
 class AProjectile;
 
 UCLASS()
-class SF_API APlayerPawn : public APawn
+class SF_API APlayerPawn : public AMovingPawn
 {
 	GENERATED_BODY()
 
@@ -24,7 +24,7 @@ protected:
 	protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
     class UInputMappingContext* InputMapping;
-
+	virtual void Move() override;
 
 
 public:	
@@ -36,11 +36,6 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
 	class UInputDataAsset* InputActions;
-	UPROPERTY(EditAnywhere)
-	float Speed;
-	UPROPERTY(EditAnywhere)
-	FVector MoveDirection;
-	FVector OriginalMoveDirection;
 
 	UPROPERTY(EditAnywhere)
 	float MaxTiltAngle;
@@ -51,7 +46,6 @@ public:
 
 private:
 
-	void Move();
 	void SetRotation();
 	void LimitMovement(FVector CurrentActorLocation, FVector& MovementDelta);
 	void CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& MovementDelta);

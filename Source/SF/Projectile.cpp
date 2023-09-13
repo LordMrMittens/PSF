@@ -37,14 +37,6 @@ void AProjectile::SetSpeed(float InputSpeed)
 	Speed = InputSpeed;
 }
 
-void AProjectile::Move()
-{
-	FVector LocalMoveDelta = Direction * Speed * GetWorld()->GetDeltaSeconds();
-	FTransform ActorTransform = GetActorTransform();
-	FVector WorldMoveDelta = ActorTransform.TransformVectorNoScale(LocalMoveDelta);
-	AddActorWorldOffset(WorldMoveDelta, true);
-}
-
 void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	UE_LOG(LogTemp, Error, TEXT("Laser Hit"));
