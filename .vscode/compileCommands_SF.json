@@ -1,6 +1,6 @@
 [
 	{
-		"file": "D:\\Unreal\\PSF\\Source\\SF\\Delete.cpp",
+		"file": "D:\\Unreal\\PSF\\Source\\SF\\FlyingEnemyPawn.cpp",
 		"arguments": [
 			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
@@ -8,7 +8,23 @@
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
 	},
 	{
-		"file": "D:\\Unreal\\PSF\\Source\\SF\\Delete.h",
+		"file": "D:\\Unreal\\PSF\\Source\\SF\\FlyingEnemyPawn.h",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
+		],
+		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\Unreal\\PSF\\Source\\SF\\GunComponent.cpp",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
+		],
+		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\Unreal\\PSF\\Source\\SF\\GunComponent.h",
 		"arguments": [
 			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"

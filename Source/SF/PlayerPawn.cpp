@@ -8,6 +8,7 @@
 #include "InputDataAsset.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "GunComponent.h"
 #include "Projectile.h"
 
 // Sets default values
@@ -26,6 +27,7 @@ APlayerPawn::APlayerPawn()
     DoubleLaserSpawnPointR = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPointR"));
     DoubleLaserSpawnPointR->SetupAttachment(MainBodyComponent);
     LaserSpawnPoints.Add(DoubleLaserSpawnPointR);
+    GunComponent = CreateDefaultSubobject<UGunComponent>(TEXT("Gun"));
 }
 
 // Called when the game starts or when spawned
@@ -34,6 +36,9 @@ void APlayerPawn::BeginPlay()
     Super::BeginPlay();
     OriginalMoveDirection = MoveDirection;
     SpringArmComponent = FindComponentByClass<USpringArmComponent>();
+    if(GunComponent){
+        GunComponent->SetupGunComponent(Speed, DoubleLaser, SingleLaserSpawnPoint, LaserSpawnPoints);
+    }
 }
 
 // Called every frame
@@ -61,7 +66,7 @@ void APlayerPawn::SetupPlayerInputComponent(UInputComponent *PlayerInputComponen
     {
         // Bind the actions
         PEI->BindAction(InputActions->InputSteer, ETriggerEvent::Triggered, this, &APlayerPawn::Steer);
-        PEI->BindAction(InputActions->FireLaser, ETriggerEvent::Started, this, &APlayerPawn::FireLasers);
+        PEI->BindAction(InputActions->FireLaser, ETriggerEvent::Started,  GunComponent, &UGunComponent::FireLasers);
     }
 }
 
@@ -130,31 +135,5 @@ void APlayerPawn::CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& Move
     {
         MovementDelta.Y = 100;
         MoveDirection.Y =1;
-    }
-}
-
-void APlayerPawn::FireLasers()
-{
-    if(DoubleLaser){
-        for (USceneComponent* SpawnPoint : LaserSpawnPoints)
-        {
-            SpawnLaser(SpawnPoint);
-        }
-        
-    } else {
-        SpawnLaser(SingleLaserSpawnPoint);
-    }
-
-}
-
-void APlayerPawn::SpawnLaser(USceneComponent *SpawnPoint)
-{
-    AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
-                                                                  SpawnPoint->GetComponentLocation(),
-                                                                  SpawnPoint->GetComponentRotation());
-    if (Projectile)
-    {
-        Projectile->SetOwner(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
-        Projectile->SetSpeed(Speed * 4);
     }
 }

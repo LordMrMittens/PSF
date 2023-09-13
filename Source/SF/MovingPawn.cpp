@@ -15,6 +15,7 @@ AMovingPawn::AMovingPawn()
 void AMovingPawn::BeginPlay()
 {
 	Super::BeginPlay();
+    OriginalMoveDirection = MoveDirection;
 	
 }
 

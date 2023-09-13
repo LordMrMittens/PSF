@@ -8,6 +8,7 @@
 
 struct FInputActionValue;
 class AProjectile;
+class UGunComponent;
 
 UCLASS()
 class SF_API APlayerPawn : public AMovingPawn
@@ -21,7 +22,6 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
     class UInputMappingContext* InputMapping;
 	virtual void Move() override;
@@ -46,8 +46,6 @@ private:
 
 	void LimitMovement(FVector CurrentActorLocation, FVector& MovementDelta);
 	void CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& MovementDelta);
-	void FireLasers();
-	void SpawnLaser(USceneComponent* SpawnPoint);
 
 	UPROPERTY(EditAnywhere)
 	USceneComponent* SingleLaserSpawnPoint;
@@ -60,15 +58,13 @@ private:
 	
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* MainBodyComponent;
-
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<AProjectile> ProjectileClass;
 	
 	UPROPERTY(EditAnywhere)
 	bool DoubleLaser = false;
 
 	FVector MinBoundary = FVector(0.0f, -5000.0f, 0.0f);
     FVector MaxBoundary = FVector(0.0f, 5000.0f, 3000.0f);
-	
+	UPROPERTY(EditAnywhere)
+	UGunComponent* GunComponent;
 
 };
