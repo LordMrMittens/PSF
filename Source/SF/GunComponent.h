@@ -3,13 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
+#include "Components/SceneComponent.h"
 #include "GunComponent.generated.h"
 
 class AProjectile;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class SF_API UGunComponent : public UActorComponent
+class SF_API UGunComponent : public USceneComponent
 {
 	GENERATED_BODY()
 
@@ -24,15 +24,20 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	void SetupGunComponent(float ShotSpeed, bool DoubleShot = false, USceneComponent* SingleLaserSource =nullptr, TArray<USceneComponent*> MultiLasers = TArray<USceneComponent*>());
+	void SetupGunComponent(AActor* Owner, float ShotSpeed, bool DoubleShot = false, USceneComponent* SingleLaserSource =nullptr, TArray<USceneComponent*> MultiLasers = TArray<USceneComponent*>());
 	void FireLasers();
 	void SpawnLaser(USceneComponent* SpawnPoint);
+	void Aim(AActor* PlayerActor);
+
+	AActor* OwnerActor;
 
 private:
 
 	USceneComponent* SingleLaserSpawnPoint;
 	TArray<USceneComponent*> LaserSpawnPoints;
 	float Speed;
+	UPROPERTY(EditAnywhere)
+	float ShotSpeedMultiplier;
 	bool DoubleLaser = false;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AProjectile> ProjectileClass;

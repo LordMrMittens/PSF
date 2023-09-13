@@ -34,11 +34,12 @@ void UGunComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 	// ...
 }
 
-void UGunComponent::SetupGunComponent(float ShotSpeed, bool DoubleShot, USceneComponent* SingleLaserSource, TArray<USceneComponent*> MultiLasers){
+void UGunComponent::SetupGunComponent(AActor* Owner, float ShotSpeed, bool DoubleShot, USceneComponent* SingleLaserSource, TArray<USceneComponent*> MultiLasers){
 	Speed = ShotSpeed;
 	DoubleLaser = DoubleShot;
 	SingleLaserSpawnPoint = SingleLaserSource;
 	LaserSpawnPoints = MultiLasers;
+	OwnerActor = Owner;
 }
 
 void UGunComponent::FireLasers()
@@ -58,14 +59,34 @@ void UGunComponent::FireLasers()
 void UGunComponent::SpawnLaser(USceneComponent *SpawnPoint)
 {
 	struct FActorSpawnParameters params;
-	params.Owner = GetOwner();
+	params.Owner = OwnerActor;
 	AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
 																  SpawnPoint->GetComponentLocation(),
-																  SpawnPoint->GetComponentRotation(), 
+																  this->GetComponentRotation(), 
 																  params);
 	if (Projectile!= nullptr)
 	{
-		Projectile->SetSpeed(Speed * 4);
+		Projectile->SetSpeed(Speed * ShotSpeedMultiplier);
 	}
 
+}
+void UGunComponent::Aim(AActor* PlayerActor){
+	    if (PlayerActor)
+    {
+        // Get the location of the player
+        FVector PlayerLocation = PlayerActor->GetActorLocation();
+
+        // Calculate the rotation to make the X-axis of the gun component aim at the player
+        FVector GunDirection = PlayerLocation - GetOwner()->GetActorLocation();
+        FRotator NewRotation = GunDirection.Rotation();
+		
+
+        // Optionally, you can limit the rotation to only affect the yaw (X-axis)
+        // NewRotation.Pitch = 0.0f;
+        // NewRotation.Roll = 0.0f;
+
+        // Apply the new rotation to the gun component
+	
+        SetWorldRotation(NewRotation);
+    }
 }

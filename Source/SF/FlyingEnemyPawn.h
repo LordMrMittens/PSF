@@ -37,8 +37,12 @@ private:
 	UStaticMeshComponent *MainBodyComponent;
 	UPROPERTY(EditAnywhere)
 	UGunComponent *GunComponent;
-
 	AActor* PlayerActor;
+
+	UPROPERTY(EditAnywhere)
+	float ShotFrequency;
+
+	FTimerHandle ShotTimerHandle;
 
 	void Steer();
 };

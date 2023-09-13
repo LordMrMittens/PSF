@@ -35,7 +35,6 @@ void AProjectile::Tick(float DeltaTime)
 void AProjectile::SetSpeed(float InputSpeed)
 {
 	Speed = InputSpeed;
-	UE_LOG(LogTemp, Warning, TEXT("Speed set"));
 }
 
 void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
@@ -46,7 +45,11 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimi
 
 void AProjectile::OnOverlapStart(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor != GetOwner()){
+	if(GetOwner() == nullptr){
+		UE_LOG(LogTemp, Error, TEXT("No Owner"));
+	}
+	if(OtherActor != GetOwner() && OtherActor->GetOwner() != GetOwner()){
+	UE_LOG(LogTemp, Error, TEXT("Laser Overlap owner %s, otheractor %s"),*GetOwner()->GetActorNameOrLabel(), *OtherActor->GetActorNameOrLabel());
 	Destroy();}
 }
 

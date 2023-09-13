@@ -29,14 +29,19 @@ void AFlyingEnemyPawn::BeginPlay()
 {
     Super::BeginPlay();
     PlayerActor = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-    
-     
+    if(GunComponent){
+        GunComponent->SetupGunComponent(this,Speed, false, SingleLaserSpawnPoint, LaserSpawnPoints);
+    }
+    GetWorldTimerManager().SetTimer(ShotTimerHandle,GunComponent, &UGunComponent::FireLasers, ShotFrequency, true);
 }
 
 void AFlyingEnemyPawn::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
     Steer();
+    if(GunComponent != nullptr){
+        GunComponent->Aim(PlayerActor);
+    }
 }
 
 void AFlyingEnemyPawn::Steer()

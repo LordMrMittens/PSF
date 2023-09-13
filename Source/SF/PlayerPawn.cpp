@@ -37,7 +37,7 @@ void APlayerPawn::BeginPlay()
     OriginalMoveDirection = MoveDirection;
     SpringArmComponent = FindComponentByClass<USpringArmComponent>();
     if(GunComponent){
-        GunComponent->SetupGunComponent(Speed, DoubleLaser, SingleLaserSpawnPoint, LaserSpawnPoints);
+        GunComponent->SetupGunComponent(this ,Speed, DoubleLaser, SingleLaserSpawnPoint, LaserSpawnPoints);
     }
 }
 
