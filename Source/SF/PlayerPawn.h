@@ -39,11 +39,14 @@ public:
 	class UInputDataAsset* InputActions;
 
 	void Steer(const FInputActionValue& Value);
+	FVector CalculateVelocity();
 
 private:
 
 	void LimitMovement(FVector CurrentActorLocation, FVector& MovementDelta);
 	void CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& MovementDelta);
+	
+	FVector PreviousLocation;
 
 	UPROPERTY(EditAnywhere)
 	USceneComponent* SingleLaserSpawnPoint;
@@ -62,6 +65,8 @@ private:
 
 	FVector MinBoundary = FVector(0.0f, -5000.0f, 0.0f);
     FVector MaxBoundary = FVector(0.0f, 5000.0f, 3000.0f);
+
+	bool RecevingInput = false;
 
 
 };

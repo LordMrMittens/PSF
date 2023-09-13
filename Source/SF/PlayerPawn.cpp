@@ -74,6 +74,7 @@ void APlayerPawn::Steer(const FInputActionValue &Value)
     FVector2D SteerValue = Value.Get<FVector2D>();
     MoveDirection.Z = SteerValue.Y;
     MoveDirection.Y = SteerValue.X;
+    RecevingInput = true;
 }
 
 void APlayerPawn::Move()
@@ -85,6 +86,7 @@ void APlayerPawn::Move()
     AddActorWorldOffset(MoveDelta, true);
     SetRotation();
     MoveDirection = OriginalMoveDirection;
+    RecevingInput = false;
 }
 
 void APlayerPawn::SetRotation()
@@ -135,4 +137,15 @@ void APlayerPawn::CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& Move
         MovementDelta.Y = 100;
         MoveDirection.Y =1;
     }
+}
+
+FVector APlayerPawn::CalculateVelocity()
+{
+    FVector CurrentLocation = GetActorLocation();
+    FVector Velocity = (CurrentLocation - PreviousLocation) / GetWorld()->GetDeltaSeconds();
+
+    // Update the previous location for the next frame
+    PreviousLocation = CurrentLocation;
+
+    return Velocity;
 }

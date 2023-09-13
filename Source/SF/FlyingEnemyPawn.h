@@ -43,6 +43,8 @@ private:
 	float ShotFrequency;
 
 	FTimerHandle ShotTimerHandle;
+	UPROPERTY(EditAnywhere)
+	float SteerFactor = 3; //times steering force in final script
 
 	void Steer();
 };

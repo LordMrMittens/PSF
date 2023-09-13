@@ -46,7 +46,6 @@ void AFlyingEnemyPawn::Tick(float DeltaTime)
 
 void AFlyingEnemyPawn::Steer()
 {
-    float SteerFactor = 10; //times steering force in final script
     FVector PlayerLocation = PlayerActor->GetActorLocation();
     FVector EnemyLocation = GetActorLocation();
     FVector PlayerDirection = (PlayerLocation - EnemyLocation).GetSafeNormal();
