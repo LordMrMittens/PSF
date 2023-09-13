@@ -62,7 +62,8 @@ void UGunComponent::SpawnLaser(USceneComponent *SpawnPoint)
                                                                   SpawnPoint->GetComponentRotation());
     if (Projectile)
     {
-        Projectile->SetOwner(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
+		
+        Projectile->SetOwner(GetOwner());
         Projectile->SetSpeed(Speed * 4);
     }
 }

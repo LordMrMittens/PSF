@@ -23,7 +23,7 @@ void AMovingPawn::BeginPlay()
 void AMovingPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+    Move();
 }
 
 // Called to bind functionality to input

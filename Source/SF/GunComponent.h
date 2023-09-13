@@ -36,5 +36,6 @@ private:
 	bool DoubleLaser = false;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AProjectile> ProjectileClass;
+
 		
 };

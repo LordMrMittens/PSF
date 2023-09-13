@@ -38,8 +38,6 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
 	class UInputDataAsset* InputActions;
 
-
-
 	void Steer(const FInputActionValue& Value);
 
 private:
@@ -49,22 +47,21 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	USceneComponent* SingleLaserSpawnPoint;
-		UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere)
 	USceneComponent* DoubleLaserSpawnPointL;
-		UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere)
 	USceneComponent* DoubleLaserSpawnPointR;
 
 	TArray<USceneComponent*> LaserSpawnPoints;
-	
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* MainBodyComponent;
-	
+	UPROPERTY(EditAnywhere)
+	UGunComponent* GunComponent;
 	UPROPERTY(EditAnywhere)
 	bool DoubleLaser = false;
 
 	FVector MinBoundary = FVector(0.0f, -5000.0f, 0.0f);
     FVector MaxBoundary = FVector(0.0f, 5000.0f, 3000.0f);
-	UPROPERTY(EditAnywhere)
-	UGunComponent* GunComponent;
+
 
 };

@@ -45,7 +45,6 @@ void APlayerPawn::BeginPlay()
 void APlayerPawn::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    Move();
 }
 
 // Called to bind functionality to input
