@@ -57,13 +57,15 @@ void UGunComponent::FireLasers()
 }
 void UGunComponent::SpawnLaser(USceneComponent *SpawnPoint)
 {
-	    AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
-                                                                  SpawnPoint->GetComponentLocation(),
-                                                                  SpawnPoint->GetComponentRotation());
-    if (Projectile)
-    {
-		
-        Projectile->SetOwner(GetOwner());
-        Projectile->SetSpeed(Speed * 4);
-    }
+	struct FActorSpawnParameters params;
+	params.Owner = GetOwner();
+	AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
+																  SpawnPoint->GetComponentLocation(),
+																  SpawnPoint->GetComponentRotation(), 
+																  params);
+	if (Projectile!= nullptr)
+	{
+		Projectile->SetSpeed(Speed * 4);
+	}
+
 }
