@@ -40,3 +40,13 @@ void AMovingPawn::Move()
     MoveDirection = OriginalMoveDirection;
 }
 
+void AMovingPawn::SetRotation()
+{
+    float DesiredPitch = FMath::Clamp(MoveDirection.Z, -1.0f, 1.0f) * MaxTiltAngle / 2;
+    float DesiredRoll = FMath::Clamp(MoveDirection.Y, -1.0f, 1.0f) * MaxTiltAngle;
+    FRotator CurrentRotation = GetActorRotation();
+    FRotator DesiredRotation = FRotator(DesiredPitch, 0.0f, DesiredRoll);
+    FRotator NewRotation = FMath::RInterpTo(CurrentRotation, DesiredRotation, GetWorld()->GetDeltaSeconds(), RotationInterpSpeed);
+    SetActorRotation(NewRotation);
+}
+

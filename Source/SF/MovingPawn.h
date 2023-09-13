@@ -20,6 +20,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	virtual void Move();
+	virtual void SetRotation();
 
 public:	
 	// Called every frame
@@ -33,5 +34,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	FVector MoveDirection;
 	FVector OriginalMoveDirection;
+	UPROPERTY(EditAnywhere)
+	float MaxTiltAngle;
+	UPROPERTY(EditAnywhere)
+	float RotationInterpSpeed;
 
 };

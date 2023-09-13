@@ -25,6 +25,7 @@ protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
     class UInputMappingContext* InputMapping;
 	virtual void Move() override;
+	virtual void SetRotation() override;
 
 
 public:	
@@ -37,16 +38,12 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
 	class UInputDataAsset* InputActions;
 
-	UPROPERTY(EditAnywhere)
-	float MaxTiltAngle;
-	UPROPERTY(EditAnywhere)
-	float RotationInterpSpeed;
+
 
 	void Steer(const FInputActionValue& Value);
 
 private:
 
-	void SetRotation();
 	void LimitMovement(FVector CurrentActorLocation, FVector& MovementDelta);
 	void CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& MovementDelta);
 	void FireLasers();
