@@ -24,6 +24,7 @@ AFlyingEnemyPawn::AFlyingEnemyPawn()
     LaserSpawnPoints.Add(DoubleLaserSpawnPointR);
 
     GunComponent = CreateDefaultSubobject<UGunComponent>(TEXT("Gun"));
+    GunComponent->SetupAttachment(MainBodyComponent);
 }
 void AFlyingEnemyPawn::BeginPlay()
 {

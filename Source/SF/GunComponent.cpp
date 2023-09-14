@@ -86,7 +86,6 @@ void UGunComponent::Aim(AActor *PlayerActor)
         
         FVector PredictedPlayerLocation = PlayerLocation + (PlayerVelocity * TimeToHit);
         FVector GunDirection = PredictedPlayerLocation - GetComponentLocation();
-		GunDirection.X *= -1;
         FRotator NewRotation = GunDirection.Rotation();
 
         SetRelativeRotation(NewRotation);
