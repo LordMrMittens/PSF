@@ -38,6 +38,8 @@ private:
 	float Speed;
 	UPROPERTY(EditAnywhere)
 	float ShotSpeedMultiplier;
+	UPROPERTY(EditAnywhere)
+	float ShotLeadMultiplier = 1.5f; //1.5 default
 	bool DoubleLaser = false;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AProjectile> ProjectileClass;

@@ -82,7 +82,7 @@ void UGunComponent::Aim(AActor *PlayerActor)
             PlayerVelocity = PlayerPawn->CalculateVelocity();
         }
 
-        float TimeToHit = FVector::Dist(GetComponentLocation(), PlayerLocation) / (Speed * 4);
+        float TimeToHit = FVector::Dist(GetComponentLocation(), PlayerLocation) / (Speed * ShotSpeedMultiplier*ShotLeadMultiplier);
         
         FVector PredictedPlayerLocation = PlayerLocation + (PlayerVelocity * TimeToHit);
         FVector GunDirection = PredictedPlayerLocation - GetComponentLocation();
