@@ -48,8 +48,9 @@ void AProjectile::OnOverlapStart(class UPrimitiveComponent* OverlappedComp, clas
 	if(GetOwner() == nullptr){
 		UE_LOG(LogTemp, Error, TEXT("No Owner"));
 	}
-	if(OtherActor != GetOwner() && OtherActor->GetOwner() != GetOwner()){
-	UE_LOG(LogTemp, Error, TEXT("Laser Overlap owner %s, otheractor %s"),*GetOwner()->GetActorNameOrLabel(), *OtherActor->GetActorNameOrLabel());
-	Destroy();}
+	if(OtherActor != GetOwner() && OtherActor->GetOwner() != GetOwner())
+	{
+	Destroy();
+	}
 }
 

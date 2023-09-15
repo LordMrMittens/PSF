@@ -1,17 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "FlyingEnemyPawn.h"
 #include "GunComponent.h"
 #include "Kismet/GameplayStatics.h"
-
+#include "DrawDebugHelpers.h"
 
 AFlyingEnemyPawn::AFlyingEnemyPawn()
 {
     PrimaryActorTick.bCanEverTick = true;
     MainBodyComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MainBody"));
     SetRootComponent(MainBodyComponent);
-    
+
     SingleLaserSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPoint"));
     SingleLaserSpawnPoint->SetupAttachment(MainBodyComponent);
 
@@ -30,26 +29,76 @@ void AFlyingEnemyPawn::BeginPlay()
 {
     Super::BeginPlay();
     PlayerActor = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-    if(GunComponent){
-        GunComponent->SetupGunComponent(this,Speed, false, SingleLaserSpawnPoint, LaserSpawnPoints);
+    if (GunComponent)
+    {
+        GunComponent->SetupGunComponent(this, Speed, false, SingleLaserSpawnPoint, LaserSpawnPoints);
     }
-    GetWorldTimerManager().SetTimer(ShotTimerHandle,GunComponent, &UGunComponent::FireLasers, ShotFrequency, true);
+    GetWorldTimerManager().SetTimer(ShotTimerHandle, GunComponent, &UGunComponent::FireLasers, ShotFrequency, true);
 }
 
 void AFlyingEnemyPawn::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
     Steer();
-    if(GunComponent != nullptr){
+    if (GunComponent != nullptr)
+    {
         GunComponent->Aim(PlayerActor);
     }
 }
 
 void AFlyingEnemyPawn::Steer()
 {
-    FVector PlayerLocation = PlayerActor->GetActorLocation();
-    FVector EnemyLocation = GetActorLocation();
-    FVector PlayerDirection = (PlayerLocation - EnemyLocation).GetSafeNormal();
-    MoveDirection.Z = PlayerDirection.Z * SteerFactor;
-    MoveDirection.Y = PlayerDirection.Y * SteerFactor;
+    if (CanSteerTowardsPlayer && ObstacleAvoidanceDirection == 0 && !DetectObstacles())
+    {
+        FVector PlayerLocation = PlayerActor->GetActorLocation();
+        FVector EnemyLocation = GetActorLocation();
+        FVector PlayerDirection = (PlayerLocation - EnemyLocation).GetSafeNormal();
+        MoveDirection.Z = PlayerDirection.Z * SteerFactor;
+        MoveDirection.Y = PlayerDirection.Y * SteerFactor;
+    }
+    else
+    {
+        Evade();
+    }
+}
+
+void AFlyingEnemyPawn::Evade()
+{
+    ObstacleAvoidanceTimer += GetWorld()->GetDeltaSeconds();
+    CanSteerTowardsPlayer = false;
+    if (ObstacleAvoidanceDirection == 0)
+    {
+        int32 RandomDirection = FMath::RandRange(0, 1);
+        ZObstacleAvoidanceStrength = FMath::RandRange(0.0f, 0.6f);
+        ObstacleAvoidanceDirection = (RandomDirection == 0) ? -1 : 1;
+    }
+    if (ObstacleAvoidanceTimer > ObstacleAvoidanceDuration)
+    {
+        ObstacleAvoidanceDirection = 0;
+        ZObstacleAvoidanceStrength = 0;
+    }
+    MoveDirection.Y = ObstacleAvoidanceDirection * SteerFactor * ObstacleAvoidanceStrength;
+    MoveDirection.Z = 1 * SteerFactor * ObstacleAvoidanceStrength * ZObstacleAvoidanceStrength;
+    if (ObstacleAvoidanceTimer > ResetSteeringDuration)
+    {
+        ObstacleAvoidanceTimer = 0;
+        CanSteerTowardsPlayer = true;
+    }
+}
+
+bool AFlyingEnemyPawn::DetectObstacles()
+{
+    FHitResult HitResult;
+    FCollisionQueryParams CollisionParams;
+    CollisionParams.AddIgnoredActor(this);
+    FVector TraceStart = GetActorLocation();
+    FVector TraceEnd = TraceStart + MoveDirection * ObstacleAvoidanceDistance;
+    DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Red, false, 1);
+    bool bIsHit = GetWorld()->LineTraceSingleByChannel(HitResult,
+                                                       TraceStart,
+                                                       TraceEnd,
+                                                       ECC_Visibility,
+                                                       CollisionParams);
+
+    return bIsHit;
 }

@@ -46,5 +46,27 @@ private:
 	UPROPERTY(EditAnywhere)
 	float SteerFactor = 3; //times steering force in final script
 
+	UPROPERTY(EditAnywhere)
+	float ObstacleAvoidanceDistance = 5000;
+
+	UPROPERTY(EditAnywhere)
+	float ObstacleDetectionFrequency = 1;
+	FTimerHandle ObstacleDetectionTimerHandle;
+
+	UPROPERTY(EditAnywhere)
+	float ObstacleAvoidanceDuration = 2;
+	UPROPERTY(EditAnywhere)
+	float ResetSteeringDuration = 4;
+	UPROPERTY(EditAnywhere)
+	float ObstacleAvoidanceStrength = 1.5;
+	float ZObstacleAvoidanceStrength =.0f;
+	float ObstacleAvoidanceTimer = 0;
+	bool CanSteerTowardsPlayer = true;
+
+	int32 ObstacleAvoidanceDirection = 0;
+
 	void Steer();
+	void Evade();
+	bool DetectObstacles();
+	
 };
