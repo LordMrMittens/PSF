@@ -49,17 +49,20 @@ void AFlyingEnemyPawn::Tick(float DeltaTime)
 
 void AFlyingEnemyPawn::Steer()
 {
-    if (CanSteerTowardsPlayer && ObstacleAvoidanceDirection == 0 && !DetectObstacles())
+    if(LeavingLevel)
+    {
+    LeaveLevel();
+    }
+    if(DetectObstacles()){
+    Evade();
+    }
+    else if (CanSteerTowardsPlayer && ObstacleAvoidanceDirection == 0)
     {
         FVector PlayerLocation = PlayerActor->GetActorLocation();
         FVector EnemyLocation = GetActorLocation();
         FVector PlayerDirection = (PlayerLocation - EnemyLocation).GetSafeNormal();
         MoveDirection.Z = PlayerDirection.Z * SteerFactor;
         MoveDirection.Y = PlayerDirection.Y * SteerFactor;
-    }
-    else
-    {
-        Evade();
     }
 }
 
@@ -106,5 +109,14 @@ bool AFlyingEnemyPawn::DetectObstacles()
 
 void AFlyingEnemyPawn::LeaveLevel()
 {
-    UE_LOG(LogTemp, Error, TEXT("Out of Ammo"));
+    LeavingLevel = true;
+    if (ObstacleAvoidanceDirection == 0)
+    {
+        int32 RandomDirection = FMath::RandRange(0, 1);
+        ZObstacleAvoidanceStrength = FMath::RandRange(0.0f, 0.6f);
+        ObstacleAvoidanceDirection = (RandomDirection == 0) ? -1 : 1;
+    }
+    MoveDirection.Y = ObstacleAvoidanceDirection * ZObstacleAvoidanceStrength;
+    MoveDirection.Z = 1 * ZObstacleAvoidanceStrength;
+    UE_LOG(LogTemp, Display, TEXT("Leaving"));
 }

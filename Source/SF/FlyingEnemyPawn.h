@@ -65,6 +65,7 @@ private:
 	float ZObstacleAvoidanceStrength =.0f;
 	float ObstacleAvoidanceTimer = 0;
 	bool CanSteerTowardsPlayer = true;
+	bool LeavingLevel = false;
 
 	int32 ObstacleAvoidanceDirection = 0;
 
