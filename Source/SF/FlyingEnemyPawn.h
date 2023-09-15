@@ -71,5 +71,7 @@ private:
 	void Steer();
 	void Evade();
 	bool DetectObstacles();
+	UFUNCTION()
+	void LeaveLevel();
 	
 };

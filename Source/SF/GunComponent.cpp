@@ -59,6 +59,9 @@ void UGunComponent::FireLasers()
 		if (AvailableAmmo > 0)
 		{
 			AvailableAmmo--;
+			if( AvailableAmmo==0){
+				OutOfAmmoDelegate.Broadcast();
+			}
 		}
 	}
 }

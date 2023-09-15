@@ -32,6 +32,7 @@ void AFlyingEnemyPawn::BeginPlay()
     if (GunComponent)
     {
         GunComponent->SetupGunComponent(this, Speed, AmmoAvailable, false, SingleLaserSpawnPoint, LaserSpawnPoints);
+        GunComponent->OutOfAmmoDelegate.AddDynamic(this,&AFlyingEnemyPawn::LeaveLevel);
     }
     GetWorldTimerManager().SetTimer(ShotTimerHandle, GunComponent, &UGunComponent::FireLasers, ShotFrequency, true);
 }
@@ -101,4 +102,9 @@ bool AFlyingEnemyPawn::DetectObstacles()
                                                        CollisionParams);
 
     return bIsHit;
+}
+
+void AFlyingEnemyPawn::LeaveLevel()
+{
+    UE_LOG(LogTemp, Error, TEXT("Out of Ammo"));
 }

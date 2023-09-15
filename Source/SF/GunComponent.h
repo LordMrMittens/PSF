@@ -30,6 +30,10 @@ public:
 	void Aim(AActor* PlayerActor);
 
 	AActor* OwnerActor;
+	
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOutOfAmmoDelegate);
+	UPROPERTY(BlueprintAssignable, Category = "Ammo")
+	FOutOfAmmoDelegate OutOfAmmoDelegate;
 
 private:
 
@@ -39,11 +43,11 @@ private:
 	UPROPERTY(EditAnywhere)
 	float ShotSpeedMultiplier;
 	UPROPERTY(EditAnywhere)
-	float ShotLeadMultiplier = 1.5f; //1.5 default
+	float ShotLeadMultiplier = 1.5f;
 	bool DoubleLaser = false;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AProjectile> ProjectileClass;
-	int32 AvailableAmmo = -1;
+	int32 AvailableAmmo = -1; //negative number for infinite
 
 		
 };
