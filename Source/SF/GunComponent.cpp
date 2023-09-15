@@ -31,27 +31,35 @@ void UGunComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 	// ...
 }
 
-void UGunComponent::SetupGunComponent(AActor *Owner, float ShotSpeed, bool DoubleShot, USceneComponent *SingleLaserSource, TArray<USceneComponent *> MultiLasers)
+void UGunComponent::SetupGunComponent(AActor *Owner, float ShotSpeed, int32 AmmoAvailable ,bool DoubleShot, USceneComponent *SingleLaserSource, TArray<USceneComponent *> MultiLasers)
 {
 	Speed = ShotSpeed;
 	DoubleLaser = DoubleShot;
 	SingleLaserSpawnPoint = SingleLaserSource;
 	LaserSpawnPoints = MultiLasers;
 	OwnerActor = Owner;
+	AvailableAmmo = AmmoAvailable;
 }
 
 void UGunComponent::FireLasers()
 {
-	if (DoubleLaser)
+	if (AvailableAmmo != 0)
 	{
-		for (USceneComponent *SpawnPoint : LaserSpawnPoints)
+		if (DoubleLaser)
 		{
-			SpawnLaser(SpawnPoint);
+			for (USceneComponent *SpawnPoint : LaserSpawnPoints)
+			{
+				SpawnLaser(SpawnPoint);
+			}
 		}
-	}
-	else
-	{
-		SpawnLaser(SingleLaserSpawnPoint);
+		else
+		{
+			SpawnLaser(SingleLaserSpawnPoint);
+		}
+		if (AvailableAmmo > 0)
+		{
+			AvailableAmmo--;
+		}
 	}
 }
 void UGunComponent::SpawnLaser(USceneComponent *SpawnPoint)

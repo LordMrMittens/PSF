@@ -42,6 +42,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	float ShotFrequency;
 
+	UPROPERTY(EditAnywhere)
+	int32 AmmoAvailable =3;
+
 	FTimerHandle ShotTimerHandle;
 	UPROPERTY(EditAnywhere)
 	float SteerFactor = 3; //times steering force in final script

@@ -24,7 +24,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	void SetupGunComponent(AActor* Owner, float ShotSpeed, bool DoubleShot = false, USceneComponent* SingleLaserSource =nullptr, TArray<USceneComponent*> MultiLasers = TArray<USceneComponent*>());
+	void SetupGunComponent(AActor* Owner, float ShotSpeed, int32 AmmoAvailable = -1 , bool DoubleShot = false, USceneComponent* SingleLaserSource =nullptr, TArray<USceneComponent*> MultiLasers = TArray<USceneComponent*>());
 	void FireLasers();
 	void SpawnLaser(USceneComponent* SpawnPoint);
 	void Aim(AActor* PlayerActor);
@@ -43,6 +43,7 @@ private:
 	bool DoubleLaser = false;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AProjectile> ProjectileClass;
+	int32 AvailableAmmo = -1;
 
 		
 };

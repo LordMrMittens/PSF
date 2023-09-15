@@ -31,7 +31,7 @@ void AFlyingEnemyPawn::BeginPlay()
     PlayerActor = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
     if (GunComponent)
     {
-        GunComponent->SetupGunComponent(this, Speed, false, SingleLaserSpawnPoint, LaserSpawnPoints);
+        GunComponent->SetupGunComponent(this, Speed, AmmoAvailable, false, SingleLaserSpawnPoint, LaserSpawnPoints);
     }
     GetWorldTimerManager().SetTimer(ShotTimerHandle, GunComponent, &UGunComponent::FireLasers, ShotFrequency, true);
 }
