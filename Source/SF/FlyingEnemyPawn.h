@@ -73,6 +73,8 @@ private:
 	FTimerHandle LeavingDelayTimerHandle;
 	UPROPERTY(EditAnywhere)
 	float HoldTimeBeforeLevelExit = 3;
+	UPROPERTY(EditAnywhere)
+	float TimeToDestroy = 15; // not implemented yet
 
 
 	float ZObstacleAvoidanceStrength =.0f;

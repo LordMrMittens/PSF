@@ -9,6 +9,7 @@
 struct FInputActionValue;
 class AProjectile;
 class UGunComponent;
+class UBoostComponent;
 
 UCLASS()
 class SF_API APlayerPawn : public AMovingPawn
@@ -42,7 +43,10 @@ public:
 	FVector CalculateVelocity();
 
 private:
-
+	void Boost();
+	void FinishBoosting();
+	void Break();
+	void FinishBreaking();
 	void LimitMovement(FVector CurrentActorLocation, FVector& MovementDelta);
 	void CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& MovementDelta);
 	
@@ -62,6 +66,9 @@ private:
 	UGunComponent* GunComponent;
 	UPROPERTY(EditAnywhere)
 	bool DoubleLaser = false;
+
+	UPROPERTY(EditAnywhere)
+	UBoostComponent* BoostComponent;
 
 	FVector MinBoundary = FVector(0.0f, -5000.0f, 0.0f);
     FVector MaxBoundary = FVector(0.0f, 5000.0f, 3000.0f);

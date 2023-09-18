@@ -110,7 +110,6 @@ bool AFlyingEnemyPawn::DetectObstacles()
     CollisionParams.AddIgnoredActor(this);
     FVector TraceStart = GetActorLocation();
     FVector TraceEnd = TraceStart + MoveDirection * ObstacleAvoidanceDistance;
-    DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Red, false, 1);
     bool bIsHit = GetWorld()->LineTraceSingleByChannel(HitResult,
                                                        TraceStart,
                                                        TraceEnd,
@@ -127,15 +126,21 @@ void AFlyingEnemyPawn::LeaveLevel()
 
 void AFlyingEnemyPawn::SteerOffLevel()
 {
-        LeavingLevel = true;
+    LeavingLevel = true;
+    
     if (ObstacleAvoidanceDirection == 0)
     {
         int32 RandomDirection = FMath::RandRange(0, 1);
-        ZObstacleAvoidanceStrength = FMath::RandRange(0.0f, 0.6f);
+        ZObstacleAvoidanceStrength = FMath::RandRange(0.4f, 0.7f);
         ObstacleAvoidanceDirection = (RandomDirection == 0) ? -1 : 1;
     }
     MoveDirection.Y = ObstacleAvoidanceDirection * ZObstacleAvoidanceStrength;
     MoveDirection.Z = 1 * ZObstacleAvoidanceStrength;
+    TimeToDestroy -= GetWorld()->GetDeltaSeconds();
+    if(TimeToDestroy<0){
+        Destroy();
+    }
+
 }
 
 void AFlyingEnemyPawn::OnOverlapStart(class UPrimitiveComponent *OverlappedComp, class AActor *OtherActor, class UPrimitiveComponent *OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult)

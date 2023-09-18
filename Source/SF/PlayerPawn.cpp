@@ -9,6 +9,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GunComponent.h"
+#include "BoostComponent.h"
 #include "Projectile.h"
 
 // Sets default values
@@ -39,6 +40,12 @@ void APlayerPawn::BeginPlay()
     if(GunComponent){
         GunComponent->SetupGunComponent(this ,Speed, -1 ,DoubleLaser, SingleLaserSpawnPoint, LaserSpawnPoints);
     }
+    BoostComponent = Cast<UBoostComponent>(GetComponentByClass(UBoostComponent::StaticClass()));
+    if(BoostComponent != nullptr){
+
+    } else {
+        UE_LOG(LogTemp, Error, TEXT("No boost Component Found"));
+    }
 }
 
 // Called every frame
@@ -66,6 +73,10 @@ void APlayerPawn::SetupPlayerInputComponent(UInputComponent *PlayerInputComponen
         // Bind the actions
         PEI->BindAction(InputActions->InputSteer, ETriggerEvent::Triggered, this, &APlayerPawn::Steer);
         PEI->BindAction(InputActions->FireLaser, ETriggerEvent::Started,  GunComponent, &UGunComponent::FireLasers);
+        PEI->BindAction(InputActions->Boost,  ETriggerEvent::Started ,this,&APlayerPawn::Boost);
+        PEI->BindAction(InputActions->Boost,  ETriggerEvent::Completed ,this,&APlayerPawn::FinishBoosting);
+        PEI->BindAction(InputActions->Break,  ETriggerEvent::Started ,this,&APlayerPawn::Break);
+        PEI->BindAction(InputActions->Break,  ETriggerEvent::Completed ,this,&APlayerPawn::FinishBreaking);
     }
 }
 
@@ -148,4 +159,36 @@ FVector APlayerPawn::CalculateVelocity()
     PreviousLocation = CurrentLocation;
 
     return Velocity;
+}
+
+void APlayerPawn::Boost()
+{
+    UE_LOG(LogTemp, Display, TEXT("BOOOOOOST"));
+    if(BoostComponent){
+
+    }
+}
+
+void APlayerPawn::FinishBoosting()
+{
+    UE_LOG(LogTemp, Display, TEXT("BOOOOOOST EEEnd"));
+        if(BoostComponent){
+        
+    }
+}
+
+void APlayerPawn::Break()
+{
+    UE_LOG(LogTemp, Display, TEXT("BREEEAK"));
+        if(BoostComponent){
+        
+    }
+}
+
+void APlayerPawn::FinishBreaking()
+{
+    UE_LOG(LogTemp, Display, TEXT("BREEEAK end"));
+        if(BoostComponent){
+        
+    }
 }

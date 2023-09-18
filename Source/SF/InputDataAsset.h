@@ -22,5 +22,9 @@ public:
     class UInputAction* FireLaser;
 		UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     class UInputAction* FireBombs;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    class UInputAction* Boost;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    class UInputAction* Break;
 	
 };
