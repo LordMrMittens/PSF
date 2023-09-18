@@ -6,6 +6,8 @@
 #include "GameFramework/Pawn.h"
 #include "MovingPawn.generated.h"
 
+class UHealthComponent;
+
 UCLASS()
 class SF_API AMovingPawn : public APawn
 {
@@ -38,5 +40,7 @@ public:
 	float MaxTiltAngle;
 	UPROPERTY(EditAnywhere)
 	float RotationInterpSpeed;
+
+	UHealthComponent* HealthComponent;
 
 };
