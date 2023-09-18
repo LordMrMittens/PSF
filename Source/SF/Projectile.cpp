@@ -3,6 +3,8 @@
 
 #include "Projectile.h"
 #include "Kismet/GameplayStatics.h"
+#include "HealthComponent.h"
+#include "MovingPawn.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -22,6 +24,7 @@ void AProjectile::BeginPlay()
 		MainBodyComponent->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
 		MainBodyComponent->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnOverlapStart);
 	}
+	CurrentDamage = BaseDamage;
 }
 
 // Called every frame
@@ -43,14 +46,19 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimi
 	Destroy();
 }
 
-void AProjectile::OnOverlapStart(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AProjectile::OnOverlapStart(class UPrimitiveComponent *OverlappedComp, class AActor *OtherActor, class UPrimitiveComponent *OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult)
 {
-	if(GetOwner() == nullptr){
+	if (GetOwner() == nullptr)
+	{
 		UE_LOG(LogTemp, Error, TEXT("No Owner"));
 	}
-	if(OtherActor != GetOwner() && OtherActor->GetOwner() != GetOwner())
+	if (OtherActor != GetOwner() && OtherActor->GetOwner() != GetOwner())
 	{
-	Destroy();
+		AMovingPawn *OtherPawn = Cast<AMovingPawn>(OtherActor);
+		if (OtherPawn != nullptr && OtherPawn->HealthComponent != nullptr)
+		{
+			OtherPawn->HealthComponent->TakeDamage(CurrentDamage);
+		}
+		Destroy();
 	}
 }
-

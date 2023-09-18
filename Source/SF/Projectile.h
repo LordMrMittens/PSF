@@ -25,6 +25,10 @@ public:
 	void SetSpeed(float InputSpeed);
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* MainBodyComponent;
+	UPROPERTY(EditAnywhere)
+	float BaseDamage = 1;
+
+	float CurrentDamage;
 
 private:
 

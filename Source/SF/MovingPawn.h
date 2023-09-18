@@ -43,4 +43,7 @@ public:
 
 	UHealthComponent* HealthComponent;
 
+	UFUNCTION()
+	void OnDeath();
+
 };

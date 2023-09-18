@@ -2,13 +2,13 @@
 
 
 #include "MovingPawn.h"
+#include "HealthComponent.h"
 
 // Sets default values
 AMovingPawn::AMovingPawn()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 }
 
 // Called when the game starts or when spawned
@@ -16,6 +16,12 @@ void AMovingPawn::BeginPlay()
 {
 	Super::BeginPlay();
     OriginalMoveDirection = MoveDirection;
+    HealthComponent = Cast<UHealthComponent>(GetComponentByClass(UHealthComponent::StaticClass()));
+    if(HealthComponent != nullptr){
+        HealthComponent->OnOutOfHealth.AddDynamic(this, &AMovingPawn::OnDeath);
+    } else {
+        UE_LOG(LogTemp, Error, TEXT("No Health Component Found"));
+    }
 	
 }
 
@@ -31,6 +37,12 @@ void AMovingPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AMovingPawn::OnDeath()
+{
+    UE_LOG(LogTemp, Error, TEXT("Death"));
+    Destroy();
 }
 
 void AMovingPawn::Move()
