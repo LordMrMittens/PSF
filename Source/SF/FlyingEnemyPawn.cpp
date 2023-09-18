@@ -54,7 +54,7 @@ void AFlyingEnemyPawn::Steer()
 {
     if (LeavingLevel)
     {
-        LeaveLevel();
+        SteerOffLevel();
     }
     if (DetectObstacles()||PerformEvasiveManouevres)
     {
@@ -97,6 +97,8 @@ void AFlyingEnemyPawn::Evade()
     if (ObstacleAvoidanceTimer > ResetSteeringDuration)
     {
         ObstacleAvoidanceTimer = 0;
+        ObstacleAvoidanceDirection = 0;
+        ZObstacleAvoidanceStrength = 0;
         CanSteerTowardsPlayer = true;
     }
 }
@@ -120,7 +122,12 @@ bool AFlyingEnemyPawn::DetectObstacles()
 
 void AFlyingEnemyPawn::LeaveLevel()
 {
-    LeavingLevel = true;
+    GetWorldTimerManager().SetTimer(LeavingDelayTimerHandle, this, &AFlyingEnemyPawn::SteerOffLevel, HoldTimeBeforeLevelExit, false);
+}
+
+void AFlyingEnemyPawn::SteerOffLevel()
+{
+        LeavingLevel = true;
     if (ObstacleAvoidanceDirection == 0)
     {
         int32 RandomDirection = FMath::RandRange(0, 1);

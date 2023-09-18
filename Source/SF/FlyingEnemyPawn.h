@@ -68,7 +68,11 @@ private:
 	UPROPERTY(EditAnywhere)
 	float HorizontalDistanceToPlayerOffset = 460;
 	UPROPERTY(EditAnywhere)
-	float DistanceFromBordersffset = 550;
+	float DistanceFromBordersffset = 550; // not implemented yet
+
+	FTimerHandle LeavingDelayTimerHandle;
+	UPROPERTY(EditAnywhere)
+	float HoldTimeBeforeLevelExit = 3;
 
 
 	float ZObstacleAvoidanceStrength =.0f;
@@ -84,6 +88,7 @@ private:
 	bool DetectObstacles();
 	UFUNCTION()
 	void LeaveLevel();
+	void SteerOffLevel();
 
 
 	UFUNCTION()
