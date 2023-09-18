@@ -32,8 +32,11 @@ void AFlyingEnemyPawn::BeginPlay()
     if (GunComponent)
     {
         GunComponent->SetupGunComponent(this, Speed, AmmoAvailable, false, SingleLaserSpawnPoint, LaserSpawnPoints);
-        GunComponent->OutOfAmmoDelegate.AddDynamic(this,&AFlyingEnemyPawn::LeaveLevel);
+        GunComponent->OutOfAmmoDelegate.AddDynamic(this, &AFlyingEnemyPawn::LeaveLevel);
     }
+    if(MainBodyComponent){
+    		MainBodyComponent->OnComponentBeginOverlap.AddDynamic(this, &AFlyingEnemyPawn::OnOverlapStart);
+	}
     GetWorldTimerManager().SetTimer(ShotTimerHandle, GunComponent, &UGunComponent::FireLasers, ShotFrequency, true);
 }
 
@@ -49,20 +52,27 @@ void AFlyingEnemyPawn::Tick(float DeltaTime)
 
 void AFlyingEnemyPawn::Steer()
 {
-    if(LeavingLevel)
+    if (LeavingLevel)
     {
-    LeaveLevel();
+        LeaveLevel();
     }
-    if(DetectObstacles()){
-    Evade();
+    if (DetectObstacles()||PerformEvasiveManouevres)
+    {
+        Evade();
     }
     else if (CanSteerTowardsPlayer && ObstacleAvoidanceDirection == 0)
     {
         FVector PlayerLocation = PlayerActor->GetActorLocation();
         FVector EnemyLocation = GetActorLocation();
         FVector PlayerDirection = (PlayerLocation - EnemyLocation).GetSafeNormal();
-        MoveDirection.Z = PlayerDirection.Z * SteerFactor;
-        MoveDirection.Y = PlayerDirection.Y * SteerFactor;
+        if (EnemyLocation.Z > VerticalDistanceToPlayerOffset || EnemyLocation.Z < VerticalDistanceToPlayerOffset)
+        {
+            MoveDirection.Z = PlayerDirection.Z * SteerFactor;
+        }
+        if (EnemyLocation.Y > HorizontalDistanceToPlayerOffset || EnemyLocation.Y < HorizontalDistanceToPlayerOffset)
+        {
+            MoveDirection.Y = PlayerDirection.Y * SteerFactor;
+        }
     }
 }
 
@@ -80,6 +90,7 @@ void AFlyingEnemyPawn::Evade()
     {
         ObstacleAvoidanceDirection = 0;
         ZObstacleAvoidanceStrength = 0;
+        PerformEvasiveManouevres = false;
     }
     MoveDirection.Y = ObstacleAvoidanceDirection * SteerFactor * ObstacleAvoidanceStrength;
     MoveDirection.Z = 1 * SteerFactor * ObstacleAvoidanceStrength * ZObstacleAvoidanceStrength;
@@ -118,4 +129,10 @@ void AFlyingEnemyPawn::LeaveLevel()
     }
     MoveDirection.Y = ObstacleAvoidanceDirection * ZObstacleAvoidanceStrength;
     MoveDirection.Z = 1 * ZObstacleAvoidanceStrength;
+}
+
+void AFlyingEnemyPawn::OnOverlapStart(class UPrimitiveComponent *OverlappedComp, class AActor *OtherActor, class UPrimitiveComponent *OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult)
+{
+    if(OtherActor->GetOwner()!=this){
+    PerformEvasiveManouevres = true;}
 }

@@ -62,10 +62,20 @@ private:
 	float ResetSteeringDuration = 4;
 	UPROPERTY(EditAnywhere)
 	float ObstacleAvoidanceStrength = 1.5;
+
+	UPROPERTY(EditAnywhere)
+	float VerticalDistanceToPlayerOffset = 440;
+	UPROPERTY(EditAnywhere)
+	float HorizontalDistanceToPlayerOffset = 460;
+	UPROPERTY(EditAnywhere)
+	float DistanceFromBordersffset = 550;
+
+
 	float ZObstacleAvoidanceStrength =.0f;
 	float ObstacleAvoidanceTimer = 0;
 	bool CanSteerTowardsPlayer = true;
 	bool LeavingLevel = false;
+	bool PerformEvasiveManouevres = false;
 
 	int32 ObstacleAvoidanceDirection = 0;
 
@@ -74,5 +84,10 @@ private:
 	bool DetectObstacles();
 	UFUNCTION()
 	void LeaveLevel();
+
+
+	UFUNCTION()
+	void OnOverlapStart(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 	
 };
