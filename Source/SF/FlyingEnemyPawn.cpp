@@ -118,5 +118,4 @@ void AFlyingEnemyPawn::LeaveLevel()
     }
     MoveDirection.Y = ObstacleAvoidanceDirection * ZObstacleAvoidanceStrength;
     MoveDirection.Z = 1 * ZObstacleAvoidanceStrength;
-    UE_LOG(LogTemp, Display, TEXT("Leaving"));
 }
