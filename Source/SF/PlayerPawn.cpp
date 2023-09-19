@@ -46,6 +46,7 @@ void APlayerPawn::BeginPlay()
     } else {
         UE_LOG(LogTemp, Error, TEXT("No boost Component Found"));
     }
+    BaseSpeed = Speed;
 }
 
 // Called every frame
@@ -73,9 +74,9 @@ void APlayerPawn::SetupPlayerInputComponent(UInputComponent *PlayerInputComponen
         // Bind the actions
         PEI->BindAction(InputActions->InputSteer, ETriggerEvent::Triggered, this, &APlayerPawn::Steer);
         PEI->BindAction(InputActions->FireLaser, ETriggerEvent::Started,  GunComponent, &UGunComponent::FireLasers);
-        PEI->BindAction(InputActions->Boost,  ETriggerEvent::Started ,this,&APlayerPawn::Boost);
+        PEI->BindAction(InputActions->Boost,  ETriggerEvent::Triggered ,this,&APlayerPawn::Boost);
         PEI->BindAction(InputActions->Boost,  ETriggerEvent::Completed ,this,&APlayerPawn::FinishBoosting);
-        PEI->BindAction(InputActions->Break,  ETriggerEvent::Started ,this,&APlayerPawn::Break);
+        PEI->BindAction(InputActions->Break,  ETriggerEvent::Triggered ,this,&APlayerPawn::Break);
         PEI->BindAction(InputActions->Break,  ETriggerEvent::Completed ,this,&APlayerPawn::FinishBreaking);
     }
 }
@@ -90,7 +91,7 @@ void APlayerPawn::Steer(const FInputActionValue &Value)
 
 void APlayerPawn::Move()
 {
-    FVector MoveDelta = MoveDirection * Speed * GetWorld()->GetDeltaSeconds();
+    FVector MoveDelta = MoveDirection * BaseSpeed * GetWorld()->GetDeltaSeconds();
     FVector CurrentLocation = GetActorLocation();
     LimitMovement(CurrentLocation, MoveDelta);
     CheckIfOutOfBounds(CurrentLocation, MoveDelta);
@@ -163,32 +164,42 @@ FVector APlayerPawn::CalculateVelocity()
 
 void APlayerPawn::Boost()
 {
-    UE_LOG(LogTemp, Display, TEXT("BOOOOOOST"));
-    if(BoostComponent){
-
+    if (BoostComponent)
+    {
+        if (BoostComponent->CanChangeVelocity(BoostComponent->CurrentBoost, BoostComponent->ConsumptionRate, BoostComponent->bMustRestoreBoostCompletely, BoostComponent->bShouldRestoreBoost))
+        {
+            BaseSpeed = Speed * 2;
+        }
+        else
+        {
+            FinishBoosting();
+        }
     }
 }
 
 void APlayerPawn::FinishBoosting()
 {
-    UE_LOG(LogTemp, Display, TEXT("BOOOOOOST EEEnd"));
-        if(BoostComponent){
-        
+    BaseSpeed = Speed;
+    if (BoostComponent)
+    {
+        BoostComponent->StartRestoringResource(BoostComponent->bShouldRestoreBoost);
     }
 }
 
 void APlayerPawn::Break()
 {
-    UE_LOG(LogTemp, Display, TEXT("BREEEAK"));
-        if(BoostComponent){
-        
+    if (BoostComponent->CanChangeVelocity(BoostComponent->CurrentBreak, BoostComponent->ConsumptionRate, BoostComponent->bMustRestoreBreakCompletely, BoostComponent->bShouldRestoreBreak))
+    {
+        BaseSpeed = Speed / 2;
+    } else {
+        FinishBreaking();
     }
 }
 
 void APlayerPawn::FinishBreaking()
 {
-    UE_LOG(LogTemp, Display, TEXT("BREEEAK end"));
+    BaseSpeed = Speed;
         if(BoostComponent){
-        
+        BoostComponent->StartRestoringResource(BoostComponent->bShouldRestoreBreak);
     }
 }

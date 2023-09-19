@@ -30,35 +30,36 @@ void UBoostComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	RestoreResource(DeltaTime, CurrentBoost, MaxBoost, RestoringRate, bMustRestoreBoostCompletely, bShouldRestoreBoost);
 	RestoreResource(DeltaTime, CurrentBreak, MaxBreak, RestoringRate, bMustRestoreBreakCompletely, bShouldRestoreBreak);
+	UE_LOG(LogTemp, Display, TEXT("currentBoost = %f"), CurrentBoost);
 }
 
-bool UBoostComponent::CanChangeVelocity(float Resource, float Rate, bool &OutResourceBeingRestored, bool &OutResourceToRestore)
+bool UBoostComponent::CanChangeVelocity(float &OutResource, float Rate, bool &OutResourceBeingRestored, bool &OutResourceToRestore)
 {
 	if (OutResourceBeingRestored == true)
 	{
 		return false;
 	}
 
-	if (Resource > 0)
+	if (OutResource > 0)
 	{
-		Resource -= Rate * GetWorld()->GetDeltaSeconds();
+		OutResource -= Rate * GetWorld()->GetDeltaSeconds();
 		OutResourceToRestore = false;
 	}
-	if(Resource <=0){
+	if(OutResource <=0){
 	OutResourceBeingRestored = true;
 	OutResourceToRestore = true;
 	}
-	return Resource > 0;
+	return OutResource > 0;
 }
 void UBoostComponent::StartRestoringResource(bool &OutResourceToRestore){
 	OutResourceToRestore = true;
 }
 
-void UBoostComponent::RestoreResource(float DeltaTime, float Resource, float MaxResource, float Rate, bool &OutResourceBeingRestored, bool &OutResourceToRestore){
+void UBoostComponent::RestoreResource(float DeltaTime, float &OutResource, float MaxResource, float Rate, bool &OutResourceBeingRestored, bool &OutResourceToRestore){
 	if(OutResourceToRestore){
-		Resource += Rate * DeltaTime;
-		if(Resource >= MaxResource){
-			Resource =MaxResource;
+		OutResource += Rate * DeltaTime;
+		if(OutResource >= MaxResource){
+			OutResource =MaxResource;
 			OutResourceToRestore = false;
 			OutResourceBeingRestored = false;
 		}

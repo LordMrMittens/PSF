@@ -69,6 +69,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	UBoostComponent* BoostComponent;
+	float BaseSpeed;
 
 	FVector MinBoundary = FVector(0.0f, -5000.0f, 0.0f);
     FVector MaxBoundary = FVector(0.0f, 5000.0f, 3000.0f);

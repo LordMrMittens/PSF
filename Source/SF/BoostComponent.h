@@ -19,22 +19,9 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+	
 
 public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-	bool CanChangeVelocity(float Resource, float Rate, bool &OutResourceBeingRestored, bool &OutResourceToRestore);
-	void RestoreResource(float DeltaTime, float Resource, float MaxResource, float Rate, bool &OutResourceBeingRestored, bool &OutResourceToRestore);
-	void StartRestoringResource(bool &OutResourceToRestore);
-private:
-	UPROPERTY(EditAnywhere)
-	float MaxBoost = 100;
-	float CurrentBoost;
-	UPROPERTY(EditAnywhere)
-	float MaxBreak = 100;
-	float CurrentBreak;
-
 	UPROPERTY(EditAnywhere)
 	float RestoringRate;
 	UPROPERTY(EditAnywhere)
@@ -44,5 +31,22 @@ private:
 	bool bMustRestoreBoostCompletely = false;
 	bool bShouldRestoreBreak = false;
 	bool bMustRestoreBreakCompletely = false;
+	float CurrentBoost;
+	float CurrentBreak;
+	// Called every frame
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	bool CanChangeVelocity(float &OutResource, float Rate, bool &OutResourceBeingRestored, bool &OutResourceToRestore);
+	void RestoreResource(float DeltaTime, float &OutResource, float MaxResource, float Rate, bool &OutResourceBeingRestored, bool &OutResourceToRestore);
+	void StartRestoringResource(bool &OutResourceToRestore);
+private:
+	UPROPERTY(EditAnywhere)
+	float MaxBoost = 100;
+	
+	UPROPERTY(EditAnywhere)
+	float MaxBreak = 100;
+	
+
+
 		
 };
