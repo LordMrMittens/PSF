@@ -30,12 +30,11 @@ void UBoostComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	RestoreResource(DeltaTime, CurrentBoost, MaxBoost, RestoringRate, bMustRestoreBoostCompletely, bShouldRestoreBoost);
 	RestoreResource(DeltaTime, CurrentBreak, MaxBreak, RestoringRate, bMustRestoreBreakCompletely, bShouldRestoreBreak);
-	UE_LOG(LogTemp, Display, TEXT("currentBoost = %f"), CurrentBoost);
 }
 
-bool UBoostComponent::CanChangeVelocity(float &OutResource, float Rate, bool &OutResourceBeingRestored, bool &OutResourceToRestore)
+bool UBoostComponent::CanChangeVelocity(float &OutResource, float Rate, bool &OutResourceWasDepleted, bool &OutRestoringResource)
 {
-	if (OutResourceBeingRestored == true)
+	if (OutResourceWasDepleted == true)
 	{
 		return false;
 	}
@@ -43,11 +42,11 @@ bool UBoostComponent::CanChangeVelocity(float &OutResource, float Rate, bool &Ou
 	if (OutResource > 0)
 	{
 		OutResource -= Rate * GetWorld()->GetDeltaSeconds();
-		OutResourceToRestore = false;
+		OutRestoringResource = false;
 	}
 	if(OutResource <=0){
-	OutResourceBeingRestored = true;
-	OutResourceToRestore = true;
+	OutResourceWasDepleted = true;
+	OutRestoringResource = true;
 	}
 	return OutResource > 0;
 }
@@ -55,13 +54,13 @@ void UBoostComponent::StartRestoringResource(bool &OutResourceToRestore){
 	OutResourceToRestore = true;
 }
 
-void UBoostComponent::RestoreResource(float DeltaTime, float &OutResource, float MaxResource, float Rate, bool &OutResourceBeingRestored, bool &OutResourceToRestore){
-	if(OutResourceToRestore){
+void UBoostComponent::RestoreResource(float DeltaTime, float &OutResource, float MaxResource, float Rate, bool &OutResourceWasDepleted, bool &OutRestoringResource){
+	if(OutRestoringResource){
 		OutResource += Rate * DeltaTime;
 		if(OutResource >= MaxResource){
 			OutResource =MaxResource;
-			OutResourceToRestore = false;
-			OutResourceBeingRestored = false;
+			OutRestoringResource = false;
+			OutResourceWasDepleted = false;
 		}
 	}
 }

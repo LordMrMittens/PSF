@@ -36,8 +36,8 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	bool CanChangeVelocity(float &OutResource, float Rate, bool &OutResourceBeingRestored, bool &OutResourceToRestore);
-	void RestoreResource(float DeltaTime, float &OutResource, float MaxResource, float Rate, bool &OutResourceBeingRestored, bool &OutResourceToRestore);
+	bool CanChangeVelocity(float &OutResource, float Rate, bool &OutResourceDepleted, bool &OutRestoringResource);
+	void RestoreResource(float DeltaTime, float &OutResource, float MaxResource, float Rate, bool &OutResourceDepleted, bool &OutRestoringResource);
 	void StartRestoringResource(bool &OutResourceToRestore);
 private:
 	UPROPERTY(EditAnywhere)
