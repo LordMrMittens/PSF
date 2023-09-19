@@ -8,7 +8,7 @@
 
 struct FInputActionValue;
 class AProjectile;
-class UGunComponent;
+class UPlayerGunComponent;
 class UBoostComponent;
 
 UCLASS()
@@ -42,7 +42,7 @@ public:
 	void Steer(const FInputActionValue& Value);
 	FVector CalculateVelocity();
 
-	UGunComponent* GetGunComponent() const
+	UPlayerGunComponent* GetGunComponent() const
     {
         return GunComponent;
     }
@@ -68,7 +68,7 @@ private:
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* MainBodyComponent;
 	UPROPERTY(EditAnywhere)
-	UGunComponent* GunComponent;
+	UPlayerGunComponent* GunComponent;
 	UPROPERTY(EditAnywhere)
 	bool DoubleLaser = false;
 

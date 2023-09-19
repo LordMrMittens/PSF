@@ -5,7 +5,7 @@
 #include "Components/CapsuleComponent.h"
 #include "PlayerPawn.h"
 #include "HealthComponent.h"
-#include "GunComponent.h"
+#include "PlayerGunComponent.h"
 
 // Sets default values
 APickup::APickup()
@@ -41,13 +41,22 @@ void APickup::OnBeginOverlap(UPrimitiveComponent *OverlappedComponent, AActor *O
 	APlayerPawn *Player = Cast<APlayerPawn>(OtherActor);
 	if (Player)
 	{
+		UPlayerGunComponent *PlayerGunComponent = Player->GetGunComponent();
 		switch (PickupType)
 		{
 		case EPickupType::LaserUpgrade:
-			Player->GetGunComponent()->EnhanceLasers();
+			
+			if (PlayerGunComponent)
+			{
+				PlayerGunComponent->EnhanceLasers();
+			}
+			else
+			{
+				UE_LOG(LogTemp, Error, TEXT("Gun Component is null"));
+			}
 			break;
 		case EPickupType::BombPickup:
-			//Not Implemented
+			// Not Implemented
 			UE_LOG(LogTemp, Error, TEXT("Feature Not Implemented"));
 			break;
 		case EPickupType::RepairPickup:

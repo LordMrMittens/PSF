@@ -8,7 +8,7 @@
 #include "InputDataAsset.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/SpringArmComponent.h"
-#include "GunComponent.h"
+#include "PlayerGunComponent.h"
 #include "BoostComponent.h"
 #include "Projectile.h"
 
@@ -28,7 +28,7 @@ APlayerPawn::APlayerPawn()
     DoubleLaserSpawnPointR = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPointR"));
     DoubleLaserSpawnPointR->SetupAttachment(MainBodyComponent);
     LaserSpawnPoints.Add(DoubleLaserSpawnPointR);
-    GunComponent = CreateDefaultSubobject<UGunComponent>(TEXT("Gun"));
+    GunComponent = CreateDefaultSubobject<UPlayerGunComponent>(TEXT("Gun"));
 }
 
 // Called when the game starts or when spawned

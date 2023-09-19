@@ -20,36 +20,34 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	void SetupGunComponent(AActor* Owner, float ShotSpeed, int32 AmmoAvailable = -1 , bool DoubleShot = false, USceneComponent* SingleLaserSource =nullptr, TArray<USceneComponent*> MultiLasers = TArray<USceneComponent*>());
-	void FireLasers();
-	void SpawnLaser(USceneComponent* SpawnPoint);
-	void Aim(AActor* PlayerActor);
-	void EnhanceLasers();
-
-	AActor* OwnerActor;
 	
+
+public:
+	// Called every frame
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+	void SetupGunComponent(AActor *Owner, float ShotSpeed, int32 AmmoAvailable = -1, bool DoubleShot = false, USceneComponent *SingleLaserSource = nullptr, TArray<USceneComponent *> MultiLasers = TArray<USceneComponent *>());
+	virtual void SpawnLaser(USceneComponent *SpawnPoint);
+	virtual void FireLasers();
+	void Aim(AActor *PlayerActor);
+
+	USceneComponent *SingleLaserSpawnPoint;
+	TArray<USceneComponent *> LaserSpawnPoints;
+	AActor *OwnerActor;
+
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOutOfAmmoDelegate);
 	UPROPERTY(BlueprintAssignable, Category = "Ammo")
 	FOutOfAmmoDelegate OutOfAmmoDelegate;
 
-private:
-
-	USceneComponent* SingleLaserSpawnPoint;
-	TArray<USceneComponent*> LaserSpawnPoints;
+	bool DoubleLaser = false;
 	float Speed;
 	UPROPERTY(EditAnywhere)
 	float ShotSpeedMultiplier;
 	UPROPERTY(EditAnywhere)
 	float ShotLeadMultiplier = 1.5f;
-	bool DoubleLaser = false;
-	bool PowerLaser = false;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AProjectile> ProjectileClass;
 	int32 AvailableAmmo = -1; //negative number for infinite
+
 
 		
 };
