@@ -68,5 +68,6 @@ void APickup::OnBeginOverlap(UPrimitiveComponent *OverlappedComponent, AActor *O
 			EPickupType::RepairPickup;
 			break;
 		}
+		Destroy();
 	}
 }
