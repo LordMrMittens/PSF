@@ -3,6 +3,9 @@
 
 #include "Pickup.h"
 #include "Components/CapsuleComponent.h"
+#include "PlayerPawn.h"
+#include "HealthComponent.h"
+#include "GunComponent.h"
 
 // Sets default values
 APickup::APickup()
@@ -24,18 +27,37 @@ void APickup::BeginPlay()
 	if(CapsuleComponent){
 		CapsuleComponent->OnComponentBeginOverlap.AddDynamic(this, &APickup::OnBeginOverlap);
 	}
-	UE_LOG(LogTemp, Error, TEXT("I Am Alive"));
+	
 }
 
 // Called every frame
 void APickup::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
-void APickup::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult){
-	UE_LOG(LogTemp, Error, TEXT("Pickup Hit"));
+void APickup::OnBeginOverlap(UPrimitiveComponent *OverlappedComponent, AActor *OtherActor, UPrimitiveComponent *OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult)
+{
+	APlayerPawn *Player = Cast<APlayerPawn>(OtherActor);
+	if (Player)
+	{
+		switch (PickupType)
+		{
+		case EPickupType::LaserUpgrade:
+			Player->GetGunComponent()->EnhanceLasers();
+			break;
+		case EPickupType::BombPickup:
+			//Not Implemented
+			UE_LOG(LogTemp, Error, TEXT("Feature Not Implemented"));
+			break;
+		case EPickupType::RepairPickup:
+			Player->HealthComponent->RestoreHealth(100);
+			//repair wings if broken
+			break;
+
+		default:
+			EPickupType::RepairPickup;
+			break;
+		}
+	}
 }
-
-

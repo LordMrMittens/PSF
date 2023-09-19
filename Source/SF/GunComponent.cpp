@@ -30,6 +30,17 @@ void UGunComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 
 	// ...
 }
+void UGunComponent::EnhanceLasers()
+{
+	if (DoubleLaser)
+	{
+		PowerLaser = true;
+	}
+	else
+	{
+		DoubleLaser = true;
+	}
+}
 
 void UGunComponent::SetupGunComponent(AActor *Owner, float ShotSpeed, int32 AmmoAvailable ,bool DoubleShot, USceneComponent *SingleLaserSource, TArray<USceneComponent *> MultiLasers)
 {

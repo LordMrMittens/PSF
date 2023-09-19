@@ -28,6 +28,7 @@ public:
 	void FireLasers();
 	void SpawnLaser(USceneComponent* SpawnPoint);
 	void Aim(AActor* PlayerActor);
+	void EnhanceLasers();
 
 	AActor* OwnerActor;
 	
@@ -45,6 +46,7 @@ private:
 	UPROPERTY(EditAnywhere)
 	float ShotLeadMultiplier = 1.5f;
 	bool DoubleLaser = false;
+	bool PowerLaser = false;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AProjectile> ProjectileClass;
 	int32 AvailableAmmo = -1; //negative number for infinite

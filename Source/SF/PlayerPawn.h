@@ -42,6 +42,11 @@ public:
 	void Steer(const FInputActionValue& Value);
 	FVector CalculateVelocity();
 
+	UGunComponent* GetGunComponent() const
+    {
+        return GunComponent;
+    }
+
 private:
 	void Boost();
 	void FinishBoosting();
