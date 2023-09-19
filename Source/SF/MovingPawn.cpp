@@ -31,14 +31,6 @@ void AMovingPawn::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
     Move();
 }
-
-// Called to bind functionality to input
-void AMovingPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
-
 void AMovingPawn::OnDeath()
 {
     UE_LOG(LogTemp, Error, TEXT("Death"));

@@ -140,11 +140,12 @@ void AFlyingEnemyPawn::SteerOffLevel()
     if(TimeToDestroy<0){
         Destroy();
     }
-
 }
 
 void AFlyingEnemyPawn::OnOverlapStart(class UPrimitiveComponent *OverlappedComp, class AActor *OtherActor, class UPrimitiveComponent *OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult)
 {
-    if(OtherActor->GetOwner()!=this){
-    PerformEvasiveManouevres = true;}
+    if (OtherActor->GetOwner() != this)
+    {
+        PerformEvasiveManouevres = true;
+    }
 }
