@@ -24,21 +24,18 @@ void ABomb::Tick(float DeltaTime)
 
 void ABomb::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-    
 }
 
-void ABomb::OnOverlapStart(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void ABomb::OnOverlapStart(class UPrimitiveComponent *OverlappedComp, class AActor *OtherActor, class UPrimitiveComponent *OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult)
 {
-   Explode();
+    if (OtherActor != Owner)
+    {
+        Explode();
+    }
 }
-
 
 void ABomb::Explode()
 {
-     UE_LOG(LogTemp, Error, TEXT("Bomb Exploded"));
-     Destroy();
+    UE_LOG(LogTemp, Error, TEXT("Bomb Exploded"));
+    Destroy();
 }
-
-
-
-

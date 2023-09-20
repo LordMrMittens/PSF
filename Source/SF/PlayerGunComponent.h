@@ -27,8 +27,6 @@ private:
 	bool PowerLaser = false;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AProjectile> SecondaryProjectileClass;
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<AProjectile> BombProjectileClass;
 	TSubclassOf<AProjectile> ActiveProjectileClass;
 	
 };

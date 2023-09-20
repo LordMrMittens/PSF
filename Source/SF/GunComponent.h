@@ -7,6 +7,7 @@
 #include "GunComponent.generated.h"
 
 class AProjectile;
+class ABomb;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SF_API UGunComponent : public USceneComponent
@@ -28,6 +29,8 @@ public:
 	void SetupGunComponent(AActor *Owner, float ShotSpeed, int32 AmmoAvailable = -1, bool DoubleShot = false, USceneComponent *SingleLaserSource = nullptr, TArray<USceneComponent *> MultiLasers = TArray<USceneComponent *>());
 	virtual void SpawnLaser(USceneComponent *SpawnPoint);
 	virtual void FireLasers();
+	virtual void FireBombs();
+	virtual void SpawnBombs(USceneComponent *SpawnPoint);
 	void Aim(AActor *PlayerActor);
 
 	USceneComponent *SingleLaserSpawnPoint;
@@ -46,7 +49,10 @@ public:
 	float ShotLeadMultiplier = 1.5f;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AProjectile> ProjectileClass;
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<ABomb> BombClass;
 	int32 AvailableAmmo = -1; //negative number for infinite
+	int32 AvailableBombs = -1;
 
 
 		

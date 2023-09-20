@@ -29,7 +29,7 @@ private:
 	void Explode();
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
-	float DistanceToExplode = 5000;
+	float DistanceToExplode = 15000;
 
 	FVector StartingPosition;
 };

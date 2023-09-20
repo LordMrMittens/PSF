@@ -3,6 +3,7 @@
 #include "GunComponent.h"
 #include "Projectile.h"
 #include "PlayerPawn.h"
+#include "Bomb.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
@@ -63,6 +64,28 @@ void UGunComponent::FireLasers()
 				OutOfAmmoDelegate.Broadcast();
 			}
 		}
+	}
+}
+void UGunComponent::FireBombs()
+{
+	if (AvailableBombs != 0)
+	{
+		SpawnBombs(SingleLaserSpawnPoint);
+		if(AvailableBombs>0){
+			AvailableBombs--;
+		}
+	}
+}
+void UGunComponent::SpawnBombs(USceneComponent *SpawnPoint){
+	struct FActorSpawnParameters params;
+	params.Owner = OwnerActor;
+	ABomb *Bomb = GetWorld()->SpawnActor<ABomb>(BombClass,
+												SpawnPoint->GetComponentLocation(),
+												this->GetComponentRotation(),
+												params);
+	if (Bomb != nullptr)
+	{
+		Bomb->SetSpeed(Speed * ShotSpeedMultiplier);
 	}
 }
 void UGunComponent::SpawnLaser(USceneComponent *SpawnPoint)
