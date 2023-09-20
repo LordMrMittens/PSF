@@ -27,8 +27,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	UPROPERTY(EditAnywhere)
+	
 	float Speed;
 	UPROPERTY(EditAnywhere)
 	FVector MoveDirection;

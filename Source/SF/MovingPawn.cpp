@@ -3,6 +3,8 @@
 
 #include "MovingPawn.h"
 #include "HealthComponent.h"
+#include "SFGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AMovingPawn::AMovingPawn()
@@ -15,6 +17,7 @@ AMovingPawn::AMovingPawn()
 void AMovingPawn::BeginPlay()
 {
 	Super::BeginPlay();
+    Speed = Cast<ASFGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()))->GetSpeed();
     OriginalMoveDirection = MoveDirection;
     HealthComponent = Cast<UHealthComponent>(GetComponentByClass(UHealthComponent::StaticClass()));
     if(HealthComponent != nullptr){

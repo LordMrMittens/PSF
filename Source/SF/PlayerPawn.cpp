@@ -6,6 +6,7 @@
 #include "EnhancedInput/Public/EnhancedInputComponent.h"
 #include "InputActionValue.h"
 #include "InputDataAsset.h"
+#include "SFGameModeBase.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "PlayerGunComponent.h"
@@ -35,18 +36,7 @@ APlayerPawn::APlayerPawn()
 void APlayerPawn::BeginPlay()
 {
     Super::BeginPlay();
-    OriginalMoveDirection = MoveDirection;
-    SpringArmComponent = FindComponentByClass<USpringArmComponent>();
-    if(GunComponent){
-        GunComponent->SetupGunComponent(this ,Speed, -1 ,DoubleLaser, SingleLaserSpawnPoint, LaserSpawnPoints);
-    }
-    BoostComponent = Cast<UBoostComponent>(GetComponentByClass(UBoostComponent::StaticClass()));
-    if(BoostComponent != nullptr){
-
-    } else {
-        UE_LOG(LogTemp, Error, TEXT("No boost Component Found"));
-    }
-    BaseSpeed = Speed;
+    SetUpPlayerPawn();
 }
 
 // Called every frame
@@ -160,6 +150,34 @@ FVector APlayerPawn::CalculateVelocity()
     PreviousLocation = CurrentLocation;
 
     return Velocity;
+}
+
+void APlayerPawn::SetLevelBoundary()
+{
+    ASFGameModeBase* GameMode = Cast<ASFGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+    if (GameMode)
+    {
+        MaxBoundary = GameMode->GetMaxBoundary();
+        MinBoundary = GameMode->GetMinBoundary();
+    }
+    
+}
+
+void APlayerPawn::SetUpPlayerPawn()
+{
+    SetLevelBoundary();
+    //OriginalMoveDirection = MoveDirection;
+    SpringArmComponent = FindComponentByClass<USpringArmComponent>();
+    if(GunComponent){
+        GunComponent->SetupGunComponent(this ,Speed, -1 ,DoubleLaser, SingleLaserSpawnPoint, LaserSpawnPoints);
+    }
+    BoostComponent = Cast<UBoostComponent>(GetComponentByClass(UBoostComponent::StaticClass()));
+    if(BoostComponent != nullptr){
+
+    } else {
+        UE_LOG(LogTemp, Error, TEXT("No boost Component Found"));
+    }
+    BaseSpeed = Speed;
 }
 
 void APlayerPawn::Boost()

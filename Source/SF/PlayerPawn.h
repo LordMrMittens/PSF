@@ -48,6 +48,8 @@ public:
     }
 
 private:
+	void SetLevelBoundary();
+	void SetUpPlayerPawn();
 	void Boost();
 	void FinishBoosting();
 	void Break();
@@ -76,8 +78,8 @@ private:
 	UBoostComponent* BoostComponent;
 	float BaseSpeed;
 
-	FVector MinBoundary = FVector(0.0f, -5000.0f, 0.0f);
-    FVector MaxBoundary = FVector(0.0f, 5000.0f, 3000.0f);
+	FVector MinBoundary;
+    FVector MaxBoundary;
 
 	bool RecevingInput = false;
 
