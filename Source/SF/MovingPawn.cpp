@@ -17,6 +17,7 @@ AMovingPawn::AMovingPawn()
 void AMovingPawn::BeginPlay()
 {
 	Super::BeginPlay();
+    SetLevelBoundary();
     Speed = Cast<ASFGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()))->GetSpeed();
     OriginalMoveDirection = MoveDirection;
     HealthComponent = Cast<UHealthComponent>(GetComponentByClass(UHealthComponent::StaticClass()));
@@ -56,5 +57,17 @@ void AMovingPawn::SetRotation()
     FRotator DesiredRotation = FRotator(DesiredPitch, 0.0f, DesiredRoll);
     FRotator NewRotation = FMath::RInterpTo(CurrentRotation, DesiredRotation, GetWorld()->GetDeltaSeconds(), RotationInterpSpeed);
     SetActorRotation(NewRotation);
+}
+
+
+void AMovingPawn::SetLevelBoundary()
+{
+    ASFGameModeBase* GameMode = Cast<ASFGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+    if (GameMode)
+    {
+        MaxBoundary = GameMode->GetMaxBoundary();
+        MinBoundary = GameMode->GetMinBoundary();
+    }
+    
 }
 

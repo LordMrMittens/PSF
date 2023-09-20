@@ -23,11 +23,12 @@ protected:
 
 	virtual void Move();
 	virtual void SetRotation();
+	virtual void SetLevelBoundary();
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	
+
 	float Speed;
 	UPROPERTY(EditAnywhere)
 	FVector MoveDirection;
@@ -41,5 +42,8 @@ public:
 
 	UFUNCTION()
 	void OnDeath();
+
+	FVector MinBoundary;
+    FVector MaxBoundary;
 
 };

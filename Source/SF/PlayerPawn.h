@@ -48,7 +48,7 @@ public:
     }
 
 private:
-	void SetLevelBoundary();
+	
 	void SetUpPlayerPawn();
 	void Boost();
 	void FinishBoosting();
@@ -77,9 +77,6 @@ private:
 	UPROPERTY(EditAnywhere)
 	UBoostComponent* BoostComponent;
 	float BaseSpeed;
-
-	FVector MinBoundary;
-    FVector MaxBoundary;
 
 	bool RecevingInput = false;
 

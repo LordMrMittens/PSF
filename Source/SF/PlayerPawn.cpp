@@ -152,20 +152,8 @@ FVector APlayerPawn::CalculateVelocity()
     return Velocity;
 }
 
-void APlayerPawn::SetLevelBoundary()
-{
-    ASFGameModeBase* GameMode = Cast<ASFGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
-    if (GameMode)
-    {
-        MaxBoundary = GameMode->GetMaxBoundary();
-        MinBoundary = GameMode->GetMinBoundary();
-    }
-    
-}
-
 void APlayerPawn::SetUpPlayerPawn()
 {
-    SetLevelBoundary();
     //OriginalMoveDirection = MoveDirection;
     SpringArmComponent = FindComponentByClass<USpringArmComponent>();
     if(GunComponent){
