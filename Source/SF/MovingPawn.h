@@ -24,12 +24,15 @@ protected:
 	virtual void Move();
 	virtual void SetRotation();
 	virtual void SetLevelBoundary();
+	virtual void LimitMovement(FVector CurrentActorLocation, FVector& MovementDelta);
+	virtual void CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& MovementDelta);
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	float Speed;
+	float CurrentSpeed;
 	UPROPERTY(EditAnywhere)
 	FVector MoveDirection;
 	FVector OriginalMoveDirection;

@@ -40,6 +40,18 @@ void AFlyingEnemyPawn::BeginPlay()
     GetWorldTimerManager().SetTimer(ShotTimerHandle, GunComponent, &UGunComponent::FireLasers, ShotFrequency, true);
 }
 
+void AFlyingEnemyPawn::Move()
+{
+    FVector MoveDelta = MoveDirection * CurrentSpeed * GetWorld()->GetDeltaSeconds();
+    if(!LeavingLevel){
+    FVector CurrentLocation = GetActorLocation();
+    LimitMovement(CurrentLocation, MoveDelta);
+    CheckIfOutOfBounds(CurrentLocation, MoveDelta);
+    }
+    AddActorWorldOffset(MoveDelta, true);
+    MoveDirection = OriginalMoveDirection;
+}
+
 void AFlyingEnemyPawn::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
@@ -122,12 +134,13 @@ bool AFlyingEnemyPawn::DetectObstacles()
 void AFlyingEnemyPawn::LeaveLevel()
 {
     GetWorldTimerManager().SetTimer(LeavingDelayTimerHandle, this, &AFlyingEnemyPawn::SteerOffLevel, HoldTimeBeforeLevelExit, false);
+    
 }
 
 void AFlyingEnemyPawn::SteerOffLevel()
 {
     LeavingLevel = true;
-    
+    CurrentSpeed = Speed * 0.25f;
     if (ObstacleAvoidanceDirection == 0)
     {
         int32 RandomDirection = FMath::RandRange(0, 1);

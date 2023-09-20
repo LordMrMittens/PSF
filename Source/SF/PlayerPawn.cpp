@@ -81,7 +81,7 @@ void APlayerPawn::Steer(const FInputActionValue &Value)
 
 void APlayerPawn::Move()
 {
-    FVector MoveDelta = MoveDirection * BaseSpeed * GetWorld()->GetDeltaSeconds();
+    FVector MoveDelta = MoveDirection * CurrentSpeed * GetWorld()->GetDeltaSeconds();
     FVector CurrentLocation = GetActorLocation();
     LimitMovement(CurrentLocation, MoveDelta);
     CheckIfOutOfBounds(CurrentLocation, MoveDelta);
@@ -99,45 +99,6 @@ void APlayerPawn::SetRotation()
         FRotator SpringArmRotation = SpringArmComponent->GetRelativeRotation();
         SpringArmRotation.Roll *= 0.5f; // Reduce the roll rotation by 50%
         SpringArmComponent->SetRelativeRotation(SpringArmRotation);
-    }
-}
-
-void APlayerPawn::LimitMovement(FVector CurrentActorLocation, FVector& MovementDelta)
-{
-    FVector NewLocation = CurrentActorLocation + MovementDelta;
-        if (NewLocation.Z > MaxBoundary.Z || NewLocation.Z < MinBoundary.Z)
-    {
-        MovementDelta.Z = 0;
-        MoveDirection.Z=0;
-    }
-    if (NewLocation.Y > MaxBoundary.Y || NewLocation.Y < MinBoundary.Y)
-    {
-        MovementDelta.Y = 0;
-        MoveDirection.Y =0;
-    }
-}
-
-void APlayerPawn::CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& MovementDelta)
-{
-    if (CurrentActorLocation.Z > MaxBoundary.Z)
-    {
-        MovementDelta.Z = -100;
-        MoveDirection.Z =-1;
-    }
-    if (CurrentActorLocation.Z < MinBoundary.Z)
-    {
-        MovementDelta.Z = 100;
-        MoveDirection.Z =1;
-    }
-        if (CurrentActorLocation.Y > MaxBoundary.Y)
-    {
-        MovementDelta.Y = -100;
-        MoveDirection.Y =-1;
-    }
-    if (CurrentActorLocation.Y < MinBoundary.Y)
-    {
-        MovementDelta.Y = 100;
-        MoveDirection.Y =1;
     }
 }
 
@@ -165,7 +126,6 @@ void APlayerPawn::SetUpPlayerPawn()
     } else {
         UE_LOG(LogTemp, Error, TEXT("No boost Component Found"));
     }
-    BaseSpeed = Speed;
 }
 
 void APlayerPawn::Boost()
@@ -174,7 +134,7 @@ void APlayerPawn::Boost()
     {
         if (BoostComponent->CanChangeVelocity(BoostComponent->CurrentBoost, BoostComponent->ConsumptionRate, BoostComponent->bMustRestoreBoostCompletely, BoostComponent->bShouldRestoreBoost))
         {
-            BaseSpeed = Speed * 2;
+            CurrentSpeed = Speed * 2;
         }
         else
         {
@@ -185,7 +145,7 @@ void APlayerPawn::Boost()
 
 void APlayerPawn::FinishBoosting()
 {
-    BaseSpeed = Speed;
+    CurrentSpeed = Speed;
     if (BoostComponent)
     {
         BoostComponent->StartRestoringResource(BoostComponent->bShouldRestoreBoost);
@@ -196,7 +156,7 @@ void APlayerPawn::Break()
 {
     if (BoostComponent->CanChangeVelocity(BoostComponent->CurrentBreak, BoostComponent->ConsumptionRate, BoostComponent->bMustRestoreBreakCompletely, BoostComponent->bShouldRestoreBreak))
     {
-        BaseSpeed = Speed / 2;
+        CurrentSpeed = Speed / 2;
     } else {
         FinishBreaking();
     }
@@ -204,7 +164,7 @@ void APlayerPawn::Break()
 
 void APlayerPawn::FinishBreaking()
 {
-    BaseSpeed = Speed;
+    CurrentSpeed = Speed;
         if(BoostComponent){
         BoostComponent->StartRestoringResource(BoostComponent->bShouldRestoreBreak);
     }

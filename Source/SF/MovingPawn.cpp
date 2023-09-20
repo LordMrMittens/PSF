@@ -26,7 +26,7 @@ void AMovingPawn::BeginPlay()
     } else {
         UE_LOG(LogTemp, Error, TEXT("No Health Component Found"));
     }
-	
+	CurrentSpeed = Speed;
 }
 
 // Called every frame
@@ -43,7 +43,7 @@ void AMovingPawn::OnDeath()
 
 void AMovingPawn::Move()
 {
-    FVector MoveDelta = MoveDirection * Speed * GetWorld()->GetDeltaSeconds();
+    FVector MoveDelta = MoveDirection * CurrentSpeed * GetWorld()->GetDeltaSeconds();
     FVector CurrentLocation = GetActorLocation();
     AddActorWorldOffset(MoveDelta, true);
     MoveDirection = OriginalMoveDirection;
@@ -69,5 +69,43 @@ void AMovingPawn::SetLevelBoundary()
         MinBoundary = GameMode->GetMinBoundary();
     }
     
+}
+void AMovingPawn::LimitMovement(FVector CurrentActorLocation, FVector& MovementDelta)
+{
+    FVector NewLocation = CurrentActorLocation + MovementDelta;
+        if (NewLocation.Z > MaxBoundary.Z || NewLocation.Z < MinBoundary.Z)
+    {
+        MovementDelta.Z = 0;
+        MoveDirection.Z=0;
+    }
+    if (NewLocation.Y > MaxBoundary.Y || NewLocation.Y < MinBoundary.Y)
+    {
+        MovementDelta.Y = 0;
+        MoveDirection.Y =0;
+    }
+}
+
+void AMovingPawn::CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& MovementDelta)
+{
+    if (CurrentActorLocation.Z > MaxBoundary.Z)
+    {
+        MovementDelta.Z = -100;
+        MoveDirection.Z =-1;
+    }
+    if (CurrentActorLocation.Z < MinBoundary.Z)
+    {
+        MovementDelta.Z = 100;
+        MoveDirection.Z =1;
+    }
+        if (CurrentActorLocation.Y > MaxBoundary.Y)
+    {
+        MovementDelta.Y = -100;
+        MoveDirection.Y =-1;
+    }
+    if (CurrentActorLocation.Y < MinBoundary.Y)
+    {
+        MovementDelta.Y = 100;
+        MoveDirection.Y =1;
+    }
 }
 

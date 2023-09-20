@@ -54,8 +54,6 @@ private:
 	void FinishBoosting();
 	void Break();
 	void FinishBreaking();
-	void LimitMovement(FVector CurrentActorLocation, FVector& MovementDelta);
-	void CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& MovementDelta);
 	
 	FVector PreviousLocation;
 
@@ -76,7 +74,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	UBoostComponent* BoostComponent;
-	float BaseSpeed;
+	
 
 	bool RecevingInput = false;
 
