@@ -30,12 +30,16 @@ void ABomb::OnOverlapStart(class UPrimitiveComponent *OverlappedComp, class AAct
 {
     if (OtherActor != Owner)
     {
+        //if the other actor has a health component it receives the full bomb damage
         Explode();
+        
     }
 }
 
 void ABomb::Explode()
 {
     UE_LOG(LogTemp, Error, TEXT("Bomb Exploded"));
+    //Cast a sphere of the desired size
+    //all actors inside sphere that have a health component get damaged based on 2/3rds of original damage
     Destroy();
 }

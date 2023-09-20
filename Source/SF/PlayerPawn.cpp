@@ -64,7 +64,7 @@ void APlayerPawn::SetupPlayerInputComponent(UInputComponent *PlayerInputComponen
         // Bind the actions
         PEI->BindAction(InputActions->InputSteer, ETriggerEvent::Triggered, this, &APlayerPawn::Steer);
         PEI->BindAction(InputActions->FireLaser, ETriggerEvent::Started,  GunComponent, &UGunComponent::FireLasers);
-        PEI->BindAction(InputActions->FireBombs, ETriggerEvent::Started,  GunComponent, &UGunComponent::FireBombs);//should be bombs
+        PEI->BindAction(InputActions->FireBombs, ETriggerEvent::Started,  GunComponent, &UGunComponent::FireBombs);
         PEI->BindAction(InputActions->Boost,  ETriggerEvent::Triggered ,this,&APlayerPawn::Boost);
         PEI->BindAction(InputActions->Boost,  ETriggerEvent::Completed ,this,&APlayerPawn::FinishBoosting);
         PEI->BindAction(InputActions->Break,  ETriggerEvent::Triggered ,this,&APlayerPawn::Break);
