@@ -46,7 +46,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	float ShotSpeedMultiplier;
 	UPROPERTY(EditAnywhere)
-	float ShotLeadMultiplier = 1.5f;
+	float ShotLeadErrorMin = 1.5f;
+	UPROPERTY(EditAnywhere)
+	float ShotLeadErrorMax = 1.5f; // 1 for dead on player
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AProjectile> ProjectileClass;
 	UPROPERTY(EditAnywhere)

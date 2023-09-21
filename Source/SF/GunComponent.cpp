@@ -32,7 +32,7 @@ void UGunComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 	// ...
 }
 
-void UGunComponent::SetupGunComponent(AActor *Owner, float ShotSpeed, int32 AmmoAvailable ,bool DoubleShot, USceneComponent *SingleLaserSource, TArray<USceneComponent *> MultiLasers)
+void UGunComponent::SetupGunComponent(AActor *Owner, float ShotSpeed, int32 AmmoAvailable, bool DoubleShot, USceneComponent *SingleLaserSource, TArray<USceneComponent *> MultiLasers)
 {
 	Speed = ShotSpeed;
 	DoubleLaser = DoubleShot;
@@ -60,7 +60,8 @@ void UGunComponent::FireLasers()
 		if (AvailableAmmo > 0)
 		{
 			AvailableAmmo--;
-			if( AvailableAmmo==0){
+			if (AvailableAmmo == 0)
+			{
 				OutOfAmmoDelegate.Broadcast();
 			}
 		}
@@ -71,12 +72,14 @@ void UGunComponent::FireBombs()
 	if (AvailableBombs != 0)
 	{
 		SpawnBombs(SingleLaserSpawnPoint);
-		if(AvailableBombs>0){
+		if (AvailableBombs > 0)
+		{
 			AvailableBombs--;
 		}
 	}
 }
-void UGunComponent::SpawnBombs(USceneComponent *SpawnPoint){
+void UGunComponent::SpawnBombs(USceneComponent *SpawnPoint)
+{
 	struct FActorSpawnParameters params;
 	params.Owner = OwnerActor;
 	ABomb *Bomb = GetWorld()->SpawnActor<ABomb>(BombClass,
@@ -105,27 +108,31 @@ void UGunComponent::Aim(AActor *PlayerActor)
 {
 	if (PlayerActor)
 	{
+		float LeadFactor = 1.0f;
+		FVector PlayerLocation = PlayerActor->GetActorLocation();
+		FVector PlayerVelocity = FVector::ZeroVector;
 
-	        FVector PlayerLocation = PlayerActor->GetActorLocation();
-        FVector PlayerVelocity = FVector::ZeroVector;
+		APlayerPawn *PlayerPawn = Cast<APlayerPawn>(PlayerActor);
+		if (PlayerPawn)
+		{
+			PlayerVelocity = PlayerPawn->CalculateVelocity();
+		}
+		FVector RelativePlayerLocation = PlayerLocation - GetComponentLocation();
+		float TimeToHit = RelativePlayerLocation.Size() / (Speed * ShotSpeedMultiplier);
+		LeadFactor = FMath::RandRange(ShotLeadErrorMin, ShotLeadErrorMax);
+		UE_LOG(LogTemp, Display, TEXT("lead Factor : %f"), LeadFactor);
+		FVector PredictedPlayerLocation = PlayerLocation + (PlayerVelocity * (TimeToHit * LeadFactor));
 
+		FVector GunDirection = PredictedPlayerLocation - GetComponentLocation();
+		FRotator NewRotation = GunDirection.Rotation();
 
-        APlayerPawn* PlayerPawn = Cast<APlayerPawn>(PlayerActor);
-        if (PlayerPawn)
-        {
-            PlayerVelocity = PlayerPawn->CalculateVelocity();
-        }
-
-        float TimeToHit = FVector::Dist(GetComponentLocation(), PlayerLocation) / (Speed * ShotSpeedMultiplier*ShotLeadMultiplier);
-        
-        FVector PredictedPlayerLocation = PlayerLocation + (PlayerVelocity * TimeToHit);
-        FVector GunDirection = PredictedPlayerLocation - GetComponentLocation();
-        FRotator NewRotation = GunDirection.Rotation();
-
-		if( bUsesWorldRotationWhenAiming){
+		if (bUsesWorldRotationWhenAiming)
+		{
 			SetWorldRotation(NewRotation);
-		} else
-        {SetRelativeRotation(NewRotation);}
-		
+		}
+		else
+		{
+			SetRelativeRotation(NewRotation);
+		}
 	}
 }
