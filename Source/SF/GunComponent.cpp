@@ -122,6 +122,10 @@ void UGunComponent::Aim(AActor *PlayerActor)
         FVector GunDirection = PredictedPlayerLocation - GetComponentLocation();
         FRotator NewRotation = GunDirection.Rotation();
 
-        SetRelativeRotation(NewRotation);
+		if( bUsesWorldRotationWhenAiming){
+			SetWorldRotation(NewRotation);
+		} else
+        {SetRelativeRotation(NewRotation);}
+		
 	}
 }

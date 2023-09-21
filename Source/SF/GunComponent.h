@@ -54,6 +54,8 @@ public:
 	int32 AvailableAmmo = -1; //negative number for infinite
 	int32 AvailableBombs = -1;
 
-
+private:
+	UPROPERTY(EditAnywhere, Category = "Aiming")
+	bool bUsesWorldRotationWhenAiming= false;
 		
 };
