@@ -22,13 +22,15 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	virtual void Move() override;
-	virtual void SetRotation() override;
+	
 
 public:
 	virtual void Tick(float DeltaTime) override;
 
 private:
-	
+	AActor* SetTarget();
+	bool RotationSet();
+
 	UPROPERTY(EditAnywhere)
 	UCapsuleComponent *CapsuleComponent;
 
@@ -48,13 +50,22 @@ private:
 	UPROPERTY(EditAnywhere)
 	UGunComponent *GunComponent;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Movement")
 	TArray<AActor *> MovementNodes;
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float MinimumDistanceToTarget;
+		UPROPERTY(EditAnywhere, Category = "Movement")
+	float MovementSpeed;
+		UPROPERTY(EditAnywhere, Category = "Movement")
+	float RotationInterpolationSpeed;
 
 	AActor* CurrentTarget;
+	AActor* PlayerActor;
 	int32 CurrentTargetIndex;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Movement")
 	bool bLoopsPositions = false;
+	bool bReturning = false;
+	bool bStayInPosition = false;
 
 
 };

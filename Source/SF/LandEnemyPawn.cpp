@@ -4,6 +4,7 @@
 #include "LandEnemyPawn.h"
 #include "GunComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 
 ALandEnemyPawn::ALandEnemyPawn()
@@ -25,31 +26,105 @@ ALandEnemyPawn::ALandEnemyPawn()
     DoubleLaserSpawnPointR = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPointR"));
     DoubleLaserSpawnPointR->SetupAttachment(TurretMeshComponent);
     LaserSpawnPoints.Add(DoubleLaserSpawnPointR);
-    
 }
 
 void ALandEnemyPawn::BeginPlay()
 {
     Super::BeginPlay();
-    if(GunComponent!=nullptr){
+    if (GunComponent != nullptr)
+    {
         GunComponent->SetupGunComponent(this, Speed, -1, false, SingleLaserSpawnPoint, LaserSpawnPoints);
     }
+    CurrentTargetIndex = 0;
+    PlayerActor = UGameplayStatics::GetPlayerPawn(GetWorld(),0);
 }
 void ALandEnemyPawn::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+    if (bStayInPosition == false)
+    {
+        Move();
+    }
+    if(GunComponent && PlayerActor){
+        UE_LOG(LogTemp, Display, TEXT("Aiming"));
+        GunComponent->Aim(PlayerActor);
+    } else{
+        UE_LOG(LogTemp, Warning, TEXT("The value of Player is: %s"), PlayerActor == nullptr ? TEXT("true") : TEXT("false"));
+        UE_LOG(LogTemp, Warning, TEXT("The value of gun is: %s"), GunComponent == nullptr ? TEXT("true") : TEXT("false"));
+    }
+}
+
+AActor *ALandEnemyPawn::SetTarget()
+{
+    if (MovementNodes.Num() > 0)
+    {
+        if (CurrentTargetIndex + 1 >= MovementNodes.Num())
+        {
+            if (bLoopsPositions)
+            {
+                bReturning = true;
+            }
+            else
+            {
+                bStayInPosition = true;
+            }
+        }
+        if (CurrentTargetIndex - 1 < 0)
+        {
+            bReturning = false;
+        }
+        return MovementNodes[CurrentTargetIndex];
+    } else{
+        bStayInPosition = true;
+        return nullptr;
+    }
 }
 
 void ALandEnemyPawn::Move()
 {
-    
+    if (CurrentTarget == nullptr)
+    {
+        CurrentTarget = SetTarget();
+    }
+    if (CurrentTarget != nullptr && RotationSet())
+    {
+        FVector ForwardVector = GetActorForwardVector();
+        FVector NewLocation = GetActorLocation() + (ForwardVector * MovementSpeed * GetWorld()->GetDeltaSeconds());
+        SetActorLocation(NewLocation);
+        float DistanceToTarget = FVector::Dist(GetActorLocation(), CurrentTarget->GetActorLocation());
+        if (DistanceToTarget < MinimumDistanceToTarget)
+        {
+            CurrentTarget = nullptr;
+            if (MovementNodes.Num() > 1)
+            {
+                if (bReturning)
+                {
+                    CurrentTargetIndex--;
+                }
+                else
+                {
+                    CurrentTargetIndex++;
+                }
+            }
+            else
+            {
+                bStayInPosition = true;
+            }
+        }
+    }
 }
 
-void ALandEnemyPawn::SetRotation()
+bool ALandEnemyPawn::RotationSet()
 {
-    if(MovementNodes.Num()>0){
-        
-    }
+    FVector DirectionToTarget = (CurrentTarget->GetActorLocation() - GetActorLocation()).GetSafeNormal();
+    FRotator TargetRotation = FRotationMatrix::MakeFromX(DirectionToTarget).Rotator();
+
+        // Gradually interpolate the actor's rotation towards the target
+    FRotator NewRotation = FMath::RInterpTo(GetActorRotation(), TargetRotation, GetWorld()->GetDeltaSeconds(), RotationInterpolationSpeed);
+    SetActorRotation(NewRotation);
+    bool bIsFacingTarget = FVector::DotProduct(GetActorForwardVector(), DirectionToTarget) >= 0.9f; // Adjust the threshold as needed
+
+    return bIsFacingTarget;
 }
 
 
