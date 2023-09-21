@@ -67,5 +67,9 @@ private:
 	bool bReturning = false;
 	bool bStayInPosition = false;
 
+	FTimerHandle ShotTimerHandle;
+	UPROPERTY(EditAnywhere, Category = "Shooting")
+	float ShotFrequency = 1;
+
 
 };

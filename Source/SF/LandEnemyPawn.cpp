@@ -33,7 +33,8 @@ void ALandEnemyPawn::BeginPlay()
     Super::BeginPlay();
     if (GunComponent != nullptr)
     {
-        GunComponent->SetupGunComponent(this, Speed, -1, false, SingleLaserSpawnPoint, LaserSpawnPoints);
+        GunComponent->SetupGunComponent(this, 100, -1, false, SingleLaserSpawnPoint, LaserSpawnPoints);
+        GetWorldTimerManager().SetTimer(ShotTimerHandle, GunComponent, &UGunComponent::FireLasers, ShotFrequency, true);
     }
     CurrentTargetIndex = 0;
     PlayerActor = UGameplayStatics::GetPlayerPawn(GetWorld(),0);
@@ -46,11 +47,7 @@ void ALandEnemyPawn::Tick(float DeltaTime)
         Move();
     }
     if(GunComponent && PlayerActor){
-        UE_LOG(LogTemp, Display, TEXT("Aiming"));
         GunComponent->Aim(PlayerActor);
-    } else{
-        UE_LOG(LogTemp, Warning, TEXT("The value of Player is: %s"), PlayerActor == nullptr ? TEXT("true") : TEXT("false"));
-        UE_LOG(LogTemp, Warning, TEXT("The value of gun is: %s"), GunComponent == nullptr ? TEXT("true") : TEXT("false"));
     }
 }
 
@@ -58,20 +55,28 @@ AActor *ALandEnemyPawn::SetTarget()
 {
     if (MovementNodes.Num() > 0)
     {
-        if (CurrentTargetIndex + 1 >= MovementNodes.Num())
+        if (CurrentTargetIndex >= MovementNodes.Num())
         {
             if (bLoopsPositions)
             {
+                UE_LOG(LogTemp, Display, TEXT("cycling"));
                 bReturning = true;
+                CurrentTargetIndex = MovementNodes.Num() -1;
+                return MovementNodes[CurrentTargetIndex];
             }
             else
             {
                 bStayInPosition = true;
+                return nullptr;
+                
             }
         }
-        if (CurrentTargetIndex - 1 < 0)
+        if (CurrentTargetIndex < 0)
         {
+            UE_LOG(LogTemp, Display, TEXT("cycling back"));
             bReturning = false;
+            CurrentTargetIndex = 0;
+            return MovementNodes[CurrentTargetIndex];
         }
         return MovementNodes[CurrentTargetIndex];
     } else{
