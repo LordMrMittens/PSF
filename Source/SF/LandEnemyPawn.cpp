@@ -39,7 +39,7 @@ void ALandEnemyPawn::BeginPlay()
         GunConfiguration._LaserSpawnPoints = LaserSpawnPoints;
         GunConfiguration._Speed = Speed;
         GunComponent->SetupGunComponent(&GunConfiguration, this);
-        GetWorldTimerManager().SetTimer(ShotTimerHandle, GunComponent, &UGunComponent::Aim, ShotFrequency, true);
+        GetWorldTimerManager().SetTimer(ShotTimerHandle, this, &ALandEnemyPawn::AimAndShoot, ShotFrequency, true);
     }
     CurrentTargetIndex = 0;
     PlayerActor = Cast<AActor>(GameplayManager->GetPlayerPawn());
@@ -91,7 +91,7 @@ void ALandEnemyPawn::Move()
     {
         CurrentTarget = SetTarget();
     }
-    if (CurrentTarget != nullptr && RotationSet())
+    if (CurrentTarget != nullptr && IsPlayerInRange() &&RotationSet())
     {
         FVector ForwardVector = GetActorForwardVector();
         FVector NewLocation = GetActorLocation() + (ForwardVector * MovementSpeed * GetWorld()->GetDeltaSeconds());
@@ -130,6 +130,22 @@ bool ALandEnemyPawn::RotationSet()
     bool bIsFacingTarget = FVector::DotProduct(GetActorForwardVector(), DirectionToTarget) >= 0.9f; // Adjust the threshold as needed
 
     return bIsFacingTarget;
+}
+
+bool ALandEnemyPawn::IsPlayerInRange() const
+{
+    float Distance = FVector::Dist(GetActorLocation(), GameplayManager->GetPlayerLocation());
+    return Distance < ActiveDistance;
+}
+
+void ALandEnemyPawn::AimAndShoot()
+{
+    if (IsPlayerInRange())
+    {
+        GunComponent->Aim();
+    }
+    
+    
 }
 
 

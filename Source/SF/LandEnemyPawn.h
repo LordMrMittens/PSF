@@ -30,6 +30,9 @@ public:
 private:
 	AActor* SetTarget();
 	bool RotationSet();
+	bool IsPlayerInRange() const;
+
+	void AimAndShoot();
 
 	UPROPERTY(EditAnywhere)
 	UCapsuleComponent *CapsuleComponent;
@@ -70,6 +73,8 @@ private:
 	FTimerHandle ShotTimerHandle;
 	UPROPERTY(EditAnywhere, Category = "Shooting")
 	float ShotFrequency = 1;
+	UPROPERTY(EditAnywhere, Category = "Shooting")
+	float ActiveDistance = 10000;
 
 
 };
