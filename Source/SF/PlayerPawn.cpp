@@ -110,7 +110,6 @@ void APlayerPawn::CalculateVelocity()
     FVector CurrentLocation = GetActorLocation();
     Velocity = (CurrentLocation - PreviousLocation) / GetWorld()->GetDeltaSeconds();
     PreviousLocation = CurrentLocation;
-    UE_LOG(LogTemp, Display, TEXT("My Velocity - %s"), *Velocity.ToString());
 }
 
 void APlayerPawn::SetUpPlayerPawn()

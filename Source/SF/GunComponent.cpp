@@ -125,10 +125,6 @@ void UGunComponent::Aim()
 
 		FVector GunDirection = PredictedPlayerLocation - GetComponentLocation();
 		FRotator NewRotation = GunDirection.Rotation();
-
-		//UE_LOG(LogTemp, Error, TEXT("Name: %s is aiming towards %s:"), *this->GetOwner()->GetActorNameOrLabel(), * PredictedPlayerLocation.ToString());
-		UE_LOG(LogTemp, Error, TEXT("Player velocity:%s"), *PlayerVelocity.ToString());
-
 		if (bUsesWorldRotationWhenAiming)
 		{
 			SetWorldRotation(NewRotation);
