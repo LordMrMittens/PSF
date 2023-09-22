@@ -4,6 +4,7 @@
 #include "Projectile.h"
 #include "PlayerPawn.h"
 #include "Bomb.h"
+#include "GameplayManager.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
@@ -20,7 +21,10 @@ UGunComponent::UGunComponent()
 void UGunComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
+	GameplayManager = Cast<AGameplayManager>(UGameplayStatics::GetActorOfClass(GetWorld(),AGameplayManager::StaticClass()));
+	if(GameplayManager==nullptr){
+		UE_LOG(LogTemp, Error, TEXT("GameplayManager is null"));
+	}
 	// ...
 }
 
@@ -106,14 +110,14 @@ void UGunComponent::SpawnLaser(USceneComponent *SpawnPoint)
 }
 void UGunComponent::Aim()
 {
-	PlayerActor = UGameplayStatics::GetPlayerPawn(GetWorld(),0);
-	if (PlayerActor)
+	PlayerActor = GameplayManager->GetPlayerPawn();
+	if (PlayerActor && GameplayManager)
 	{
 		float LeadFactor = 1.0f;
-		FVector PlayerLocation = PlayerActor->GetActorLocation();
+		FVector PlayerLocation = GameplayManager->GetPlayerLocation();
 		FVector PlayerVelocity = FVector::ZeroVector;
 
-		APlayerPawn *PlayerPawn = Cast<APlayerPawn>(PlayerActor);
+		APlayerPawn *PlayerPawn = GameplayManager->GetPlayerPawn();
 		if (PlayerPawn)
 		{
 			PlayerVelocity = PlayerPawn->GetVelocity();

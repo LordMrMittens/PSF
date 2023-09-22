@@ -8,6 +8,7 @@
 
 class AProjectile;
 class ABomb;
+class AGameplayManager;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SF_API UGunComponent : public USceneComponent
@@ -60,5 +61,7 @@ public:
 private:
 	UPROPERTY(EditAnywhere, Category = "Aiming")
 	bool bUsesWorldRotationWhenAiming= false;
+
+	AGameplayManager* GameplayManager;
 		
 };

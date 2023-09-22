@@ -4,6 +4,8 @@
 #include "GunComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
+#include "GameplayManager.h"
+#include "PlayerPawn.h"
 
 AFlyingEnemyPawn::AFlyingEnemyPawn()
 {
@@ -28,7 +30,7 @@ AFlyingEnemyPawn::AFlyingEnemyPawn()
 void AFlyingEnemyPawn::BeginPlay()
 {
     Super::BeginPlay();
-    PlayerActor = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+    PlayerActor = Cast<AActor>(GameplayManager->GetPlayerPawn());
     if (GunComponent)
     {
         GunComponent->SetupGunComponent(this, Speed, AmmoAvailable, false, SingleLaserSpawnPoint, LaserSpawnPoints);
@@ -70,7 +72,7 @@ void AFlyingEnemyPawn::Steer()
     }
     else if (CanSteerTowardsPlayer && ObstacleAvoidanceDirection == 0)
     {
-        FVector PlayerLocation = PlayerActor->GetActorLocation();
+        FVector PlayerLocation = GameplayManager->GetPlayerLocation();
         FVector EnemyLocation = GetActorLocation();
         FVector PlayerDirection = (PlayerLocation - EnemyLocation).GetSafeNormal();
         if (EnemyLocation.Z > VerticalDistanceToPlayerOffset || EnemyLocation.Z < VerticalDistanceToPlayerOffset)

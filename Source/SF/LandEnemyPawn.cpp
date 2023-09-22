@@ -5,6 +5,8 @@
 #include "GunComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "GameplayManager.h"
+#include "PlayerPawn.h"
 
 
 ALandEnemyPawn::ALandEnemyPawn()
@@ -37,7 +39,7 @@ void ALandEnemyPawn::BeginPlay()
         GetWorldTimerManager().SetTimer(ShotTimerHandle, GunComponent, &UGunComponent::Aim, ShotFrequency, true);
     }
     CurrentTargetIndex = 0;
-    PlayerActor = UGameplayStatics::GetPlayerPawn(GetWorld(),0);
+    PlayerActor = Cast<AActor>(GameplayManager->GetPlayerPawn());
 }
 void ALandEnemyPawn::Tick(float DeltaTime)
 {

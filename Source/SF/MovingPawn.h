@@ -7,6 +7,7 @@
 #include "MovingPawn.generated.h"
 
 class UHealthComponent;
+class AGameplayManager;
 
 UCLASS()
 class SF_API AMovingPawn : public APawn
@@ -48,5 +49,6 @@ public:
 
 	FVector MinBoundary;
     FVector MaxBoundary;
+	AGameplayManager* GameplayManager;
 
 };

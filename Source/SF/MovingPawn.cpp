@@ -5,6 +5,7 @@
 #include "HealthComponent.h"
 #include "SFGameModeBase.h"
 #include "Kismet/GameplayStatics.h"
+#include "GameplayManager.h"
 
 // Sets default values
 AMovingPawn::AMovingPawn()
@@ -26,6 +27,10 @@ void AMovingPawn::BeginPlay()
     } else {
         UE_LOG(LogTemp, Error, TEXT("No Health Component Found"));
     }
+    GameplayManager = Cast<AGameplayManager>(UGameplayStatics::GetActorOfClass(GetWorld(),AGameplayManager::StaticClass()));
+	if(GameplayManager==nullptr){
+		UE_LOG(LogTemp, Error, TEXT("GameplayManager is null"));
+	}
 	CurrentSpeed = Speed;
 }
 
