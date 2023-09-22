@@ -3,9 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GunComponent.h"
 #include "GameFramework/Pawn.h"
 #include "MovingPawn.generated.h"
 
+class UGunComponent;
 class UHealthComponent;
 class AGameplayManager;
 
@@ -40,6 +42,10 @@ public:
 	float MaxTiltAngle;
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float RotationInterpSpeed;
+
+	UPROPERTY(EditAnywhere, Category = "Guns")
+	FGunComponentConfig GunConfiguration;
+
 
 	UHealthComponent* HealthComponent;
 

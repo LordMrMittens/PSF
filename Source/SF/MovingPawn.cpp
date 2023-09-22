@@ -6,6 +6,7 @@
 #include "SFGameModeBase.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameplayManager.h"
+#include "GunComponent.h"
 
 // Sets default values
 AMovingPawn::AMovingPawn()

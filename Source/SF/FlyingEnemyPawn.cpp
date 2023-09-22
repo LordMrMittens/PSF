@@ -33,7 +33,9 @@ void AFlyingEnemyPawn::BeginPlay()
     PlayerActor = Cast<AActor>(GameplayManager->GetPlayerPawn());
     if (GunComponent)
     {
-        GunComponent->SetupGunComponent(this, Speed, AmmoAvailable, false, SingleLaserSpawnPoint, LaserSpawnPoints);
+        GunConfiguration._SingleLaserSpawnPoint = SingleLaserSpawnPoint;
+        GunConfiguration._LaserSpawnPoints = LaserSpawnPoints;
+        GunComponent->SetupGunComponent(&GunConfiguration, this);
         GunComponent->OutOfAmmoDelegate.AddDynamic(this, &AFlyingEnemyPawn::LeaveLevel);
     }
     if(MainBodyComponent){

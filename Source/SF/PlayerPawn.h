@@ -78,7 +78,8 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Components")
 	UBoostComponent* BoostComponent;
-	
+
+
 
 	bool RecevingInput = false;
 

@@ -7,7 +7,14 @@
 void UPlayerGunComponent::BeginPlay()
 {
     Super::BeginPlay();
-    ResetLasers();
+    
+}
+
+void UPlayerGunComponent::SetupGunComponent(FGunComponentConfig *GunConfig, AActor *_OwnerActor)
+{
+	Super::SetupGunComponent(GunConfig, _OwnerActor);
+	ActiveProjectileClass = ProjectileClass;
+	ResetLasers();
 }
 
 void UPlayerGunComponent::EnhanceLasers()

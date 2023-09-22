@@ -36,14 +36,22 @@ void UGunComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 	// ...
 }
 
-void UGunComponent::SetupGunComponent(AActor *Owner, float ShotSpeed, int32 AmmoAvailable, bool DoubleShot, USceneComponent *SingleLaserSource, TArray<USceneComponent *> MultiLasers)
+void UGunComponent::SetupGunComponent(FGunComponentConfig* GunConfig, AActor *_OwnerActor)
 {
-	Speed = ShotSpeed;
-	DoubleLaser = DoubleShot;
-	SingleLaserSpawnPoint = SingleLaserSource;
-	LaserSpawnPoints = MultiLasers;
-	OwnerActor = Owner;
-	AvailableAmmo = AmmoAvailable;
+	ShotSpeedMultiplier = GunConfig->_ShotSpeedMultiplier;
+	ShotLeadErrorMin = GunConfig->_ShotLeadErrorMin;
+	ShotLeadErrorMax = GunConfig->_ShotLeadErrorMax;
+	ProjectileClass = GunConfig->_ProjectileClass;
+	SecondaryProjectileClass = GunConfig->_SecondaryProjectileClass;
+	BombClass = GunConfig->_BombClass;
+	AvailableAmmo = GunConfig->_AvailableAmmo;
+	AvailableBombs= GunConfig->_AvailableBombs;
+	bUsesWorldRotationWhenAiming = GunConfig->_bUsesWorldRotationWhenAiming;
+	Speed = GunConfig->_Speed;
+	DoubleLaser = GunConfig->_DoubleLaser;
+	SingleLaserSpawnPoint = GunConfig->_SingleLaserSpawnPoint;
+	LaserSpawnPoints = GunConfig->_LaserSpawnPoints;
+	OwnerActor = _OwnerActor;
 }
 
 void UGunComponent::FireLasers()

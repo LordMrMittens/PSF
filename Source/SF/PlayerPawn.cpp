@@ -114,10 +114,11 @@ void APlayerPawn::CalculateVelocity()
 
 void APlayerPawn::SetUpPlayerPawn()
 {
-    //OriginalMoveDirection = MoveDirection;
     SpringArmComponent = FindComponentByClass<USpringArmComponent>();
     if(GunComponent){
-        GunComponent->SetupGunComponent(this ,Speed, -1 ,DoubleLaser, SingleLaserSpawnPoint, LaserSpawnPoints);
+        GunConfiguration._SingleLaserSpawnPoint = SingleLaserSpawnPoint;
+        GunConfiguration._LaserSpawnPoints = LaserSpawnPoints;
+        GunComponent->SetupGunComponent(&GunConfiguration, this);
     }
     BoostComponent = Cast<UBoostComponent>(GetComponentByClass(UBoostComponent::StaticClass()));
     if(BoostComponent != nullptr){

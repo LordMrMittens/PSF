@@ -43,12 +43,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Guns")
 	float ShotFrequency;
 
-	UPROPERTY(EditAnywhere, Category = "Guns")
-	int32 AmmoAvailable =3;
-
 	FTimerHandle ShotTimerHandle;
-	UPROPERTY(EditAnywhere, Category = "Guns")
-	float SteerFactor = 3; //times steering force in final script
 
 	UPROPERTY(EditAnywhere, Category = "Evasion")
 	float ObstacleAvoidanceDistance = 5000;
@@ -63,7 +58,8 @@ private:
 	float ResetSteeringDuration = 4;
 	UPROPERTY(EditAnywhere, Category = "Evasion")
 	float ObstacleAvoidanceStrength = 1.5;
-
+	UPROPERTY(EditAnywhere, Category = "Steering")
+	float SteerFactor = 3; //times steering force in final script
 	UPROPERTY(EditAnywhere, Category = "Steering")
 	float VerticalDistanceToPlayerOffset = 440;
 	UPROPERTY(EditAnywhere, Category = "Steering")

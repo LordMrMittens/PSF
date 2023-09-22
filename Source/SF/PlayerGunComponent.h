@@ -21,12 +21,12 @@ protected:
 public:
 	void EnhanceLasers();
 	void ResetLasers();
+	virtual void SetupGunComponent(FGunComponentConfig *GunConfig, AActor *_OwnerActor) override;
 
 	virtual void SpawnLaser(USceneComponent *SpawnPoint) override;
 private:
 	bool PowerLaser = false;
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<AProjectile> SecondaryProjectileClass;
+
 	TSubclassOf<AProjectile> ActiveProjectileClass;
 	
 };
