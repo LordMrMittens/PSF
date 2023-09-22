@@ -21,7 +21,7 @@ protected:
 public:
 	void EnhanceLasers();
 	void ResetLasers();
-	virtual void SetupGunComponent(FGunComponentConfig *GunConfig, AActor *_OwnerActor) override;
+	virtual void SetupGunComponent(FGunComponentConfig *GunConfig) override;
 
 	virtual void SpawnLaser(USceneComponent *SpawnPoint) override;
 private:

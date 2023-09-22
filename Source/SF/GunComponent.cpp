@@ -36,7 +36,7 @@ void UGunComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 	// ...
 }
 
-void UGunComponent::SetupGunComponent(FGunComponentConfig* GunConfig, AActor *_OwnerActor)
+void UGunComponent::SetupGunComponent(FGunComponentConfig* GunConfig)
 {
 	ShotSpeedMultiplier = GunConfig->_ShotSpeedMultiplier;
 	ShotLeadErrorMin = GunConfig->_ShotLeadErrorMin;
@@ -51,7 +51,7 @@ void UGunComponent::SetupGunComponent(FGunComponentConfig* GunConfig, AActor *_O
 	DoubleLaser = GunConfig->_DoubleLaser;
 	SingleLaserSpawnPoint = GunConfig->_SingleLaserSpawnPoint;
 	LaserSpawnPoints = GunConfig->_LaserSpawnPoints;
-	OwnerActor = _OwnerActor;
+	OwnerActor = GetOwner();
 }
 
 void UGunComponent::FireLasers()

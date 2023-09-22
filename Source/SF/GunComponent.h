@@ -62,7 +62,7 @@ protected:
 public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
-	virtual void SetupGunComponent(FGunComponentConfig *GunConfig, AActor *_OwnerActor);
+	virtual void SetupGunComponent(FGunComponentConfig *GunConfig);
 	
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOutOfAmmoDelegate);
 	UPROPERTY(BlueprintAssignable, Category = "Ammo")

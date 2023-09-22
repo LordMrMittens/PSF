@@ -36,7 +36,7 @@ void AFlyingEnemyPawn::BeginPlay()
         GunConfiguration._SingleLaserSpawnPoint = SingleLaserSpawnPoint;
         GunConfiguration._LaserSpawnPoints = LaserSpawnPoints;
         GunConfiguration._Speed = Speed;
-        GunComponent->SetupGunComponent(&GunConfiguration, this);
+        GunComponent->SetupGunComponent(&GunConfiguration);
         GunComponent->OutOfAmmoDelegate.AddDynamic(this, &AFlyingEnemyPawn::LeaveLevel);
     }
     if(MainBodyComponent){

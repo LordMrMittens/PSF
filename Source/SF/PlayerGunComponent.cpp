@@ -10,9 +10,9 @@ void UPlayerGunComponent::BeginPlay()
     
 }
 
-void UPlayerGunComponent::SetupGunComponent(FGunComponentConfig *GunConfig, AActor *_OwnerActor)
+void UPlayerGunComponent::SetupGunComponent(FGunComponentConfig *GunConfig)
 {
-	Super::SetupGunComponent(GunConfig, _OwnerActor);
+	Super::SetupGunComponent(GunConfig);
 	ActiveProjectileClass = ProjectileClass;
 	ResetLasers();
 }
