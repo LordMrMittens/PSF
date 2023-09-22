@@ -22,14 +22,20 @@ public:
 	{
 		return MaxBoundary;
 	}
+		FVector GetMoveDirection() const
+	{
+		return MoveDirection;
+	}
 	float GetSpeed() const
 	{
 		return Speed;
 	}
 
 private:
-	UPROPERTY(EditAnywhere, Category = "Movement Speed")
+	UPROPERTY(EditAnywhere, Category = "Level Movement")
 	float Speed = 3000;
+	UPROPERTY(EditAnywhere, Category = "Level Movement")
+	FVector MoveDirection;
 	UPROPERTY(EditAnywhere, Category = "Level Boundaries")
 	FVector MinBoundary = FVector(0.0f, -5000.0f, 0.0f);
 	UPROPERTY(EditAnywhere, Category = "Level Boundaries")

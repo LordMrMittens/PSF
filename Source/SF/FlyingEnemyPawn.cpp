@@ -147,8 +147,8 @@ void AFlyingEnemyPawn::SteerOffLevel()
     }
     MoveDirection.Y = ObstacleAvoidanceDirection * ZObstacleAvoidanceStrength;
     MoveDirection.Z = 1 * ZObstacleAvoidanceStrength;
-    TimeToDestroy -= GetWorld()->GetDeltaSeconds();
-    if(TimeToDestroy<0){
+    TimeToDestroyWhenLeaving -= GetWorld()->GetDeltaSeconds();
+    if(TimeToDestroyWhenLeaving<0){
         Destroy();
     }
 }

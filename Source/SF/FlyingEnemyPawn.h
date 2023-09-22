@@ -26,56 +26,56 @@ public:
 virtual void Tick(float DeltaTime) override;
 
 private:
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Components")
 	USceneComponent *SingleLaserSpawnPoint;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Components")
 	USceneComponent *DoubleLaserSpawnPointL;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Components")
 	USceneComponent *DoubleLaserSpawnPointR;
 
 	TArray<USceneComponent *> LaserSpawnPoints;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Components")
 	UStaticMeshComponent *MainBodyComponent;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Components")
 	UGunComponent *GunComponent;
 	AActor* PlayerActor;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Guns")
 	float ShotFrequency;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Guns")
 	int32 AmmoAvailable =3;
 
 	FTimerHandle ShotTimerHandle;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Guns")
 	float SteerFactor = 3; //times steering force in final script
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Evasion")
 	float ObstacleAvoidanceDistance = 5000;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Evasion")
 	float ObstacleDetectionFrequency = 1;
 	FTimerHandle ObstacleDetectionTimerHandle;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Evasion")
 	float ObstacleAvoidanceDuration = 2;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Evasion")
 	float ResetSteeringDuration = 4;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Evasion")
 	float ObstacleAvoidanceStrength = 1.5;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Steering")
 	float VerticalDistanceToPlayerOffset = 440;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Steering")
 	float HorizontalDistanceToPlayerOffset = 460;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Steering")
 	float DistanceFromBordersffset = 550; // not implemented yet
 
 	FTimerHandle LeavingDelayTimerHandle;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Steering")
 	float HoldTimeBeforeLevelExit = 3;
-	UPROPERTY(EditAnywhere)
-	float TimeToDestroy = 15; // not implemented yet
+	UPROPERTY(EditAnywhere, Category = "Misc")
+	float TimeToDestroyWhenLeaving = 15; // not implemented yet
 
 
 	float ZObstacleAvoidanceStrength =.0f;

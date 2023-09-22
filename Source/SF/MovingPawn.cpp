@@ -20,6 +20,7 @@ void AMovingPawn::BeginPlay()
 	Super::BeginPlay();
     SetLevelBoundary();
     Speed = Cast<ASFGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()))->GetSpeed();
+    MoveDirection = Cast<ASFGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()))->GetMoveDirection();
     OriginalMoveDirection = MoveDirection;
     HealthComponent = Cast<UHealthComponent>(GetComponentByClass(UHealthComponent::StaticClass()));
     if(HealthComponent != nullptr){

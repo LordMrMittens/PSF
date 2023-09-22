@@ -61,22 +61,22 @@ private:
 	
 	FVector PreviousLocation;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Components")
 	USceneComponent* SingleLaserSpawnPoint;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Components")
 	USceneComponent* DoubleLaserSpawnPointL;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Components")
 	USceneComponent* DoubleLaserSpawnPointR;
 
 	TArray<USceneComponent*> LaserSpawnPoints;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Components")
 	UStaticMeshComponent* MainBodyComponent;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Components")
 	UPlayerGunComponent* GunComponent;
 	UPROPERTY(EditAnywhere)
 	bool DoubleLaser = false;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Components")
 	UBoostComponent* BoostComponent;
 	
 

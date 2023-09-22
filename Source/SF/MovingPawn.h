@@ -34,12 +34,11 @@ public:
 
 	float Speed;
 	float CurrentSpeed;
-	UPROPERTY(EditAnywhere)
 	FVector MoveDirection;
 	FVector OriginalMoveDirection;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Movement")
 	float MaxTiltAngle;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Movement")
 	float RotationInterpSpeed;
 
 	UHealthComponent* HealthComponent;
