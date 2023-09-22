@@ -43,6 +43,7 @@ void APlayerPawn::BeginPlay()
 void APlayerPawn::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+    PreviousLocation = GetActorLocation();
 }
 
 // Called to bind functionality to input
@@ -107,9 +108,6 @@ FVector APlayerPawn::CalculateVelocity()
 {
     FVector CurrentLocation = GetActorLocation();
     FVector Velocity = (CurrentLocation - PreviousLocation) / GetWorld()->GetDeltaSeconds();
-
-    // Update the previous location for the next frame
-    PreviousLocation = CurrentLocation;
 
     return Velocity;
 }
