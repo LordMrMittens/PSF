@@ -37,7 +37,7 @@ void AFlyingEnemyPawn::BeginPlay()
     if(MainBodyComponent){
     		MainBodyComponent->OnComponentBeginOverlap.AddDynamic(this, &AFlyingEnemyPawn::OnOverlapStart);
 	}
-    GetWorldTimerManager().SetTimer(ShotTimerHandle, GunComponent, &UGunComponent::FireLasers, ShotFrequency, true);
+    GetWorldTimerManager().SetTimer(ShotTimerHandle, GunComponent, &UGunComponent::Aim, ShotFrequency, true);
 }
 
 void AFlyingEnemyPawn::Move()
@@ -56,10 +56,6 @@ void AFlyingEnemyPawn::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
     Steer();
-    if (GunComponent != nullptr)
-    {
-        GunComponent->Aim(PlayerActor);
-    }
 }
 
 void AFlyingEnemyPawn::Steer()

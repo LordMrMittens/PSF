@@ -34,7 +34,7 @@ void ALandEnemyPawn::BeginPlay()
     if (GunComponent != nullptr)
     {
         GunComponent->SetupGunComponent(this, 100, -1, false, SingleLaserSpawnPoint, LaserSpawnPoints);
-        GetWorldTimerManager().SetTimer(ShotTimerHandle, GunComponent, &UGunComponent::FireLasers, ShotFrequency, true);
+        GetWorldTimerManager().SetTimer(ShotTimerHandle, GunComponent, &UGunComponent::Aim, ShotFrequency, true);
     }
     CurrentTargetIndex = 0;
     PlayerActor = UGameplayStatics::GetPlayerPawn(GetWorld(),0);
@@ -46,9 +46,6 @@ void ALandEnemyPawn::Tick(float DeltaTime)
     {
         Move();
     }
-    if(GunComponent && PlayerActor){
-        GunComponent->Aim(PlayerActor);
-    }
 }
 
 AActor *ALandEnemyPawn::SetTarget()
@@ -59,7 +56,6 @@ AActor *ALandEnemyPawn::SetTarget()
         {
             if (bLoopsPositions)
             {
-                UE_LOG(LogTemp, Display, TEXT("cycling"));
                 bReturning = true;
                 CurrentTargetIndex = MovementNodes.Num() -1;
                 return MovementNodes[CurrentTargetIndex];
@@ -73,7 +69,6 @@ AActor *ALandEnemyPawn::SetTarget()
         }
         if (CurrentTargetIndex < 0)
         {
-            UE_LOG(LogTemp, Display, TEXT("cycling back"));
             bReturning = false;
             CurrentTargetIndex = 0;
             return MovementNodes[CurrentTargetIndex];

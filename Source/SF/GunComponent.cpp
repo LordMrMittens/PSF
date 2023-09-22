@@ -104,8 +104,9 @@ void UGunComponent::SpawnLaser(USceneComponent *SpawnPoint)
 		Projectile->SetSpeed(Speed * ShotSpeedMultiplier);
 	}
 }
-void UGunComponent::Aim(AActor *PlayerActor)
+void UGunComponent::Aim()
 {
+	PlayerActor = UGameplayStatics::GetPlayerPawn(GetWorld(),0);
 	if (PlayerActor)
 	{
 		float LeadFactor = 1.0f;
@@ -120,11 +121,13 @@ void UGunComponent::Aim(AActor *PlayerActor)
 		FVector RelativePlayerLocation = PlayerLocation - GetComponentLocation();
 		float TimeToHit = RelativePlayerLocation.Size() / (Speed * ShotSpeedMultiplier);
 		LeadFactor = FMath::RandRange(ShotLeadErrorMin, ShotLeadErrorMax);
-		UE_LOG(LogTemp, Display, TEXT("lead Factor : %f"), LeadFactor);
 		FVector PredictedPlayerLocation = PlayerLocation + (PlayerVelocity * (TimeToHit * LeadFactor));
 
 		FVector GunDirection = PredictedPlayerLocation - GetComponentLocation();
 		FRotator NewRotation = GunDirection.Rotation();
+
+		UE_LOG(LogTemp, Error, TEXT("Name: %s is aiming towards %s:"), *this->GetOwner()->GetActorNameOrLabel(), * PredictedPlayerLocation.ToString());
+		UE_LOG(LogTemp, Error, TEXT("Name: %s Playerlocation:%s, relative player location:%s, Player velocity:%s"), *this->GetOwner()->GetActorNameOrLabel(), * PlayerLocation.ToString(), *RelativePlayerLocation.ToString(), *PlayerVelocity.ToString());
 
 		if (bUsesWorldRotationWhenAiming)
 		{
@@ -134,5 +137,6 @@ void UGunComponent::Aim(AActor *PlayerActor)
 		{
 			SetRelativeRotation(NewRotation);
 		}
+		FireLasers();
 	}
 }

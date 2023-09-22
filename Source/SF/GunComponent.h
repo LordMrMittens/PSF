@@ -31,11 +31,12 @@ public:
 	virtual void FireLasers();
 	virtual void FireBombs();
 	virtual void SpawnBombs(USceneComponent *SpawnPoint);
-	void Aim(AActor *PlayerActor);
+	void Aim();
 
 	USceneComponent *SingleLaserSpawnPoint;
 	TArray<USceneComponent *> LaserSpawnPoints;
 	AActor *OwnerActor;
+	AActor *PlayerActor;
 
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOutOfAmmoDelegate);
 	UPROPERTY(BlueprintAssignable, Category = "Ammo")
