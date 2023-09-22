@@ -116,7 +116,7 @@ void UGunComponent::Aim()
 		APlayerPawn *PlayerPawn = Cast<APlayerPawn>(PlayerActor);
 		if (PlayerPawn)
 		{
-			PlayerVelocity = PlayerPawn->CalculateVelocity();
+			PlayerVelocity = PlayerPawn->GetVelocity();
 		}
 		FVector RelativePlayerLocation = PlayerLocation - GetComponentLocation();
 		float TimeToHit = RelativePlayerLocation.Size() / (Speed * ShotSpeedMultiplier);
@@ -126,8 +126,8 @@ void UGunComponent::Aim()
 		FVector GunDirection = PredictedPlayerLocation - GetComponentLocation();
 		FRotator NewRotation = GunDirection.Rotation();
 
-		UE_LOG(LogTemp, Error, TEXT("Name: %s is aiming towards %s:"), *this->GetOwner()->GetActorNameOrLabel(), * PredictedPlayerLocation.ToString());
-		UE_LOG(LogTemp, Error, TEXT("Name: %s Playerlocation:%s, relative player location:%s, Player velocity:%s"), *this->GetOwner()->GetActorNameOrLabel(), * PlayerLocation.ToString(), *RelativePlayerLocation.ToString(), *PlayerVelocity.ToString());
+		//UE_LOG(LogTemp, Error, TEXT("Name: %s is aiming towards %s:"), *this->GetOwner()->GetActorNameOrLabel(), * PredictedPlayerLocation.ToString());
+		UE_LOG(LogTemp, Error, TEXT("Player velocity:%s"), *PlayerVelocity.ToString());
 
 		if (bUsesWorldRotationWhenAiming)
 		{

@@ -40,12 +40,15 @@ public:
 	class UInputDataAsset* InputActions;
 
 	void Steer(const FInputActionValue& Value);
-	FVector CalculateVelocity();
+	
 
 	UPlayerGunComponent* GetGunComponent() const
     {
         return GunComponent;
     }
+	FVector GetVelocity() const{
+		return Velocity;
+	}
 
 private:
 	
@@ -54,6 +57,7 @@ private:
 	void FinishBoosting();
 	void Break();
 	void FinishBreaking();
+	void CalculateVelocity();
 	
 	FVector PreviousLocation;
 
@@ -78,5 +82,5 @@ private:
 
 	bool RecevingInput = false;
 
-
+	FVector Velocity;
 };

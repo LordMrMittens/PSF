@@ -43,7 +43,8 @@ void APlayerPawn::BeginPlay()
 void APlayerPawn::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    PreviousLocation = GetActorLocation();
+    CalculateVelocity();
+    
 }
 
 // Called to bind functionality to input
@@ -104,12 +105,12 @@ void APlayerPawn::SetRotation()
     }
 }
 
-FVector APlayerPawn::CalculateVelocity()
+void APlayerPawn::CalculateVelocity()
 {
     FVector CurrentLocation = GetActorLocation();
-    FVector Velocity = (CurrentLocation - PreviousLocation) / GetWorld()->GetDeltaSeconds();
-
-    return Velocity;
+    Velocity = (CurrentLocation - PreviousLocation) / GetWorld()->GetDeltaSeconds();
+    PreviousLocation = CurrentLocation;
+    UE_LOG(LogTemp, Display, TEXT("My Velocity - %s"), *Velocity.ToString());
 }
 
 void APlayerPawn::SetUpPlayerPawn()
