@@ -118,6 +118,7 @@ void APlayerPawn::SetUpPlayerPawn()
     if(GunComponent){
         GunConfiguration._SingleLaserSpawnPoint = SingleLaserSpawnPoint;
         GunConfiguration._LaserSpawnPoints = LaserSpawnPoints;
+        GunConfiguration._Speed = Speed;
         GunComponent->SetupGunComponent(&GunConfiguration, this);
     }
     BoostComponent = Cast<UBoostComponent>(GetComponentByClass(UBoostComponent::StaticClass()));
