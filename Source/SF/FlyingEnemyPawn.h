@@ -26,18 +26,6 @@ public:
 virtual void Tick(float DeltaTime) override;
 
 private:
-	UPROPERTY(EditAnywhere, Category = "Components")
-	USceneComponent *SingleLaserSpawnPoint;
-	UPROPERTY(EditAnywhere, Category = "Components")
-	USceneComponent *DoubleLaserSpawnPointL;
-	UPROPERTY(EditAnywhere, Category = "Components")
-	USceneComponent *DoubleLaserSpawnPointR;
-
-	TArray<USceneComponent *> LaserSpawnPoints;
-	UPROPERTY(EditAnywhere, Category = "Components")
-	UStaticMeshComponent *MainBodyComponent;
-	UPROPERTY(EditAnywhere, Category = "Components")
-	UGunComponent *GunComponent;
 	AActor* PlayerActor;
 
 	UPROPERTY(EditAnywhere, Category = "Guns")

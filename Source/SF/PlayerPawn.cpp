@@ -18,18 +18,13 @@ APlayerPawn::APlayerPawn()
 {
     // Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
     PrimaryActorTick.bCanEverTick = true;
-    MainBodyComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MainBody"));
     SetRootComponent(MainBodyComponent);
+    PlayerGunComponent = CreateDefaultSubobject<UPlayerGunComponent>(TEXT("PlayerGun"));
     
-    SingleLaserSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPoint"));
-    SingleLaserSpawnPoint->SetupAttachment(MainBodyComponent);
-    DoubleLaserSpawnPointL = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPointL"));
-    DoubleLaserSpawnPointL->SetupAttachment(MainBodyComponent);
-    LaserSpawnPoints.Add(DoubleLaserSpawnPointL);
-    DoubleLaserSpawnPointR = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPointR"));
-    DoubleLaserSpawnPointR->SetupAttachment(MainBodyComponent);
-    LaserSpawnPoints.Add(DoubleLaserSpawnPointR);
-    GunComponent = CreateDefaultSubobject<UPlayerGunComponent>(TEXT("Gun"));
+    if(GunComponent){
+        GunComponent->DestroyComponent();
+        GunComponent->SetActive(false);
+    }
 }
 
 // Called when the game starts or when spawned
@@ -65,8 +60,8 @@ void APlayerPawn::SetupPlayerInputComponent(UInputComponent *PlayerInputComponen
     {
         // Bind the actions
         PEI->BindAction(InputActions->InputSteer, ETriggerEvent::Triggered, this, &APlayerPawn::Steer);
-        PEI->BindAction(InputActions->FireLaser, ETriggerEvent::Started,  GunComponent, &UGunComponent::FireLasers);
-        PEI->BindAction(InputActions->FireBombs, ETriggerEvent::Started,  GunComponent, &UGunComponent::FireBombs);
+        PEI->BindAction(InputActions->FireLaser, ETriggerEvent::Started,  PlayerGunComponent, &UGunComponent::FireLasers);
+        PEI->BindAction(InputActions->FireBombs, ETriggerEvent::Started,  PlayerGunComponent, &UGunComponent::FireBombs);
         PEI->BindAction(InputActions->Boost,  ETriggerEvent::Triggered ,this,&APlayerPawn::Boost);
         PEI->BindAction(InputActions->Boost,  ETriggerEvent::Completed ,this,&APlayerPawn::FinishBoosting);
         PEI->BindAction(InputActions->Break,  ETriggerEvent::Triggered ,this,&APlayerPawn::Break);
@@ -115,11 +110,11 @@ void APlayerPawn::CalculateVelocity()
 void APlayerPawn::SetUpPlayerPawn()
 {
     SpringArmComponent = FindComponentByClass<USpringArmComponent>();
-    if(GunComponent){
+    if(PlayerGunComponent){
         GunConfiguration._SingleLaserSpawnPoint = SingleLaserSpawnPoint;
         GunConfiguration._LaserSpawnPoints = LaserSpawnPoints;
         GunConfiguration._Speed = Speed;
-        GunComponent->SetupGunComponent(&GunConfiguration);
+        PlayerGunComponent->SetupGunComponent(&GunConfiguration);
     }
     BoostComponent = Cast<UBoostComponent>(GetComponentByClass(UBoostComponent::StaticClass()));
     if(BoostComponent != nullptr){

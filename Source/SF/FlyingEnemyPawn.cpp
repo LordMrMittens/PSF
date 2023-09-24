@@ -10,22 +10,6 @@
 AFlyingEnemyPawn::AFlyingEnemyPawn()
 {
     PrimaryActorTick.bCanEverTick = true;
-    MainBodyComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MainBody"));
-    SetRootComponent(MainBodyComponent);
-
-    SingleLaserSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPoint"));
-    SingleLaserSpawnPoint->SetupAttachment(MainBodyComponent);
-
-    DoubleLaserSpawnPointL = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPointL"));
-    DoubleLaserSpawnPointL->SetupAttachment(MainBodyComponent);
-    LaserSpawnPoints.Add(DoubleLaserSpawnPointL);
-
-    DoubleLaserSpawnPointR = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPointR"));
-    DoubleLaserSpawnPointR->SetupAttachment(MainBodyComponent);
-    LaserSpawnPoints.Add(DoubleLaserSpawnPointR);
-
-    GunComponent = CreateDefaultSubobject<UGunComponent>(TEXT("Gun"));
-    GunComponent->SetupAttachment(MainBodyComponent);
 }
 void AFlyingEnemyPawn::BeginPlay()
 {

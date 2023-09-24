@@ -44,7 +44,7 @@ public:
 
 	UPlayerGunComponent* GetGunComponent() const
     {
-        return GunComponent;
+        return PlayerGunComponent;
     }
 	FVector GetVelocity() const{
 		return Velocity;
@@ -62,17 +62,7 @@ private:
 	FVector PreviousLocation;
 
 	UPROPERTY(EditAnywhere, Category = "Components")
-	USceneComponent* SingleLaserSpawnPoint;
-	UPROPERTY(EditAnywhere, Category = "Components")
-	USceneComponent* DoubleLaserSpawnPointL;
-	UPROPERTY(EditAnywhere, Category = "Components")
-	USceneComponent* DoubleLaserSpawnPointR;
-
-	TArray<USceneComponent*> LaserSpawnPoints;
-	UPROPERTY(EditAnywhere, Category = "Components")
-	UStaticMeshComponent* MainBodyComponent;
-	UPROPERTY(EditAnywhere, Category = "Components")
-	UPlayerGunComponent* GunComponent;
+	UPlayerGunComponent* PlayerGunComponent;
 	UPROPERTY(EditAnywhere)
 	bool DoubleLaser = false;
 

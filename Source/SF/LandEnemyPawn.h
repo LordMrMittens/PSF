@@ -36,30 +36,16 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	UCapsuleComponent *CapsuleComponent;
-
-	UPROPERTY(EditAnywhere)
-	USceneComponent* SingleLaserSpawnPoint;
-	UPROPERTY(EditAnywhere)
-	USceneComponent* DoubleLaserSpawnPointL;
-	UPROPERTY(EditAnywhere)
-	USceneComponent* DoubleLaserSpawnPointR;
-	TArray<USceneComponent*> LaserSpawnPoints;
-
-	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* MainBodyComponent;
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* TurretMeshComponent;
-
-	UPROPERTY(EditAnywhere)
-	UGunComponent *GunComponent;
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	TArray<AActor *> MovementNodes;
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float MinimumDistanceToTarget;
-		UPROPERTY(EditAnywhere, Category = "Movement")
+	UPROPERTY(EditAnywhere, Category = "Movement")
 	float MovementSpeed;
-		UPROPERTY(EditAnywhere, Category = "Movement")
+	UPROPERTY(EditAnywhere, Category = "Movement")
 	float RotationInterpolationSpeed;
 
 	AActor* CurrentTarget;

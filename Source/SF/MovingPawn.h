@@ -31,6 +31,18 @@ protected:
 	virtual void LimitMovement(FVector CurrentActorLocation, FVector& MovementDelta);
 	virtual void CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& MovementDelta);
 
+	UPROPERTY(EditAnywhere, Category = "Components")
+	USceneComponent *SingleLaserSpawnPoint;
+	UPROPERTY(EditAnywhere, Category = "Components")
+	USceneComponent *DoubleLaserSpawnPointL;
+	UPROPERTY(EditAnywhere, Category = "Components")
+	USceneComponent *DoubleLaserSpawnPointR;
+	TArray<USceneComponent *> LaserSpawnPoints;
+	UPROPERTY(EditAnywhere, Category = "Components")
+	UStaticMeshComponent *MainBodyComponent;
+	UPROPERTY(EditAnywhere, Category = "Components")
+	UGunComponent *GunComponent;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -47,6 +59,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Guns")
 	FGunComponentConfig GunConfiguration;
 
+	UPROPERTY(EditAnywhere, Category = "Components")
 	UHealthComponent* HealthComponent;
 
 	UPROPERTY(EditAnywhere, Category = "Health")

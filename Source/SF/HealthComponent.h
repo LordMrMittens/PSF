@@ -43,7 +43,6 @@ public:
 
 
 private:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = true))
 	float MaxHealth;
 	float CurrentHealth;
 

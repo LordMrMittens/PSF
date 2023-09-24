@@ -13,9 +13,26 @@ AMovingPawn::AMovingPawn()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+     MainBodyComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MainBody"));
+    SetRootComponent(MainBodyComponent);
+
+    SingleLaserSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPoint"));
+    SingleLaserSpawnPoint->SetupAttachment(MainBodyComponent);
+
+    DoubleLaserSpawnPointL = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPointL"));
+    DoubleLaserSpawnPointL->SetupAttachment(MainBodyComponent);
+    LaserSpawnPoints.Add(DoubleLaserSpawnPointL);
+
+    DoubleLaserSpawnPointR = CreateDefaultSubobject<USceneComponent>(TEXT("LaserSpawnPointR"));
+    DoubleLaserSpawnPointR->SetupAttachment(MainBodyComponent);
+    LaserSpawnPoints.Add(DoubleLaserSpawnPointR);
+
+    GunComponent = CreateDefaultSubobject<UGunComponent>(TEXT("Gun"));
+    GunComponent->SetupAttachment(MainBodyComponent);
+    
+    HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health"));
     
 }
-
 // Called when the game starts or when spawned
 void AMovingPawn::BeginPlay()
 {
