@@ -30,10 +30,6 @@ void ALandEnemyPawn::BeginPlay()
     Super::BeginPlay();
     if (GunComponent != nullptr)
     {
-        GunConfiguration._SingleLaserSpawnPoint = SingleLaserSpawnPoint;
-        GunConfiguration._LaserSpawnPoints = LaserSpawnPoints;
-        GunConfiguration._Speed = Speed;
-        GunComponent->SetupGunComponent(&GunConfiguration);
         GetWorldTimerManager().SetTimer(ShotTimerHandle, this, &ALandEnemyPawn::AimAndShoot, ShotFrequency, true);
     }
     CurrentTargetIndex = 0;

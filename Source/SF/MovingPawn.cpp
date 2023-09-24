@@ -29,7 +29,7 @@ AMovingPawn::AMovingPawn()
 
     GunComponent = CreateDefaultSubobject<UGunComponent>(TEXT("Gun"));
     GunComponent->SetupAttachment(MainBodyComponent);
-    
+
     HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health"));
     
 }
@@ -41,6 +41,13 @@ void AMovingPawn::BeginPlay()
     Speed = Cast<ASFGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()))->GetSpeed();
     MoveDirection = Cast<ASFGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()))->GetMoveDirection();
     OriginalMoveDirection = MoveDirection;
+    if (GunComponent)
+    {
+        GunConfiguration._SingleLaserSpawnPoint = SingleLaserSpawnPoint;
+        GunConfiguration._LaserSpawnPoints = LaserSpawnPoints;
+        GunConfiguration._Speed = Speed;
+        GunComponent->SetupGunComponent(&GunConfiguration);
+    }
     HealthComponent = Cast<UHealthComponent>(GetComponentByClass(UHealthComponent::StaticClass()));
     if(HealthComponent != nullptr){
         HealthComponent->SetUpHealthComponent(&HealthConfiguration);
