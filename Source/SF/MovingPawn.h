@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GunComponent.h"
+#include "HealthComponent.h"
 #include "GameFramework/Pawn.h"
 #include "MovingPawn.generated.h"
 
@@ -46,8 +47,10 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Guns")
 	FGunComponentConfig GunConfiguration;
 
-
 	UHealthComponent* HealthComponent;
+
+	UPROPERTY(EditAnywhere, Category = "Health")
+	FHealthComponentConfig HealthConfiguration;
 
 	UFUNCTION()
 	void OnDeath();

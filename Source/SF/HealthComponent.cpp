@@ -18,20 +18,10 @@ UHealthComponent::UHealthComponent()
 void UHealthComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	SetHealth();
+	
 	// ...
 	
 }
-
-/*
-// Called every frame
-void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
-}
-*/
 
 void UHealthComponent::TakeDamage(float DamageTaken){
 CurrentHealth -= DamageTaken;
@@ -51,3 +41,9 @@ if(CurrentHealth > MaxHealth){
 void UHealthComponent::SetHealth(){
 	CurrentHealth = MaxHealth;
 }
+
+void UHealthComponent::SetUpHealthComponent(FHealthComponentConfig* HealthConfig){
+MaxHealth = HealthConfig->MaxHealth;
+SetHealth();
+}
+

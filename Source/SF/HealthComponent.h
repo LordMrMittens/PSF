@@ -6,6 +6,16 @@
 #include "Components/ActorComponent.h"
 #include "HealthComponent.generated.h"
 
+USTRUCT(BlueprintType)
+struct FHealthComponentConfig
+{
+    GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere)
+	int32 MaxHealth = 10;
+
+};
+
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SF_API UHealthComponent : public UActorComponent
@@ -21,13 +31,10 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-/*
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	*/
 	void TakeDamage(float DamageTaken);
 	void RestoreHealth(float HealthRestored);
 	void SetHealth();
+	void SetUpHealthComponent(FHealthComponentConfig* HealthConfig);
 
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOutOfHealthDelegate);
 	UPROPERTY(BlueprintAssignable,Category= "Health")
