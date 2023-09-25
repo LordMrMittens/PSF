@@ -48,7 +48,6 @@ void AMovingPawn::BeginPlay()
         GunConfiguration._Speed = Speed;
         GunComponent->SetupGunComponent(&GunConfiguration);
     }
-    HealthComponent = Cast<UHealthComponent>(GetComponentByClass(UHealthComponent::StaticClass()));
     if(HealthComponent != nullptr){
         HealthComponent->SetUpHealthComponent(&HealthConfiguration);
         HealthComponent->OnOutOfHealth.AddDynamic(this, &AMovingPawn::OnDeath);

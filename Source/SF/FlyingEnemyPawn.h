@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "MovingPawn.h"
+#include "EnemyPawn.h"
 #include "FlyingEnemyPawn.generated.h"
 
 class UGunComponent;
@@ -11,7 +11,7 @@ class UGunComponent;
  * 
  */
 UCLASS()
-class SF_API AFlyingEnemyPawn : public AMovingPawn
+class SF_API AFlyingEnemyPawn : public AEnemyPawn
 {
 	GENERATED_BODY()
 

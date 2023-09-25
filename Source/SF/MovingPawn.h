@@ -30,6 +30,8 @@ protected:
 	virtual void SetLevelBoundary();
 	virtual void LimitMovement(FVector CurrentActorLocation, FVector& MovementDelta);
 	virtual void CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& MovementDelta);
+	UFUNCTION()
+	virtual void OnDeath();
 
 	UPROPERTY(EditAnywhere, Category = "Components")
 	USceneComponent *SingleLaserSpawnPoint;
@@ -65,8 +67,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Health")
 	FHealthComponentConfig HealthConfiguration;
 
-	UFUNCTION()
-	void OnDeath();
+
 
 	FVector MinBoundary;
     FVector MaxBoundary;

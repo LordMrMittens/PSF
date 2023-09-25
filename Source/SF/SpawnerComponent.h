@@ -25,16 +25,16 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	void SpawnObject(APickup *ObjectToSpawn, FVector SpawnLocation, FRotator SpawnRotation);
-
+	void SpawnObject(FVector SpawnLocation, FRotator SpawnRotation);
+	UPROPERTY(EditAnywhere, Category = "Spawning")
+	TSubclassOf<APickup> PickupClass;
 
 private:
 	UFUNCTION()
 	EPickupType DecidePickupType();
 	UPROPERTY(EditAnywhere, Category = "Spawning")
 	EPickupType SpawnedPickupType;
-	UPROPERTY(EditAnywhere, Category = "Spawning")
-	TSubclassOf<APickup> PickupClass;
+
 	UPROPERTY(EditAnywhere, Category = "Spawning")
 	float MinumumTimeBetweenLaserUpgrades = 10.0f;
 

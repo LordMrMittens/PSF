@@ -30,7 +30,6 @@ void USpawnerComponent::BeginPlay()
 	// ...
 }
 
-// Called every frame
 void USpawnerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
@@ -38,10 +37,11 @@ void USpawnerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	// ...
 }
 
-void USpawnerComponent::SpawnObject(APickup *ObjectToSpawn, FVector SpawnLocation, FRotator SpawnRotation)
+void USpawnerComponent::SpawnObject(FVector SpawnLocation, FRotator SpawnRotation)
 {
-	APickup *pickup = GetWorld()->SpawnActor<APickup>(ObjectToSpawn->GetClass(), SpawnLocation, SpawnRotation);
-	pickup->PickupType = DecidePickupType();
+	if(PickupClass){
+	APickup *pickup = GetWorld()->SpawnActor<APickup>(PickupClass, SpawnLocation, SpawnRotation);
+	pickup->PickupType = DecidePickupType();}
 }
 
 EPickupType USpawnerComponent::DecidePickupType()
