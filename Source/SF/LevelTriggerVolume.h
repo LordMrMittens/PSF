@@ -16,19 +16,14 @@ class SF_API ALevelTriggerVolume : public ATriggerBox
 
 protected:
 virtual void BeginPlay() override;
+UFUNCTION()
+virtual void OnOverlapStart(AActor* OverlappedActor, AActor* OtherActor);
 
 public:
 
 private:
 
-UPROPERTY(EditAnywhere)
-TArray<AActor*> SpawnPoints;
-UPROPERTY(EditAnywhere)
-TSubclassOf<AActor> EnemyClass;
 
-void SpawnEnemy(FVector LocationToSpawn, FRotator RotationToSpawn);
-UFUNCTION()
-void OnOverlapStart(AActor* OverlappedActor, AActor* OtherActor);
 
 
 };
