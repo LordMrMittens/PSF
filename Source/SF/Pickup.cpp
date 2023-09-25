@@ -67,7 +67,7 @@ void APickup::OnBeginOverlap(UPrimitiveComponent *OverlappedComponent, AActor *O
 			break;
 		case EPickupType::RepairPickup:
 			Player->HealthComponent->RestoreHealth(100);
-			//repair wings if broken
+			//repair wings if broken when wings are implemented
 			break;
 
 		default:
