@@ -2,6 +2,7 @@
 
 
 #include "Bomb.h"
+#include "HealthComponent.h"
 
 ABomb::ABomb()
 {
@@ -30,16 +31,33 @@ void ABomb::OnOverlapStart(class UPrimitiveComponent *OverlappedComp, class AAct
 {
     if (OtherActor != Owner)
     {
-        //if the other actor has a health component it receives the full bomb damage
-        Explode();
         
+            UHealthComponent* HealthComponent = OtherActor->FindComponentByClass<UHealthComponent>();
+        if (HealthComponent)
+        {
+            HealthComponent->TakeDamage(BaseDamage);
+        }
+        Explode();
     }
 }
 
 void ABomb::Explode()
 {
-    UE_LOG(LogTemp, Error, TEXT("Bomb Exploded"));
-    //Cast a sphere of the desired size
-    //all actors inside sphere that have a health component get damaged based on 2/3rds of original damage
+TArray<FHitResult> HitResults;
+    FCollisionQueryParams Params;
+    Params.AddIgnoredActor(this);
+    bool bHit = GetWorld()->SweepMultiByObjectType(HitResults, GetActorLocation(), GetActorLocation(), FQuat::Identity, FCollisionObjectQueryParams::AllObjects, FCollisionShape::MakeSphere(ExplosionRadius), Params);
+    for (const FHitResult& HitResult : HitResults)
+    {
+        AActor* HitActor = HitResult.GetActor();
+        if(HitActor != nullptr && HitActor != this && HitActor != Owner)
+        {
+            UHealthComponent* HealthComponent = HitActor->FindComponentByClass<UHealthComponent>();
+            if (HealthComponent)
+            {
+                HealthComponent->TakeDamage(BaseDamage);
+            }
+        }
     Destroy();
+}
 }

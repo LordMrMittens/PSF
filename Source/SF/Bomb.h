@@ -30,6 +30,8 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float DistanceToExplode = 15000;
+	UPROPERTY(EditAnywhere, Category = "Explosion")
+	float ExplosionRadius = 1000;
 
 	FVector StartingPosition;
 };

@@ -26,7 +26,6 @@ public:
 	virtual void Move();
 
 	float Speed = 200.0f;
-	float Damage;
 	FVector Direction = FVector(1,0,0);
 
 };
