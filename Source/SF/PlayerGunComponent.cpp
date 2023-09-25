@@ -27,6 +27,7 @@ void UPlayerGunComponent::EnhanceLasers()
 	else
 	{
 		DoubleLaser = true;
+		TimeOfLastUpgrade = GetWorld()->GetTimeSeconds();
 	}
 }
 

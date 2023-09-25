@@ -25,7 +25,6 @@ void UHealthComponent::BeginPlay()
 
 void UHealthComponent::TakeDamage(float DamageTaken){
 CurrentHealth -= DamageTaken;
-UE_LOG(LogTemp, Display, TEXT("Damage Taken: %f, currenthealth %f"), DamageTaken, CurrentHealth);
 if(CurrentHealth <= 0){
 	OnOutOfHealth.Broadcast();
 }

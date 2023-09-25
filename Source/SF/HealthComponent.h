@@ -34,6 +34,8 @@ public:
 	void TakeDamage(float DamageTaken);
 	void RestoreHealth(float HealthRestored);
 	void SetHealth();
+	float GetHealth() const { return CurrentHealth; }
+	float GetHealthPercentage() const { return CurrentHealth / MaxHealth; }
 	void SetUpHealthComponent(FHealthComponentConfig* HealthConfig);
 
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOutOfHealthDelegate);
