@@ -148,3 +148,7 @@ void UGunComponent::Aim()
 		FireLasers();
 	}
 }
+
+void UGunComponent::AddBomb(int32 BombsToAdd){
+	BombsToAdd += AvailableBombs;
+}

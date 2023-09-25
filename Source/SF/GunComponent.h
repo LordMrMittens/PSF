@@ -60,22 +60,22 @@ protected:
 	
 
 public:
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
-	virtual void SetupGunComponent(FGunComponentConfig *GunConfig);
-	
+
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOutOfAmmoDelegate);
 	UPROPERTY(BlueprintAssignable, Category = "Ammo")
 	FOutOfAmmoDelegate OutOfAmmoDelegate;
-	
-	
 
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+	virtual void SetupGunComponent(FGunComponentConfig *GunConfig);
+	
 	virtual void SpawnLaser(USceneComponent *SpawnPoint);
-
 	virtual void FireLasers();
 	virtual void FireBombs();
 	virtual void SpawnBombs(USceneComponent *SpawnPoint);
+
 	void Aim();
+
+	void AddBomb(int32 BombsToAdd);
 
 	USceneComponent *SingleLaserSpawnPoint;
 	TArray<USceneComponent *> LaserSpawnPoints;

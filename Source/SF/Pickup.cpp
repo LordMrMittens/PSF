@@ -56,8 +56,14 @@ void APickup::OnBeginOverlap(UPrimitiveComponent *OverlappedComponent, AActor *O
 			}
 			break;
 		case EPickupType::BombPickup:
-			// Not Implemented
-			UE_LOG(LogTemp, Error, TEXT("Feature Not Implemented"));
+			if (PlayerGunComponent)
+			{
+			 PlayerGunComponent->AddBomb(1);
+			}
+			else
+			{
+				UE_LOG(LogTemp, Error, TEXT("Gun Component is null"));
+			}
 			break;
 		case EPickupType::RepairPickup:
 			Player->HealthComponent->RestoreHealth(100);

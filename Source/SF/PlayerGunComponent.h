@@ -19,12 +19,11 @@ protected:
 	
 
 public:
-	void EnhanceLasers();
-	void ResetLasers();
 	virtual void SetupGunComponent(FGunComponentConfig *GunConfig) override;
-
 	virtual void SpawnLaser(USceneComponent *SpawnPoint) override;
 
+	void EnhanceLasers();
+	void ResetLasers();
 	bool GetPowerLaser() const { return PowerLaser; }
 	float getTimeOfLastUpgrade() const { return TimeOfLastUpgrade; }
 private:

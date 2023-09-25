@@ -52,4 +52,3 @@ void UPlayerGunComponent::SpawnLaser(USceneComponent *SpawnPoint)
 	}
 }
 
-
