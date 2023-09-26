@@ -39,9 +39,11 @@ void USpawnerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 void USpawnerComponent::SpawnObject(FVector SpawnLocation, FRotator SpawnRotation)
 {
-	if(PickupClass){
-	APickup *pickup = GetWorld()->SpawnActor<APickup>(PickupClass, SpawnLocation, SpawnRotation);
-	pickup->PickupType = DecidePickupType();}
+	if (PickupClass)
+	{
+		APickup *Pickup = GetWorld()->SpawnActor<APickup>(PickupClass, SpawnLocation, SpawnRotation);
+		Pickup->SetUpPickup(DecidePickupType());
+	}
 }
 
 EPickupType USpawnerComponent::DecidePickupType()
@@ -49,20 +51,21 @@ EPickupType USpawnerComponent::DecidePickupType()
 	EPickupType TypeToSpawn = EPickupType::BombPickup;
 	if (GameplayManager)
 	{
-		if (GameplayManager->GetPlayerPawn()->GetGunComponent()->GetPowerLaser() == true)
-		{
-
-			if (GameplayManager->GetPlayerPawn()->HealthComponent->GetHealthPercentage() < 0.7f)
-			{
-				TypeToSpawn = EPickupType::RepairPickup;
-			}
-			else
-			{
-				 TypeToSpawn = EPickupType::BombPickup;
-			}
-		} else if(GameplayManager->GetPlayerPawn()->GetGunComponent()->getTimeOfLastUpgrade() + MinumumTimeBetweenLaserUpgrades < GetWorld()->GetTimeSeconds())
+		if (GameplayManager->GetPlayerPawn()->GetGunComponent()->GetPowerLaser() == false && GameplayManager->GetPlayerPawn()->GetGunComponent()->getTimeOfLastUpgrade() + MinumumTimeBetweenLaserUpgrades < GetWorld()->GetTimeSeconds())
 		{
 			TypeToSpawn = EPickupType::LaserUpgrade;
+
+			UE_LOG(LogTemp, Display, TEXT("LaserUpgrade"));
+		}
+		else if (GameplayManager->GetPlayerPawn()->HealthComponent->GetHealthPercentage() < 0.7f)
+		{
+			TypeToSpawn = EPickupType::RepairPickup;
+			UE_LOG(LogTemp, Display, TEXT("RepairUpgrade"));
+		}
+		else
+		{
+			TypeToSpawn = EPickupType::BombPickup;
+			UE_LOG(LogTemp, Display, TEXT("BombUpgrade"));
 		}
 	}
 

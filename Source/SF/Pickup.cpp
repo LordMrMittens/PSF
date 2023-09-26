@@ -77,3 +77,20 @@ void APickup::OnBeginOverlap(UPrimitiveComponent *OverlappedComponent, AActor *O
 		Destroy();
 	}
 }
+void APickup::SetUpPickup(EPickupType Type){
+	PickupType = Type;
+switch (Type)
+	{
+	case EPickupType::LaserUpgrade:
+		IconMesh->SetStaticMesh(LaserMesh);
+		UE_LOG(LogTemp, Warning, TEXT("Laser Mesh"));
+		break;
+		case EPickupType::RepairPickup:
+		IconMesh->SetStaticMesh(RepairMesh);
+		UE_LOG(LogTemp, Warning, TEXT("repair Mesh"));
+		break;
+		case EPickupType::BombPickup:
+		IconMesh->SetStaticMesh(BombMesh);
+		UE_LOG(LogTemp, Warning, TEXT("bomb Mesh"));
+		break;
+	}}
