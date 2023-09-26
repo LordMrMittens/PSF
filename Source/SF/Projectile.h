@@ -28,12 +28,16 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	void SetSpeed(float InputSpeed);
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere,BlueprintReadWrite , meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* MainBodyComponent;
 	UPROPERTY(EditAnywhere)
 	float BaseDamage = 1;
 
 	float CurrentDamage;
+	UPROPERTY(EditAnywhere, Category = "Lifespan")
+	float LifeDuration = 4.0f;
+	FTimerHandle LifeTimerHandle;
 
+	void DestroyProjectile();
 	
 };

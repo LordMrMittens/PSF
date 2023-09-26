@@ -54,18 +54,14 @@ EPickupType USpawnerComponent::DecidePickupType()
 		if (GameplayManager->GetPlayerPawn()->GetGunComponent()->GetPowerLaser() == false && GameplayManager->GetPlayerPawn()->GetGunComponent()->getTimeOfLastUpgrade() + MinumumTimeBetweenLaserUpgrades < GetWorld()->GetTimeSeconds())
 		{
 			TypeToSpawn = EPickupType::LaserUpgrade;
-
-			UE_LOG(LogTemp, Display, TEXT("LaserUpgrade"));
 		}
 		else if (GameplayManager->GetPlayerPawn()->HealthComponent->GetHealthPercentage() < 0.7f)
 		{
 			TypeToSpawn = EPickupType::RepairPickup;
-			UE_LOG(LogTemp, Display, TEXT("RepairUpgrade"));
 		}
 		else
 		{
 			TypeToSpawn = EPickupType::BombPickup;
-			UE_LOG(LogTemp, Display, TEXT("BombUpgrade"));
 		}
 	}
 

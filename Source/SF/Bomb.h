@@ -30,7 +30,7 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float DistanceToExplode = 15000;
-	UPROPERTY(EditAnywhere, Category = "Explosion")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite , meta = (AllowPrivateAccess = "true"))
 	float ExplosionRadius = 1000;
 
 	FVector StartingPosition;
