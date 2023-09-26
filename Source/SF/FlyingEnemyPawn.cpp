@@ -27,6 +27,7 @@ void AFlyingEnemyPawn::BeginPlay()
 
 void AFlyingEnemyPawn::Move()
 {
+    
     FVector MoveDelta = MoveDirection * CurrentSpeed * GetWorld()->GetDeltaSeconds();
     if(!LeavingLevel){
     FVector CurrentLocation = GetActorLocation();
@@ -35,6 +36,8 @@ void AFlyingEnemyPawn::Move()
     }
     AddActorWorldOffset(MoveDelta, true);
     MoveDirection = OriginalMoveDirection;
+    CurrentSpeed = Speed * CalculateTargetVelocity();
+    UE_LOG(LogTemp, Warning, TEXT("Speed: %f"), CurrentSpeed);
 }
 
 void AFlyingEnemyPawn::Tick(float DeltaTime)

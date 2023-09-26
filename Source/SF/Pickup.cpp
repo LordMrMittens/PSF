@@ -16,8 +16,8 @@ APickup::APickup()
 	SetRootComponent(CapsuleComponent);
 	MainBody = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MainBodyComponent"));
 	MainBody->SetupAttachment(CapsuleComponent);
-
-
+	IconMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("IconMeshComponent"));
+	IconMesh->SetupAttachment(CapsuleComponent);
 }
 
 // Called when the game starts or when spawned
