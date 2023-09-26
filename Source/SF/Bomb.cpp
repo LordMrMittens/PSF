@@ -3,6 +3,8 @@
 
 #include "Bomb.h"
 #include "HealthComponent.h"
+#include "Explosion_Damaging.h"
+#include "Kismet/GameplayStatics.h"
 
 ABomb::ABomb()
 {
@@ -37,27 +39,17 @@ void ABomb::OnOverlapStart(class UPrimitiveComponent *OverlappedComp, class AAct
         {
             HealthComponent->TakeDamage(BaseDamage);
         }
-        Explode();
+        if(bIsExploding == false){
+        Explode();}
     }
 }
 
 void ABomb::Explode()
 {
-TArray<FHitResult> HitResults;
-    FCollisionQueryParams Params;
-    Params.AddIgnoredActor(this);
-    bool bHit = GetWorld()->SweepMultiByObjectType(HitResults, GetActorLocation(), GetActorLocation(), FQuat::Identity, FCollisionObjectQueryParams::AllObjects, FCollisionShape::MakeSphere(ExplosionRadius), Params);
-    for (const FHitResult& HitResult : HitResults)
-    {
-        AActor* HitActor = HitResult.GetActor();
-        if(HitActor != nullptr && HitActor != this && HitActor != Owner)
-        {
-            UHealthComponent* HealthComponent = HitActor->FindComponentByClass<UHealthComponent>();
-            if (HealthComponent)
-            {
-                HealthComponent->TakeDamage(BaseDamage);
-            }
-        }
+    if(bIsExploding){
+        return;
+    }
+    bIsExploding = true;
+    AExplosion_Damaging* Explosion = GetWorld()->SpawnActor<AExplosion_Damaging>(DamagingExplosionClass,GetActorLocation(),GetActorRotation());   
     Destroy();
-}
 }

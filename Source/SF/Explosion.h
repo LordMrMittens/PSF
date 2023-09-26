@@ -20,23 +20,26 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-private:
-UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-    USphereComponent* SphereComponent;
-UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components",  meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* MainBodyComponent;
-
-    // The duration of the explosion in seconds
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Explosion",  meta = (AllowPrivateAccess = "true"))
-    float Duration;
+	    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Explosion",  meta = (AllowPrivateAccess = "true"))
+    float ExplosionDuration;
+	float Duration;
 	    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Explosion",  meta = (AllowPrivateAccess = "true"))
     float StartSize;
 	    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Explosion",  meta = (AllowPrivateAccess = "true"))
     float MaxSize;
 	float SpawnTime;
+	float CurrentSize;
+public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+    USphereComponent* SphereComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components",  meta = (AllowPrivateAccess = "true"))
+	UStaticMeshComponent* MainBodyComponent;
+
+private:
+
+
+
+
 };

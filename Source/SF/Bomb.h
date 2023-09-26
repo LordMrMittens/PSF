@@ -6,6 +6,7 @@
 #include "Projectile.h"
 #include "Bomb.generated.h"
 
+class AExplosion_Damaging;
 /**
  * 
  */
@@ -27,11 +28,15 @@ public:
 	virtual void Tick(float DeltaTime) override;
 private:
 	void Explode();
+	bool bIsExploding = false;
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float DistanceToExplode = 15000;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite , meta = (AllowPrivateAccess = "true"))
 	float ExplosionRadius = 1000;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite , meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AExplosion_Damaging> DamagingExplosionClass;
 
 	FVector StartingPosition;
 };
