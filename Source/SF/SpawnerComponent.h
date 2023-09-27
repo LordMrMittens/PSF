@@ -28,6 +28,7 @@ public:
 	void SpawnObject(FVector SpawnLocation, FRotator SpawnRotation);
 	UPROPERTY(EditAnywhere, Category = "Spawning")
 	TSubclassOf<APickup> PickupClass;
+	void SetShouldSpawn(bool _bShouldSpawn) {bShouldSpawn = _bShouldSpawn;}
 
 private:
 	UFUNCTION()
@@ -39,4 +40,6 @@ private:
 	float MinumumTimeBetweenLaserUpgrades = 10.0f;
 
 	AGameplayManager* GameplayManager;
+	UPROPERTY(VisibleAnywhere)
+	bool bShouldSpawn;
 };

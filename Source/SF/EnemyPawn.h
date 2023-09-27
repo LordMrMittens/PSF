@@ -20,12 +20,14 @@ public:
 protected:
 	virtual void OnDeath() override;
 	virtual float CalculateTargetVelocity();
-public:
 UPROPERTY(EditAnywhere, Category = "Components")
 	USpawnerComponent* SpawnerComponent;
+	
+public:
+USpawnerComponent* GetSpawnerComponent() { return SpawnerComponent; }
 
 UPROPERTY(EditAnywhere, Category="Movement")
 	float MaxTargetDistanceFromPlayer = 5000;
-	UPROPERTY(EditAnywhere, Category="Movement")
+UPROPERTY(EditAnywhere, Category="Movement")
 	float MinTargetDistanceFromPlayer = 2500;
 };

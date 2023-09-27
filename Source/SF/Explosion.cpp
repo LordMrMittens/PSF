@@ -32,8 +32,6 @@ void AExplosion::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	CurrentSize += DeltaTime * Duration;
     SetActorScale3D(FVector(CurrentSize));
-
-    // Destroy the explosion when it reaches its maximum scale
     if (CurrentSize >= MaxSize)
     {
         Destroy();
