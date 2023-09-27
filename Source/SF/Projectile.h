@@ -35,9 +35,7 @@ public:
 
 	float CurrentDamage;
 	UPROPERTY(EditAnywhere, Category = "Lifespan")
-	float LifeDuration = 4.0f;
+	float LifeDuration = 2.0f;
 	FTimerHandle LifeTimerHandle;
-
-	void DestroyProjectile();
 	
 };
