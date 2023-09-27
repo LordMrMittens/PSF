@@ -25,7 +25,7 @@ void AProjectile::BeginPlay()
 		MainBodyComponent->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnOverlapStart);
 	}
 	CurrentDamage = BaseDamage;
-	GetWorldTimerManager().SetTimer(LifeTimerHandle, this, &AProjectile::DestroyProjectile, LifeDuration, false);
+	SetLifeSpan(LifeDuration);
 }
 
 // Called every frame
@@ -40,12 +40,6 @@ void AProjectile::SetSpeed(float InputSpeed)
 {
 	Speed = InputSpeed;
 }
-
-void AProjectile::DestroyProjectile()
-{
-	Destroy();
-}
-
 void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	UE_LOG(LogTemp, Error, TEXT("Laser Hit"));

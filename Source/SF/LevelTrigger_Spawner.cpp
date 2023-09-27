@@ -3,6 +3,8 @@
 
 #include "LevelTrigger_Spawner.h"
 #include "Kismet/GameplayStatics.h"
+#include "EnemyPawn.h"
+#include "SpawnerComponent.h"
 
 
 void ALevelTrigger_Spawner::OnOverlapStart(AActor* OverlappedActor, AActor* OtherActor)
@@ -16,8 +18,15 @@ void ALevelTrigger_Spawner::OnOverlapStart(AActor* OverlappedActor, AActor* Othe
 }
 void ALevelTrigger_Spawner::SpawnEnemy(FVector LocationToSpawn, FRotator RotationToSpawn)
 {
-    AActor* Enemy = GetWorld()->SpawnActor<AActor>(EnemyClass,
+    AEnemyPawn* Enemy = GetWorld()->SpawnActor<AEnemyPawn>(EnemyClass,
 												LocationToSpawn,
 												RotationToSpawn
 												);
+    if (Enemy && NumberOfEnemiesSpawningPowerUps > 0)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("OneEnemy Should Spawn PowerUp"));
+        Enemy->GetSpawnerComponent()->SetShouldSpawn(true);
+        NumberOfEnemiesSpawningPowerUps--;
+    }
+    
 }

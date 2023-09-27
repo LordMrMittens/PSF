@@ -18,10 +18,13 @@ class SF_API ALevelTrigger_Spawner : public ALevelTriggerVolume
 	virtual void OnOverlapStart(AActor* OverlappedActor, AActor* OtherActor) override;
 public:
 
-UPROPERTY(EditAnywhere)
+UPROPERTY(EditAnywhere, Category = "Spawning", meta = (ToolTip = "If spawning powerups is enabled, the enemy that will spawn the powerup will be spawned on the first position in this array"))
 TArray<AActor*> SpawnPoints;
-UPROPERTY(EditAnywhere)
+UPROPERTY(EditAnywhere, Category = "Spawning")
 TSubclassOf<AActor> EnemyClass;
+UPROPERTY(EditAnywhere, Category="PowerUps")
+int32 NumberOfEnemiesSpawningPowerUps = 1;
 
 void SpawnEnemy(FVector LocationToSpawn, FRotator RotationToSpawn);
+
 };

@@ -39,7 +39,7 @@ void USpawnerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 void USpawnerComponent::SpawnObject(FVector SpawnLocation, FRotator SpawnRotation)
 {
-	if (PickupClass)
+	if (PickupClass && bShouldSpawn)
 	{
 		APickup *Pickup = GetWorld()->SpawnActor<APickup>(PickupClass, SpawnLocation, SpawnRotation);
 		Pickup->SetUpPickup(DecidePickupType());
