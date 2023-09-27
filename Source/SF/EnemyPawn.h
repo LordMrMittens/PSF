@@ -24,6 +24,7 @@ UPROPERTY(EditAnywhere, Category = "Components")
 	USpawnerComponent* SpawnerComponent;
 	
 public:
+AActor* PlayerActor;
 USpawnerComponent* GetSpawnerComponent() { return SpawnerComponent; }
 
 UPROPERTY(EditAnywhere, Category="Movement")

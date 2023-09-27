@@ -26,7 +26,6 @@ public:
 virtual void Tick(float DeltaTime) override;
 
 private:
-	AActor* PlayerActor;
 
 	UPROPERTY(EditAnywhere, Category = "Guns")
 	float ShotFrequency;
