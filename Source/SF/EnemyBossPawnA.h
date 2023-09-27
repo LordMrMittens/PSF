@@ -7,6 +7,7 @@
 #include "EnemyBossPawnA.generated.h"
 
 class AGameplayManager;
+class UNiagaraSystem;
 /**
  *
  */
@@ -97,4 +98,6 @@ private:
 	void MissileAttack();
 	void ToggleMainLaser();
 	UGunComponent* DetermineGunToUse();
+	UPROPERTY(EditAnywhere, Category = "Attacking Effects")
+	UNiagaraSystem* WarningLaser;
 };

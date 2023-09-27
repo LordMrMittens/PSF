@@ -7,6 +7,8 @@
 #include "GameplayManager.h"
 #include "PlayerPawn.h"
 #include "HealthComponent.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraComponent.h"
 
 
 AEnemyBossPawnA::AEnemyBossPawnA()
@@ -126,6 +128,8 @@ void AEnemyBossPawnA::SustainedLaserAttack()
     
     GetWorldTimerManager().SetTimer(WarningTimerHandle, this, &AEnemyBossPawnA::ToggleMainLaser, MainGunWarningDuration, false);
     GetWorldTimerManager().SetTimer(AttackDurationTimerHandle, this, &AEnemyBossPawnA::ToggleMainLaser, MainGunWarningDuration+MainGunSutainedDuration, false);
+    UNiagaraFunctionLibrary::SpawnSystemAttached(WarningLaser, SingleLaserSpawnPoint, NAME_None, FVector(0,0,0), FRotator(0,0,0), EAttachLocation::KeepRelativeOffset, true);
+    
     ///GetWorld()->SpawnActor(); //spawn Warning Laser from single laser spawnpoint need new asset
 
 }
