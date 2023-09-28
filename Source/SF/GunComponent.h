@@ -73,7 +73,7 @@ public:
 	virtual void FireBombs();
 	virtual void SpawnBombs(USceneComponent *SpawnPoint);
 
-	void Aim();
+	virtual void Aim(void (UGunComponent::*FireFunctionPtr)());
 
 	void AddBomb(int32 BombsToAdd);
 

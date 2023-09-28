@@ -10,9 +10,6 @@ ABombEnemyFlak::ABombEnemyFlak()
     
 }
 
-    
-
-
 void ABombEnemyFlak::BeginPlay()
 {
     Super::BeginPlay();
@@ -22,21 +19,22 @@ void ABombEnemyFlak::BeginPlay()
 void ABombEnemyFlak::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    float DistanceToPlayer = CalculateYZDistanceToPlayer();
+    if(GameplayManager)
+{    float DistanceToPlayer = CalculateYZDistanceToPlayer();
     float XDistanceToPlayer = CalculateXDistanceToPlayer();
     if(DistanceToPlayer > PreviousDistanceToPlayer || DistanceToPlayer < MinDistanceToExplode)
     {
         bYZDistanceMet = true;
     }
-    if (bYZDistanceMet && XDistanceToPlayer < MinXDistanceToExplode * 1.5f)
+    if (bYZDistanceMet && XDistanceToPlayer < MinXDistanceToExplode * 1.5f && bIsExploding == false)
     {
         Explode();
     }
-    if (XDistanceToPlayer < MinXDistanceToExplode)
+    if (XDistanceToPlayer < MinXDistanceToExplode && bIsExploding == false)
     {
         Explode();
     }
-    PreviousDistanceToPlayer = DistanceToPlayer;
+    PreviousDistanceToPlayer = DistanceToPlayer;}
 }
 
 float ABombEnemyFlak::CalculateYZDistanceToPlayer()

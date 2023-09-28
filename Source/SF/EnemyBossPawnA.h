@@ -69,7 +69,7 @@ private:
 	float MainGunWarningDuration;
 	UPROPERTY(EditAnywhere, Category = "Main gun Behaviour")
 	float MainGunSutainedDuration;
-	float MainGunTimeOfLastShot = 0;
+	float MainGunTimeOfLastShot = 99999;
 	bool bMainGunIsFiring = false;
 
 	// Secondary Gun Behaviour
@@ -77,10 +77,13 @@ private:
 	float SecondaryGunShotFrequency;
 	UPROPERTY(EditAnywhere, Category = "Secondary gun Behaviour")
 	int32 SecondaryGunShotsInBurst =5;
+	int32 SecondaryGunShotsFired = 0;
 	UPROPERTY(EditAnywhere, Category = "Secondary gun Behaviour")
 	float TimeBetweenShots =.5f;
+	float TimeOfLastShot = 0;
 	float SecondaryGunTimeOfLastShot = 0;
 	FTimerHandle SecondaryGunDelayTimerHandle;
+	bool bIsAttackingWithFlak = false;
 	// Tertiary Gun Behaviour
 	UPROPERTY(EditAnywhere, Category = "Tertiary gun Behaviour")
 	float TertiaryGunShotFrequency;

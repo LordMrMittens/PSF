@@ -74,14 +74,21 @@ void AEnemyBossPawnA::BeginPlay()
 void AEnemyBossPawnA::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    if(bIsSteeringTowardsPlayer){
+    if (bIsSteeringTowardsPlayer)
+    {
         SteerTowardsPlayer();
     }
-    if (GunComponent && bMainGunIsFiring){
-        GunComponent->FireLasers();
-    }
-    if(SecondaryGunComponent){
-        //SecondaryGunComponent->Aim();
+    if (GunComponent)
+    {
+        if (bMainGunIsFiring)
+        {
+            GunComponent->FireLasers();
+        }
+        if (bIsAttackingWithFlak)
+        {
+            UE_LOG(LogTemp, Display, TEXT("Flak!!"));
+            FlakCannonsAttack();
+        }
     }
 }
 
@@ -99,7 +106,7 @@ void AEnemyBossPawnA::Attack()
             SustainedLaserAttack();
         }
         if(GunToUse == SecondaryGunComponent){
-
+            FlakCannonsAttack();
         }
         if (GunToUse == TertiaryGunComponent)
         {
@@ -115,7 +122,6 @@ UGunComponent* AEnemyBossPawnA::DetermineGunToUse()
         MainGunTimeOfLastShot = -1;
         return GunComponent;
     } else if(SecondaryGunTimeOfLastShot == 0 || SecondaryGunTimeOfLastShot + SecondaryGunShotFrequency < GetWorld()->GetTimeSeconds()){
-        FlakCannonsAttack();
         return SecondaryGunComponent;
     } else if(TertiaryGunTimeOfLastShot == 0 || TertiaryGunTimeOfLastShot + TertiaryGunShotFrequency < GetWorld()->GetTimeSeconds()){
         TertiaryGunTimeOfLastShot = GetWorld()->GetTimeSeconds();
@@ -131,23 +137,38 @@ void AEnemyBossPawnA::SustainedLaserAttack()
     FTimerHandle AttackDurationTimerHandle;
     bIsSteeringTowardsPlayer = true;
     GetWorldTimerManager().PauseTimer(AttackTimerHandle);
-    
     GetWorldTimerManager().SetTimer(WarningTimerHandle, this, &AEnemyBossPawnA::ToggleMainLaser, MainGunWarningDuration, false);
     GetWorldTimerManager().SetTimer(AttackDurationTimerHandle, this, &AEnemyBossPawnA::ToggleMainLaser, MainGunWarningDuration+MainGunSutainedDuration, false);
     UNiagaraFunctionLibrary::SpawnSystemAttached(WarningLaser, SingleLaserSpawnPoint, NAME_None, FVector(0,0,0), FRotator(0,0,0), EAttachLocation::KeepRelativeOffset, true);
-    
-    ///GetWorld()->SpawnActor(); //spawn Warning Laser from single laser spawnpoint need new asset
-
 }
 
 void AEnemyBossPawnA::FlakCannonsAttack()
 {
-    for (size_t i = 0; i < SecondaryGunShotsInBurst; i++)
+    GetWorldTimerManager().PauseTimer(AttackTimerHandle);
+    if (TimeOfLastShot == 0 || TimeOfLastShot + TimeBetweenShots < GetWorld()->GetTimeSeconds())
     {
-        GetWorld()->GetTimerManager().SetTimer(SecondaryGunDelayTimerHandle, SecondaryGunComponent, &UGunComponent::Aim, TimeBetweenShots, false);
-
+        UE_LOG(LogTemp, Display, TEXT("Flak attack first conditions met"));
+        if (SecondaryGunShotsFired < SecondaryGunShotsInBurst)
+        {
+            UE_LOG(LogTemp, Display, TEXT("Firing FlakCannonsAttack"));
+            SecondaryGunComponent->Aim(&UGunComponent::FireBombs);
+            TimeOfLastShot = GetWorld()->GetTimeSeconds();
+            SecondaryGunShotsFired++;
+        }
+        if (SecondaryGunShotsFired >= SecondaryGunShotsInBurst)
+        {
+            SecondaryGunShotsFired = 0;
+            SecondaryGunTimeOfLastShot = GetWorld()->GetTimeSeconds();
+            GetWorldTimerManager().UnPauseTimer(AttackTimerHandle);
+            bIsAttackingWithFlak = false;
+            UE_LOG(LogTemp, Display, TEXT("Stopping FlakCannonsAttack"));
+        }
+        else
+        {
+            bIsAttackingWithFlak = true;
+            UE_LOG(LogTemp, Display, TEXT("Looping FlakCannonsAttack"));
+        }
     }
-    SecondaryGunTimeOfLastShot = GetWorld()->GetTimeSeconds();
 }
 
 void AEnemyBossPawnA::MissileAttack()

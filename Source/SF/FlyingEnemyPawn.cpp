@@ -18,11 +18,18 @@ void AFlyingEnemyPawn::BeginPlay()
     if (GunComponent)
     {
         GunComponent->OutOfAmmoDelegate.AddDynamic(this, &AFlyingEnemyPawn::LeaveLevel);
+            GetWorldTimerManager().SetTimer(ShotTimerHandle, [this]()
+    {
+        if (GunComponent)
+        {
+            GunComponent->Aim(&UGunComponent::FireLasers);
+        }
+    }, ShotFrequency, true);
     }
     if(MainBodyComponent){
     		MainBodyComponent->OnComponentBeginOverlap.AddDynamic(this, &AFlyingEnemyPawn::OnOverlapStart);
 	}
-    GetWorldTimerManager().SetTimer(ShotTimerHandle, GunComponent, &UGunComponent::Aim, ShotFrequency, true);
+
 }
 
 void AFlyingEnemyPawn::Move()

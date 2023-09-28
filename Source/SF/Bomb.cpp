@@ -33,7 +33,6 @@ void ABomb::OnOverlapStart(class UPrimitiveComponent *OverlappedComp, class AAct
 {
     if (OtherActor != Owner)
     {
-        
             UHealthComponent* HealthComponent = OtherActor->FindComponentByClass<UHealthComponent>();
         if (HealthComponent)
         {
@@ -50,6 +49,12 @@ void ABomb::Explode()
         return;
     }
     bIsExploding = true;
+    if (DamagingExplosionClass == nullptr)
+    {
+        UE_LOG(LogTemp, Display, TEXT("Damaging exploson class is null"));
+        return;
+    }
+    
     AExplosion_Damaging* Explosion = GetWorld()->SpawnActor<AExplosion_Damaging>(DamagingExplosionClass,GetActorLocation(),GetActorRotation());
     Explosion->SetMaxSize(ExplosionRadius); 
     Destroy();

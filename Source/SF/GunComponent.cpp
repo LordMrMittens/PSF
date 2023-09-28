@@ -83,6 +83,7 @@ void UGunComponent::FireBombs()
 {
 	if (AvailableBombs != 0)
 	{
+		UE_LOG(LogTemp, Display, TEXT("SpawningBombs"));
 		SpawnBombs(SingleLaserSpawnPoint);
 		if (AvailableBombs > 0)
 		{
@@ -92,9 +93,17 @@ void UGunComponent::FireBombs()
 }
 void UGunComponent::SpawnBombs(USceneComponent *SpawnPoint)
 {
+	if(BombClass==nullptr){
+		UE_LOG(LogTemp, Error, TEXT("BombClass is null"));
+		return;
+	}
+	if(SpawnPoint==nullptr){
+		UE_LOG(LogTemp, Error, TEXT("SpawnPoint is null"));
+		return;
+	}
 	struct FActorSpawnParameters params;
 	params.Owner = OwnerActor;
-	ABomb *Bomb = GetWorld()->SpawnActor<ABomb>(BombClass,
+	AProjectile *Bomb = GetWorld()->SpawnActor<AProjectile>(BombClass,
 												SpawnPoint->GetComponentLocation(),
 												this->GetComponentRotation(),
 												params);
@@ -116,10 +125,9 @@ void UGunComponent::SpawnLaser(USceneComponent *SpawnPoint)
 		Projectile->SetSpeed(Speed * ShotSpeedMultiplier);
 	}
 }
-void UGunComponent::Aim()
+void UGunComponent::Aim(void (UGunComponent::*FireFunctionPtr)())
 {
-	PlayerActor = GameplayManager->GetPlayerPawn();
-	if (PlayerActor && GameplayManager)
+	if (GameplayManager)
 	{
 		float LeadFactor = 1.0f;
 		FVector PlayerLocation = GameplayManager->GetPlayerLocation();
@@ -145,12 +153,11 @@ void UGunComponent::Aim()
 		{
 			SetRelativeRotation(NewRotation);
 		}
-		FireLasers();
+		(this->*FireFunctionPtr)();
 	} else {
-		UE_LOG(LogTemp, Error, TEXT("PlayerActor or GameplayManager is null"));
+		UE_LOG(LogTemp, Error, TEXT("GameplayManager is null"));
 	}
 }
-
 void UGunComponent::AddBomb(int32 BombsToAdd){
 	BombsToAdd += AvailableBombs;
 }
