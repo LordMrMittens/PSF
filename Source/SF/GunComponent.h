@@ -56,8 +56,8 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-	
-	
+	AGameplayManager* GameplayManager;
+	bool bUsesWorldRotationWhenAiming= false;
 
 public:
 
@@ -102,11 +102,5 @@ public:
 	int32 AvailableAmmo = -1; //negative number for infinite
 
 	int32 AvailableBombs = -1;
-
-private:
-
-	bool bUsesWorldRotationWhenAiming= false;
-
-	AGameplayManager* GameplayManager;
 		
 };

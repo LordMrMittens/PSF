@@ -9,6 +9,7 @@
 #include "HealthComponent.h"
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
+#include "FlakGunComponent.h"
 
 
 AEnemyBossPawnA::AEnemyBossPawnA()
@@ -18,7 +19,7 @@ AEnemyBossPawnA::AEnemyBossPawnA()
     MainGunBodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MainGunBodyMesh"));
     MainGunBodyMesh->SetupAttachment(GunComponent);
 
-    SecondaryGunComponent = CreateDefaultSubobject<UGunComponent>(TEXT("SecondaryGunComponent"));
+    SecondaryGunComponent = CreateDefaultSubobject<UFlakGunComponent>(TEXT("SecondaryGunComponent"));
     SecondaryGunComponent->SetupAttachment(MainBodyComponent);
     SecondaryGunBodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SecondaryGunBodyMesh"));
     SecondaryGunBodyMesh->SetupAttachment(SecondaryGunComponent);
@@ -117,12 +118,12 @@ void AEnemyBossPawnA::Attack()
 
 UGunComponent* AEnemyBossPawnA::DetermineGunToUse()
 {
-    if( MainGunTimeOfLastShot == 0 || MainGunTimeOfLastShot + MainGunShotFrequency < GetWorld()->GetTimeSeconds()){
+    if(bShouldMainGunFire && MainGunTimeOfLastShot == 0 || MainGunTimeOfLastShot + MainGunShotFrequency < GetWorld()->GetTimeSeconds()){
         MainGunTimeOfLastShot = -1;
         return GunComponent;
-    } else if(SecondaryGunTimeOfLastShot == 0 || SecondaryGunTimeOfLastShot + SecondaryGunShotFrequency < GetWorld()->GetTimeSeconds()){
+    } else if(bShouldSecondaryGunFire && SecondaryGunTimeOfLastShot == 0 || SecondaryGunTimeOfLastShot + SecondaryGunShotFrequency < GetWorld()->GetTimeSeconds()){
         return SecondaryGunComponent;
-    } else if(TertiaryGunTimeOfLastShot == 0 || TertiaryGunTimeOfLastShot + TertiaryGunShotFrequency < GetWorld()->GetTimeSeconds()){
+    } else if(bShouldTertiaryGunFire && TertiaryGunTimeOfLastShot == 0 || TertiaryGunTimeOfLastShot + TertiaryGunShotFrequency < GetWorld()->GetTimeSeconds()){
         TertiaryGunTimeOfLastShot = GetWorld()->GetTimeSeconds();
         return TertiaryGunComponent;
     } else {

@@ -8,6 +8,7 @@
 
 class AGameplayManager;
 class UNiagaraSystem;
+class UFlakGunComponent;
 /**
  *
  */
@@ -29,7 +30,7 @@ private:
 	UStaticMeshComponent *MainGunBodyMesh;
 	
 	UPROPERTY(EditAnywhere, Category = "Components")
-	UGunComponent *SecondaryGunComponent;
+	UFlakGunComponent *SecondaryGunComponent;
 	UPROPERTY(EditAnywhere, Category = "Components")
 	UStaticMeshComponent *SecondaryGunBodyMesh;
 	UPROPERTY(EditAnywhere, Category = "Components")
@@ -71,6 +72,8 @@ private:
 	float MainGunSutainedDuration;
 	float MainGunTimeOfLastShot = 0;
 	bool bMainGunIsFiring = false;
+	UPROPERTY(EditAnywhere, Category = "Main gun Behaviour")
+	bool bShouldMainGunFire = true;
 
 	// Secondary Gun Behaviour
 	UPROPERTY(EditAnywhere, Category = "Secondary gun Behaviour")
@@ -84,6 +87,8 @@ private:
 	float SecondaryGunTimeOfLastShot = 0;
 	FTimerHandle SecondaryGunDelayTimerHandle;
 	bool bIsAttackingWithFlak = false;
+	UPROPERTY(EditAnywhere, Category = "Secondary gun Behaviour")
+	bool bShouldSecondaryGunFire = true;
 	// Tertiary Gun Behaviour
 	UPROPERTY(EditAnywhere, Category = "Tertiary gun Behaviour")
 	float TertiaryGunShotFrequency;
@@ -92,6 +97,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Tertiary gun Behaviour")
 	float TertiaryGunSutainedDuration;
 	float TertiaryGunTimeOfLastShot = 0;
+		UPROPERTY(EditAnywhere, Category = "Tertiary gun Behaviour")
+	bool bShouldTertiaryGunFire = true;
 
 
 	UFUNCTION()

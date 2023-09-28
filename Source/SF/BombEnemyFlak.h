@@ -23,14 +23,8 @@ class SF_API ABombEnemyFlak : public ABomb
 
 	private:
 	AGameplayManager* GameplayManager;
-	float CalculateYZDistanceToPlayer();
 	float CalculateXDistanceToPlayer();
-	float PreviousDistanceToPlayer = 9999999999;
+	float PreviousXDistanceToPlayer = 9999999999;
 	UPROPERTY(EditAnywhere, Category = "ExplosionLimits")
-	float MinDistanceToExplode =50;
-		UPROPERTY(EditAnywhere, Category = "ExplosionLimits")
 	float MinXDistanceToExplode =1000;
-
-	bool bYZDistanceMet = false;
-
 };

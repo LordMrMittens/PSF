@@ -20,42 +20,19 @@ void ABombEnemyFlak::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
     if(GameplayManager)
-{    float DistanceToPlayer = CalculateYZDistanceToPlayer();
+{   
     float XDistanceToPlayer = CalculateXDistanceToPlayer();
-    if(DistanceToPlayer > PreviousDistanceToPlayer || DistanceToPlayer < MinDistanceToExplode)
-    {
-        bYZDistanceMet = true;
-    }
-    if (bYZDistanceMet && XDistanceToPlayer < MinXDistanceToExplode * 1.5f && bIsExploding == false)
+    if (XDistanceToPlayer < MinXDistanceToExplode && bIsExploding == false || XDistanceToPlayer > PreviousXDistanceToPlayer && bIsExploding == false)
     {
         Explode();
     }
-    if (XDistanceToPlayer < MinXDistanceToExplode && bIsExploding == false)
-    {
-        Explode();
-    }
-    PreviousDistanceToPlayer = DistanceToPlayer;}
+    PreviousXDistanceToPlayer = XDistanceToPlayer;}
     //SteerTowards();
-}
-
-float ABombEnemyFlak::CalculateYZDistanceToPlayer()
-{
-    if(GameplayManager != nullptr)
-    {
-        FVector MyYZLocation = FVector(GetActorLocation().X, 0, 0);
-        FVector PlayerYZLocation = FVector(GameplayManager->GetPlayerLocation().X, 0, 0);
-        return FVector::Dist(MyYZLocation, PlayerYZLocation);
-    }
-    else
-    {
-        UE_LOG(LogTemp, Display, TEXT("GameplayManager is null"));
-        return 0;
-    }
 }
 
 float ABombEnemyFlak::CalculateXDistanceToPlayer()
 {
-    FVector MyXLocation = FVector(0, GetActorLocation().Y, GetActorLocation().Z);
-    FVector PlayerXLocation = FVector(0, GameplayManager->GetPlayerLocation().Y, GameplayManager->GetPlayerLocation().Z);
+    FVector MyXLocation = FVector( GetActorLocation().X, 0,0);
+    FVector PlayerXLocation = FVector(GameplayManager->GetPlayerLocation().X,0,0);
     return FVector::Dist(MyXLocation, PlayerXLocation);
 }
