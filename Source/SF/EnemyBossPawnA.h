@@ -69,7 +69,7 @@ private:
 	float MainGunWarningDuration;
 	UPROPERTY(EditAnywhere, Category = "Main gun Behaviour")
 	float MainGunSutainedDuration;
-	float MainGunTimeOfLastShot = 99999;
+	float MainGunTimeOfLastShot = 0;
 	bool bMainGunIsFiring = false;
 
 	// Secondary Gun Behaviour
