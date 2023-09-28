@@ -83,7 +83,6 @@ void UGunComponent::FireBombs()
 {
 	if (AvailableBombs != 0)
 	{
-		UE_LOG(LogTemp, Display, TEXT("SpawningBombs"));
 		SpawnBombs(SingleLaserSpawnPoint);
 		if (AvailableBombs > 0)
 		{

@@ -6,6 +6,8 @@
 #include "Mover.h"
 #include "Projectile.generated.h"
 
+class AGameplayManager;
+
 UCLASS()
 class SF_API AProjectile : public AMover
 {
@@ -22,7 +24,9 @@ protected:
 	virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 	UFUNCTION()
 	virtual void OnOverlapStart(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	AGameplayManager* GameplayManager;
 
+	virtual void SteerTowards();
 
 public:	
 	// Called every frame
@@ -37,5 +41,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Lifespan")
 	float LifeDuration = 2.0f;
 	FTimerHandle LifeTimerHandle;
+
+	UPROPERTY(EditAnywhere, Category = "Steering")
+	float SteerFactor = 1.0f;
 	
 };

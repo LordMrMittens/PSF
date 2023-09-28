@@ -86,7 +86,6 @@ void AEnemyBossPawnA::Tick(float DeltaTime)
         }
         if (bIsAttackingWithFlak)
         {
-            UE_LOG(LogTemp, Display, TEXT("Flak!!"));
             FlakCannonsAttack();
         }
     }
@@ -147,10 +146,8 @@ void AEnemyBossPawnA::FlakCannonsAttack()
     GetWorldTimerManager().PauseTimer(AttackTimerHandle);
     if (TimeOfLastShot == 0 || TimeOfLastShot + TimeBetweenShots < GetWorld()->GetTimeSeconds())
     {
-        UE_LOG(LogTemp, Display, TEXT("Flak attack first conditions met"));
         if (SecondaryGunShotsFired < SecondaryGunShotsInBurst)
         {
-            UE_LOG(LogTemp, Display, TEXT("Firing FlakCannonsAttack"));
             SecondaryGunComponent->Aim(&UGunComponent::FireBombs);
             TimeOfLastShot = GetWorld()->GetTimeSeconds();
             SecondaryGunShotsFired++;
@@ -161,12 +158,10 @@ void AEnemyBossPawnA::FlakCannonsAttack()
             SecondaryGunTimeOfLastShot = GetWorld()->GetTimeSeconds();
             GetWorldTimerManager().UnPauseTimer(AttackTimerHandle);
             bIsAttackingWithFlak = false;
-            UE_LOG(LogTemp, Display, TEXT("Stopping FlakCannonsAttack"));
         }
         else
         {
             bIsAttackingWithFlak = true;
-            UE_LOG(LogTemp, Display, TEXT("Looping FlakCannonsAttack"));
         }
     }
 }

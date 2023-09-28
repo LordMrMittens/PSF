@@ -35,6 +35,7 @@ void ABombEnemyFlak::Tick(float DeltaTime)
         Explode();
     }
     PreviousDistanceToPlayer = DistanceToPlayer;}
+    //SteerTowards();
 }
 
 float ABombEnemyFlak::CalculateYZDistanceToPlayer()
