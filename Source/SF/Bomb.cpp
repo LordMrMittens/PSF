@@ -50,6 +50,7 @@ void ABomb::Explode()
         return;
     }
     bIsExploding = true;
-    AExplosion_Damaging* Explosion = GetWorld()->SpawnActor<AExplosion_Damaging>(DamagingExplosionClass,GetActorLocation(),GetActorRotation());   
+    AExplosion_Damaging* Explosion = GetWorld()->SpawnActor<AExplosion_Damaging>(DamagingExplosionClass,GetActorLocation(),GetActorRotation());
+    Explosion->SetMaxSize(ExplosionRadius); 
     Destroy();
 }

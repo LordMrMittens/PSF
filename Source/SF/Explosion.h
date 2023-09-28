@@ -36,6 +36,7 @@ public:
     USphereComponent* SphereComponent;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components",  meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* MainBodyComponent;
+	void SetMaxSize(float NewMaxSize) {MaxSize = NewMaxSize;}
 
 private:
 

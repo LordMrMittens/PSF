@@ -146,6 +146,8 @@ void UGunComponent::Aim()
 			SetRelativeRotation(NewRotation);
 		}
 		FireLasers();
+	} else {
+		UE_LOG(LogTemp, Error, TEXT("PlayerActor or GameplayManager is null"));
 	}
 }
 

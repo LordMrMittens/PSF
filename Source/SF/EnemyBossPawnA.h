@@ -69,17 +69,18 @@ private:
 	float MainGunWarningDuration;
 	UPROPERTY(EditAnywhere, Category = "Main gun Behaviour")
 	float MainGunSutainedDuration;
-	float MainGunTimeOfLastShot =0;
+	float MainGunTimeOfLastShot = 10000;
 	bool bMainGunIsFiring = false;
 
 	// Secondary Gun Behaviour
 	UPROPERTY(EditAnywhere, Category = "Secondary gun Behaviour")
 	float SecondaryGunShotFrequency;
 	UPROPERTY(EditAnywhere, Category = "Secondary gun Behaviour")
-	float SecondaryGunWarningDuration;
+	int32 SecondaryGunShotsInBurst =5;
 	UPROPERTY(EditAnywhere, Category = "Secondary gun Behaviour")
-	float SecondaryGunSutainedDuration;
+	float TimeBetweenShots =.5f;
 	float SecondaryGunTimeOfLastShot = 0;
+	FTimerHandle SecondaryGunDelayTimerHandle;
 	// Tertiary Gun Behaviour
 	UPROPERTY(EditAnywhere, Category = "Tertiary gun Behaviour")
 	float TertiaryGunShotFrequency;
@@ -88,6 +89,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Tertiary gun Behaviour")
 	float TertiaryGunSutainedDuration;
 	float TertiaryGunTimeOfLastShot = 0;
+
 
 	UFUNCTION()
 	void OnOverlapStart(class UPrimitiveComponent *OverlappedComp, class AActor *OtherActor, class UPrimitiveComponent *OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult);

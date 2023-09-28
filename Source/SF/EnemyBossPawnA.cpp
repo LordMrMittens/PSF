@@ -77,6 +77,9 @@ void AEnemyBossPawnA::Tick(float DeltaTime)
     if (GunComponent && bMainGunIsFiring){
         GunComponent->FireLasers();
     }
+    if(SecondaryGunComponent){
+        //SecondaryGunComponent->Aim();
+    }
 }
 
 void AEnemyBossPawnA::OnOverlapStart(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -109,7 +112,7 @@ UGunComponent* AEnemyBossPawnA::DetermineGunToUse()
         MainGunTimeOfLastShot = -1;
         return GunComponent;
     } else if(SecondaryGunTimeOfLastShot == 0 || SecondaryGunTimeOfLastShot + SecondaryGunShotFrequency < GetWorld()->GetTimeSeconds()){
-        SecondaryGunTimeOfLastShot = GetWorld()->GetTimeSeconds();
+        FlakCannonsAttack();
         return SecondaryGunComponent;
     } else if(TertiaryGunTimeOfLastShot == 0 || TertiaryGunTimeOfLastShot + TertiaryGunShotFrequency < GetWorld()->GetTimeSeconds()){
         TertiaryGunTimeOfLastShot = GetWorld()->GetTimeSeconds();
@@ -136,7 +139,12 @@ void AEnemyBossPawnA::SustainedLaserAttack()
 
 void AEnemyBossPawnA::FlakCannonsAttack()
 {
-    
+    for (size_t i = 0; i < SecondaryGunShotsInBurst; i++)
+    {
+        GetWorld()->GetTimerManager().SetTimer(SecondaryGunDelayTimerHandle, SecondaryGunComponent, &UGunComponent::Aim, TimeBetweenShots, false);
+
+    }
+    SecondaryGunTimeOfLastShot = GetWorld()->GetTimeSeconds();
 }
 
 void AEnemyBossPawnA::MissileAttack()
