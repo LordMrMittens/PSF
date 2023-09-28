@@ -74,6 +74,9 @@ void AEnemyBossPawnA::BeginPlay()
 void AEnemyBossPawnA::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+    if(bIsSteeringTowardsPlayer){
+        SteerTowardsPlayer();
+    }
     if (GunComponent && bMainGunIsFiring){
         GunComponent->FireLasers();
     }
@@ -126,7 +129,7 @@ void AEnemyBossPawnA::SustainedLaserAttack()
 {
     FTimerHandle WarningTimerHandle;
     FTimerHandle AttackDurationTimerHandle;
-    //move to players YZ coords
+    bIsSteeringTowardsPlayer = true;
     GetWorldTimerManager().PauseTimer(AttackTimerHandle);
     
     GetWorldTimerManager().SetTimer(WarningTimerHandle, this, &AEnemyBossPawnA::ToggleMainLaser, MainGunWarningDuration, false);
@@ -157,6 +160,16 @@ void AEnemyBossPawnA::ToggleMainLaser()
     if(bMainGunIsFiring){
     MainGunTimeOfLastShot = GetWorld()->GetTimeSeconds();
     GetWorldTimerManager().UnPauseTimer(AttackTimerHandle);
+    bIsSteeringTowardsPlayer = false;
     }
     bMainGunIsFiring = !bMainGunIsFiring;
+}
+
+void AEnemyBossPawnA::SteerTowardsPlayer()
+{
+     FVector PlayerLocation = GameplayManager->GetPlayerLocation();
+        FVector EnemyLocation = GetActorLocation();
+        FVector PlayerDirection = (PlayerLocation - EnemyLocation).GetSafeNormal();
+            MoveDirection.Z = PlayerDirection.Z * SteerFactor;
+            MoveDirection.Y = PlayerDirection.Y * SteerFactor;
 }

@@ -69,7 +69,7 @@ private:
 	float MainGunWarningDuration;
 	UPROPERTY(EditAnywhere, Category = "Main gun Behaviour")
 	float MainGunSutainedDuration;
-	float MainGunTimeOfLastShot = 10000;
+	float MainGunTimeOfLastShot = 0;
 	bool bMainGunIsFiring = false;
 
 	// Secondary Gun Behaviour
@@ -99,7 +99,12 @@ private:
 	void FlakCannonsAttack();
 	void MissileAttack();
 	void ToggleMainLaser();
+	void SteerTowardsPlayer();
 	UGunComponent* DetermineGunToUse();
 	UPROPERTY(EditAnywhere, Category = "Attacking Effects")
 	UNiagaraSystem* WarningLaser;
+
+	UPROPERTY(EditAnywhere, Category = "Steering")
+	float SteerFactor=3.0f;
+	bool bIsSteeringTowardsPlayer = false;
 };
