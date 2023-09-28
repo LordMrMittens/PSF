@@ -14,6 +14,7 @@ AExplosion::AExplosion()
 	SetRootComponent(SphereComponent);
 	MainBodyComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MainBodyComponent"));
 	MainBodyComponent->SetupAttachment(SphereComponent);
+	SetLifeSpan(ExplosionDuration);
 
 }
 
@@ -23,19 +24,29 @@ void AExplosion::BeginPlay()
 	Super::BeginPlay();
 	SetActorScale3D(FVector(StartSize));
 	CurrentSize = StartSize;
-	Duration = (MaxSize - StartSize) / ExplosionDuration;
+	Duration = (MaxSize - StartSize) / TimeToMaxSize;
+	SetLifeSpan(ExplosionDuration);
 }
 
 // Called every frame
 void AExplosion::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+    if (CurrentSize <= MaxSize)
+    {
 	CurrentSize += DeltaTime * Duration;
     SetActorScale3D(FVector(CurrentSize));
-    if (CurrentSize >= MaxSize)
-    {
-        Destroy();
-    }
+
+    } else {
+
+		float FadeTime = 0.5f;
+		float FadeDuration = 1.0f;	
+		float FadeAlpha = 1.0f - (FadeTime / FadeDuration);
+		FLinearColor FadeColor = FLinearColor(1, 1, 1, FadeAlpha);
+		//MainBodyComponent->SetVectorParameterValueOnMaterials(FName("Color"), FadeColor);
+
+	}
 }
 
 

@@ -9,6 +9,7 @@
 #include "HealthComponent.h"
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
+#include "FlakGunComponent.h"
 
 
 AEnemyBossPawnA::AEnemyBossPawnA()
@@ -18,7 +19,7 @@ AEnemyBossPawnA::AEnemyBossPawnA()
     MainGunBodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MainGunBodyMesh"));
     MainGunBodyMesh->SetupAttachment(GunComponent);
 
-    SecondaryGunComponent = CreateDefaultSubobject<UGunComponent>(TEXT("SecondaryGunComponent"));
+    SecondaryGunComponent = CreateDefaultSubobject<UFlakGunComponent>(TEXT("SecondaryGunComponent"));
     SecondaryGunComponent->SetupAttachment(MainBodyComponent);
     SecondaryGunBodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SecondaryGunBodyMesh"));
     SecondaryGunBodyMesh->SetupAttachment(SecondaryGunComponent);
@@ -74,8 +75,20 @@ void AEnemyBossPawnA::BeginPlay()
 void AEnemyBossPawnA::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    if (GunComponent && bMainGunIsFiring){
-        GunComponent->FireLasers();
+    if (bIsSteeringTowardsPlayer)
+    {
+        SteerTowardsPlayer();
+    }
+    if (GunComponent)
+    {
+        if (bMainGunIsFiring)
+        {
+            GunComponent->FireLasers();
+        }
+        if (bIsAttackingWithFlak)
+        {
+            FlakCannonsAttack();
+        }
     }
 }
 
@@ -93,7 +106,7 @@ void AEnemyBossPawnA::Attack()
             SustainedLaserAttack();
         }
         if(GunToUse == SecondaryGunComponent){
-
+            FlakCannonsAttack();
         }
         if (GunToUse == TertiaryGunComponent)
         {
@@ -105,13 +118,12 @@ void AEnemyBossPawnA::Attack()
 
 UGunComponent* AEnemyBossPawnA::DetermineGunToUse()
 {
-    if( MainGunTimeOfLastShot == 0 || MainGunTimeOfLastShot + MainGunShotFrequency < GetWorld()->GetTimeSeconds()){
+    if(bShouldMainGunFire && MainGunTimeOfLastShot == 0 || MainGunTimeOfLastShot + MainGunShotFrequency < GetWorld()->GetTimeSeconds()){
         MainGunTimeOfLastShot = -1;
         return GunComponent;
-    } else if(SecondaryGunTimeOfLastShot == 0 || SecondaryGunTimeOfLastShot + SecondaryGunShotFrequency < GetWorld()->GetTimeSeconds()){
-        SecondaryGunTimeOfLastShot = GetWorld()->GetTimeSeconds();
+    } else if(bShouldSecondaryGunFire && SecondaryGunTimeOfLastShot == 0 || SecondaryGunTimeOfLastShot + SecondaryGunShotFrequency < GetWorld()->GetTimeSeconds()){
         return SecondaryGunComponent;
-    } else if(TertiaryGunTimeOfLastShot == 0 || TertiaryGunTimeOfLastShot + TertiaryGunShotFrequency < GetWorld()->GetTimeSeconds()){
+    } else if(bShouldTertiaryGunFire && TertiaryGunTimeOfLastShot == 0 || TertiaryGunTimeOfLastShot + TertiaryGunShotFrequency < GetWorld()->GetTimeSeconds()){
         TertiaryGunTimeOfLastShot = GetWorld()->GetTimeSeconds();
         return TertiaryGunComponent;
     } else {
@@ -123,20 +135,36 @@ void AEnemyBossPawnA::SustainedLaserAttack()
 {
     FTimerHandle WarningTimerHandle;
     FTimerHandle AttackDurationTimerHandle;
-    //move to players YZ coords
+    bIsSteeringTowardsPlayer = true;
     GetWorldTimerManager().PauseTimer(AttackTimerHandle);
-    
     GetWorldTimerManager().SetTimer(WarningTimerHandle, this, &AEnemyBossPawnA::ToggleMainLaser, MainGunWarningDuration, false);
     GetWorldTimerManager().SetTimer(AttackDurationTimerHandle, this, &AEnemyBossPawnA::ToggleMainLaser, MainGunWarningDuration+MainGunSutainedDuration, false);
     UNiagaraFunctionLibrary::SpawnSystemAttached(WarningLaser, SingleLaserSpawnPoint, NAME_None, FVector(0,0,0), FRotator(0,0,0), EAttachLocation::KeepRelativeOffset, true);
-    
-    ///GetWorld()->SpawnActor(); //spawn Warning Laser from single laser spawnpoint need new asset
-
 }
 
 void AEnemyBossPawnA::FlakCannonsAttack()
 {
-    
+    GetWorldTimerManager().PauseTimer(AttackTimerHandle);
+    if (TimeOfLastShot == 0 || TimeOfLastShot + TimeBetweenShots < GetWorld()->GetTimeSeconds())
+    {
+        if (SecondaryGunShotsFired < SecondaryGunShotsInBurst)
+        {
+            SecondaryGunComponent->Aim(&UGunComponent::FireBombs);
+            TimeOfLastShot = GetWorld()->GetTimeSeconds();
+            SecondaryGunShotsFired++;
+        }
+        if (SecondaryGunShotsFired >= SecondaryGunShotsInBurst)
+        {
+            SecondaryGunShotsFired = 0;
+            SecondaryGunTimeOfLastShot = GetWorld()->GetTimeSeconds();
+            GetWorldTimerManager().UnPauseTimer(AttackTimerHandle);
+            bIsAttackingWithFlak = false;
+        }
+        else
+        {
+            bIsAttackingWithFlak = true;
+        }
+    }
 }
 
 void AEnemyBossPawnA::MissileAttack()
@@ -149,6 +177,16 @@ void AEnemyBossPawnA::ToggleMainLaser()
     if(bMainGunIsFiring){
     MainGunTimeOfLastShot = GetWorld()->GetTimeSeconds();
     GetWorldTimerManager().UnPauseTimer(AttackTimerHandle);
+    bIsSteeringTowardsPlayer = false;
     }
     bMainGunIsFiring = !bMainGunIsFiring;
+}
+
+void AEnemyBossPawnA::SteerTowardsPlayer()
+{
+     FVector PlayerLocation = GameplayManager->GetPlayerLocation();
+        FVector EnemyLocation = GetActorLocation();
+        FVector PlayerDirection = (PlayerLocation - EnemyLocation).GetSafeNormal();
+            MoveDirection.Z = PlayerDirection.Z * SteerFactor;
+            MoveDirection.Y = PlayerDirection.Y * SteerFactor;
 }

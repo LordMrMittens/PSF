@@ -5,6 +5,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "HealthComponent.h"
 #include "MovingPawn.h"
+#include "GameplayManager.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -24,6 +25,7 @@ void AProjectile::BeginPlay()
 		MainBodyComponent->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
 		MainBodyComponent->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnOverlapStart);
 	}
+	GameplayManager = Cast<AGameplayManager>(UGameplayStatics::GetActorOfClass(GetWorld(),AGameplayManager::StaticClass()));
 	CurrentDamage = BaseDamage;
 	SetLifeSpan(LifeDuration);
 }
@@ -61,4 +63,13 @@ void AProjectile::OnOverlapStart(class UPrimitiveComponent *OverlappedComp, clas
 		}
 		Destroy();
 	}
+}
+
+void AProjectile::SteerTowards()
+{
+	     FVector PlayerLocation = GameplayManager->GetPlayerLocation();
+        FVector EnemyLocation = GetActorLocation();
+        FVector PlayerDirection = (PlayerLocation - EnemyLocation).GetSafeNormal();
+            Direction.Z += PlayerDirection.Z * SteerFactor;
+            Direction.Y += PlayerDirection.Y * SteerFactor;
 }

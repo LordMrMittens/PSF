@@ -133,7 +133,7 @@ void ALandEnemyPawn::AimAndShoot()
 {
     if (IsPlayerInRange())
     {
-        GunComponent->Aim();
+        GunComponent->Aim(&UGunComponent::FireLasers);
     }
     
     

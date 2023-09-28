@@ -23,6 +23,8 @@ protected:
 	    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Explosion",  meta = (AllowPrivateAccess = "true"))
     float ExplosionDuration;
 	float Duration;
+		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Explosion",  meta = (AllowPrivateAccess = "true"))
+    float TimeToMaxSize;
 	    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Explosion",  meta = (AllowPrivateAccess = "true"))
     float StartSize;
 	    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Explosion",  meta = (AllowPrivateAccess = "true"))
@@ -36,6 +38,7 @@ public:
     USphereComponent* SphereComponent;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components",  meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* MainBodyComponent;
+	void SetMaxSize(float NewMaxSize) {MaxSize = NewMaxSize;}
 
 private:
 

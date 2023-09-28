@@ -16,6 +16,22 @@
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
 	},
 	{
+		"file": "D:\\Unreal\\PSF\\Source\\SF\\BombEnemyFlak.cpp",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
+		],
+		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\Unreal\\PSF\\Source\\SF\\BombEnemyFlak.h",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
+		],
+		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
+	},
+	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\BoostComponent.cpp",
 		"arguments": [
 			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
@@ -105,6 +121,22 @@
 	},
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\Explosion_Damaging.h",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
+		],
+		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\Unreal\\PSF\\Source\\SF\\FlakGunComponent.cpp",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
+		],
+		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\Unreal\\PSF\\Source\\SF\\FlakGunComponent.h",
 		"arguments": [
 			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
