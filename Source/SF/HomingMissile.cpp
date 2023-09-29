@@ -6,6 +6,8 @@
 #include "PlayerPawn.h"
 #include "Kismet/GameplayStatics.h"
 #include "HealthComponent.h"
+#include "Engine/World.h"
+
 
 
 AHomingMissile::AHomingMissile()
@@ -43,13 +45,13 @@ void AHomingMissile::SteerTowards(AActor* TargetActor)
     FVector TargetLocation = TargetActor->GetActorLocation();
     FVector MissileLocation = GetActorLocation();
     FVector TargetDirection = (TargetLocation - MissileLocation).GetSafeNormal();
-    TargetDirection.X = Direction.X;
-    TargetDirection.Z *=-1; 
-    TargetDirection.Normalize();
-    CurrentSpeed = Speed- ((HomingSpeed* .5f) * -1);
-    
-    
-    Direction = FMath::VInterpConstantTo(Direction, TargetDirection, GetWorld()->GetDeltaSeconds(), HomingSpeed);
+
+    FRotator TargetRotation = TargetDirection.Rotation();
+    float DistanceToTargetonX = FMath::Abs(TargetLocation.X - MissileLocation.X);
+    DistanceToTargetonX < MinTrackingDistance ? bIsHoming = false : bIsHoming = true;
+    bIsHoming ? SetActorRotation(TargetRotation* TurningMultiplier ) : SetActorRotation(GetActorRotation());
+
+    CurrentSpeed = Speed + SlowdownOffset;
 }
 
 void AHomingMissile::OnDeath()

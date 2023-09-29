@@ -25,7 +25,12 @@ class SF_API AHomingMissile : public AProjectile
 	void Tick(float DeltaTime) override;
 	void SteerTowards(AActor* TargetActor) override;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Homing")
-	float HomingSpeed = 10.0f;
+	float SlowdownOffset = 3.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Homing")
+	float TurningMultiplier = 3.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Homing")
+	float MinTrackingDistance = 500.0f;
+	bool bIsHoming = true;
 	private:
 	AGameplayManager* GameplayManager = nullptr;
 	UHealthComponent* HealthComponent = nullptr;
