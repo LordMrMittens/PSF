@@ -124,39 +124,29 @@ void UGunComponent::SpawnLaser(USceneComponent *SpawnPoint)
 		Projectile->SetSpeed(Speed * ShotSpeedMultiplier);
 	}
 }
+
 void UGunComponent::Aim(void (UGunComponent::*FireFunctionPtr)())
 {
-	if (GameplayManager)
-	{
-		float LeadFactor = 1.0f;
-		FVector PlayerLocation = GameplayManager->GetPlayerLocation();
-		FVector PlayerVelocity = FVector::ZeroVector;
+	if (!GameplayManager)
+    {
+        UE_LOG(LogTemp, Error, TEXT("GameplayManager is null"));
+        return;
+    }
+	float LeadFactor = FMath::RandRange(ShotLeadErrorMin, ShotLeadErrorMax);
+    FVector GunDirection = GameplayManager->GetPlayerLocation() - GetComponentLocation() + GameplayManager->GetPlayerPawn()->GetVelocity() * LeadFactor;
+    FRotator NewRotation = GunDirection.Rotation();
 
-		APlayerPawn *PlayerPawn = GameplayManager->GetPlayerPawn();
-		if (PlayerPawn)
-		{
-			PlayerVelocity = PlayerPawn->GetVelocity();
-		}
-		FVector RelativePlayerLocation = PlayerLocation - GetComponentLocation();
-		float TimeToHit = RelativePlayerLocation.Size() / (Speed * ShotSpeedMultiplier);
-		LeadFactor = FMath::RandRange(ShotLeadErrorMin, ShotLeadErrorMax);
-		FVector PredictedPlayerLocation = PlayerLocation + (PlayerVelocity * (TimeToHit * LeadFactor));
-
-		FVector GunDirection = PredictedPlayerLocation - GetComponentLocation();
-		FRotator NewRotation = GunDirection.Rotation();
-		if (bUsesWorldRotationWhenAiming)
-		{
-			SetWorldRotation(NewRotation);
-		}
-		else
-		{
-			SetRelativeRotation(NewRotation);
-		}
-		(this->*FireFunctionPtr)();
-	} else {
-		UE_LOG(LogTemp, Error, TEXT("GameplayManager is null"));
-	}
+    if (bUsesWorldRotationWhenAiming)
+    {
+        SetWorldRotation(NewRotation);
+    }
+    else
+    {
+        SetRelativeRotation(NewRotation);
+    }
+    (this->*FireFunctionPtr)();
 }
+
 void UGunComponent::AddBomb(int32 BombsToAdd){
 	BombsToAdd += AvailableBombs;
 }

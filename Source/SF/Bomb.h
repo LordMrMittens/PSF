@@ -26,6 +26,9 @@ protected:
 	virtual void OnOverlapStart(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 	void Explode();
 	bool bIsExploding = false;
+	void SetDistanceToExplode(float Distance){DistanceToExplode = Distance;}
+	void SetExplosionRadius(float Radius){ExplosionRadius = Radius;}
+	FVector GetStartingPosition(){return StartingPosition;}
 public:
 	virtual void Tick(float DeltaTime) override;
 private:
