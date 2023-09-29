@@ -26,7 +26,7 @@ protected:
 	virtual void OnOverlapStart(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	AGameplayManager* GameplayManager;
 
-	virtual void SteerTowards();
+	virtual void SteerTowards(AActor* TargetActor);
 
 public:	
 	// Called every frame
