@@ -1,14 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "HomingMissile.h"
 #include "GameplayManager.h"
 #include "PlayerPawn.h"
 #include "Kismet/GameplayStatics.h"
 #include "HealthComponent.h"
 #include "Engine/World.h"
-
-
 
 AHomingMissile::AHomingMissile()
 {
@@ -19,23 +16,24 @@ void AHomingMissile::BeginPlay()
 {
     Super::BeginPlay();
     GameplayManager = Cast<AGameplayManager>(UGameplayStatics::GetActorOfClass(GetWorld(), AGameplayManager::StaticClass()));
-    Speed *= -1;
-    CurrentSpeed = Speed;
-        if(HealthComponent != nullptr){
+    Direction = -Direction;
+    if (HealthComponent != nullptr)
+    {
         HealthComponent->SetUpHealthComponent(&HealthConfiguration);
         HealthComponent->OnOutOfHealth.AddDynamic(this, &AHomingMissile::OnDeath);
-        
     }
 }
 
 void AHomingMissile::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    if(GameplayManager){
-    SteerTowards(GameplayManager->GetPlayerPawn());}
+    if (GameplayManager)
+    {
+        SteerTowards(GameplayManager->GetPlayerPawn());
+    }
 }
 
-void AHomingMissile::SteerTowards(AActor* TargetActor)
+void AHomingMissile::SteerTowards(AActor *TargetActor)
 {
     if (!GameplayManager)
     {
@@ -45,12 +43,13 @@ void AHomingMissile::SteerTowards(AActor* TargetActor)
     FVector TargetLocation = TargetActor->GetActorLocation();
     FVector MissileLocation = GetActorLocation();
     FVector TargetDirection = (TargetLocation - MissileLocation).GetSafeNormal();
-
     FRotator TargetRotation = TargetDirection.Rotation();
+    TargetRotation.Pitch *=-1;
     float DistanceToTargetonX = FMath::Abs(TargetLocation.X - MissileLocation.X);
-    DistanceToTargetonX < MinTrackingDistance ? bIsHoming = false : bIsHoming = true;
-    bIsHoming ? SetActorRotation(TargetRotation* TurningMultiplier ) : SetActorRotation(GetActorRotation());
-
+    if(DistanceToTargetonX < MinTrackingDistance){
+        bIsHoming = false;
+    }
+    bIsHoming? SetActorRotation(TargetRotation * TurningMultiplier):SetActorRotation(GetActorRotation());
     CurrentSpeed = Speed + SlowdownOffset;
 }
 
