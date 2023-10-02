@@ -89,6 +89,9 @@ void AEnemyBossPawnA::Tick(float DeltaTime)
         {
             FlakCannonsAttack();
         }
+        if(bIsAttackingWithMissiles){
+            MissileAttack();
+        }
     }
 }
 
@@ -169,7 +172,28 @@ void AEnemyBossPawnA::FlakCannonsAttack()
 
 void AEnemyBossPawnA::MissileAttack()
 {
-    TertiaryGunComponent->FireLasers();
+        GetWorldTimerManager().PauseTimer(AttackTimerHandle);
+    if (TimeOfLastMissile == 0 || TimeOfLastMissile + TimeBetweenMissiles < GetWorld()->GetTimeSeconds())
+    {
+        if (TertiaryGunShotsFired < TertiaryGunShotsInBurst)
+        {
+            TertiaryGunComponent->FireLasers();
+            TimeOfLastMissile = GetWorld()->GetTimeSeconds();
+            TertiaryGunShotsFired++;
+        }
+        if (TertiaryGunShotsFired >= TertiaryGunShotsInBurst)
+        {
+            TertiaryGunShotsFired = 0;
+            TertiaryGunTimeOfLastShot = GetWorld()->GetTimeSeconds();
+            GetWorldTimerManager().UnPauseTimer(AttackTimerHandle);
+            bIsAttackingWithMissiles = false;
+        }
+        else
+        {
+            bIsAttackingWithMissiles = true;
+        }
+    }
+    
 }
 
 void AEnemyBossPawnA::ToggleMainLaser()
