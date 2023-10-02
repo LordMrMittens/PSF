@@ -30,6 +30,12 @@ void ABombEnemyFlak::Tick(float DeltaTime)
     //SteerTowards();
 }
 
+void ABombEnemyFlak::SetExplosionLocation(FVector Location) 
+{
+    ExplosionLocation = Location;
+    SetDistanceToExplode(FVector::Distance(GetStartingPosition(), ExplosionLocation));
+}
+
 float ABombEnemyFlak::CalculateXDistanceToPlayer()
 {
     FVector MyXLocation = FVector( GetActorLocation().X, 0,0);

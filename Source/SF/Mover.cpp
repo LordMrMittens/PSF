@@ -15,7 +15,7 @@ AMover::AMover()
 void AMover::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	CurrentSpeed = Speed;
 }
 
 // Called every frame
@@ -27,7 +27,7 @@ void AMover::Tick(float DeltaTime)
 
 void AMover::Move()
 {
-	FVector LocalMoveDelta = Direction * Speed * GetWorld()->GetDeltaSeconds();
+	FVector LocalMoveDelta = Direction * CurrentSpeed * GetWorld()->GetDeltaSeconds();
 	FTransform ActorTransform = GetActorTransform();
 	FVector WorldMoveDelta = ActorTransform.TransformVectorNoScale(LocalMoveDelta);
 	AddActorWorldOffset(WorldMoveDelta, true);

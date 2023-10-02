@@ -24,8 +24,9 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void Move();
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	float Speed = 200.0f;
+	float CurrentSpeed;
 	FVector Direction = FVector(1,0,0);
 
 };

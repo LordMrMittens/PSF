@@ -41,6 +41,7 @@ void AProjectile::Tick(float DeltaTime)
 void AProjectile::SetSpeed(float InputSpeed)
 {
 	Speed = InputSpeed;
+	CurrentSpeed = Speed;
 }
 void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
@@ -56,20 +57,21 @@ void AProjectile::OnOverlapStart(class UPrimitiveComponent *OverlappedComp, clas
 	}
 	if (OtherActor != GetOwner() && OtherActor->GetOwner() != GetOwner())
 	{
-		AMovingPawn *OtherPawn = Cast<AMovingPawn>(OtherActor);
-		if (OtherPawn != nullptr && OtherPawn->HealthComponent != nullptr)
+		UHealthComponent* HealthComponent = Cast<UHealthComponent>(OtherActor->GetComponentByClass(UHealthComponent::StaticClass()));
+		if(HealthComponent != nullptr)
 		{
-			OtherPawn->HealthComponent->TakeDamage(CurrentDamage);
+			HealthComponent->TakeDamage(CurrentDamage);
 		}
 		Destroy();
 	}
+
 }
 
-void AProjectile::SteerTowards()
+void AProjectile::SteerTowards(AActor *TargetActor)
 {
-	     FVector PlayerLocation = GameplayManager->GetPlayerLocation();
+	     FVector TargetLocation = TargetActor->GetActorLocation();
         FVector EnemyLocation = GetActorLocation();
-        FVector PlayerDirection = (PlayerLocation - EnemyLocation).GetSafeNormal();
-            Direction.Z += PlayerDirection.Z * SteerFactor;
-            Direction.Y += PlayerDirection.Y * SteerFactor;
+        FVector TargetDirection = (TargetLocation - EnemyLocation).GetSafeNormal();
+            Direction.Z += TargetDirection.Z * SteerFactor;
+            Direction.Y += TargetDirection.Y * SteerFactor;
 }

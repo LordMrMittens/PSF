@@ -110,7 +110,7 @@ void AEnemyBossPawnA::Attack()
         }
         if (GunToUse == TertiaryGunComponent)
         {
-            
+            MissileAttack();
         }
         
     }
@@ -118,12 +118,12 @@ void AEnemyBossPawnA::Attack()
 
 UGunComponent* AEnemyBossPawnA::DetermineGunToUse()
 {
-    if(bShouldMainGunFire && MainGunTimeOfLastShot == 0 || MainGunTimeOfLastShot + MainGunShotFrequency < GetWorld()->GetTimeSeconds()){
+    if(bShouldMainGunFire && (MainGunTimeOfLastShot == 0 || MainGunTimeOfLastShot + MainGunShotFrequency < GetWorld()->GetTimeSeconds())){
         MainGunTimeOfLastShot = -1;
         return GunComponent;
-    } else if(bShouldSecondaryGunFire && SecondaryGunTimeOfLastShot == 0 || SecondaryGunTimeOfLastShot + SecondaryGunShotFrequency < GetWorld()->GetTimeSeconds()){
+    } else if(bShouldSecondaryGunFire && (SecondaryGunTimeOfLastShot == 0 || SecondaryGunTimeOfLastShot + SecondaryGunShotFrequency < GetWorld()->GetTimeSeconds())){
         return SecondaryGunComponent;
-    } else if(bShouldTertiaryGunFire && TertiaryGunTimeOfLastShot == 0 || TertiaryGunTimeOfLastShot + TertiaryGunShotFrequency < GetWorld()->GetTimeSeconds()){
+    } else if(bShouldTertiaryGunFire && (TertiaryGunTimeOfLastShot == 0 || TertiaryGunTimeOfLastShot + TertiaryGunShotFrequency < GetWorld()->GetTimeSeconds())){
         TertiaryGunTimeOfLastShot = GetWorld()->GetTimeSeconds();
         return TertiaryGunComponent;
     } else {
@@ -169,7 +169,7 @@ void AEnemyBossPawnA::FlakCannonsAttack()
 
 void AEnemyBossPawnA::MissileAttack()
 {
-    
+    TertiaryGunComponent->FireLasers();
 }
 
 void AEnemyBossPawnA::ToggleMainLaser()

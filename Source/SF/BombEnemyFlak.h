@@ -20,6 +20,7 @@ class SF_API ABombEnemyFlak : public ABomb
 	public:
 	ABombEnemyFlak();
 	void Tick(float DeltaTime) override;
+	void SetExplosionLocation(FVector Location);
 
 	private:
 	AGameplayManager* GameplayManager;
@@ -27,4 +28,5 @@ class SF_API ABombEnemyFlak : public ABomb
 	float PreviousXDistanceToPlayer = 9999999999;
 	UPROPERTY(EditAnywhere, Category = "ExplosionLimits")
 	float MinXDistanceToExplode =1000;
+	FVector ExplosionLocation = FVector::ZeroVector;
 };

@@ -8,18 +8,17 @@
 
 class AGameplayManager;
 /**
- * 
+ *
  */
 UCLASS()
 class SF_API UFlakGunComponent : public UGunComponent
 {
 	GENERATED_BODY()
 
-	public:
+public:
 	UFlakGunComponent();
-	virtual void Aim(void (UGunComponent::*FireFunctionPtr)());
+	virtual void Aim(void (UGunComponent::*FireFunctionPtr)()) override;
+	virtual void SpawnBombs(USceneComponent *SpawnPoint) override;
 
-
-	
-	
+	FVector PredictedPlayerLocation;
 };
