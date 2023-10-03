@@ -14,6 +14,7 @@ AFlyingEnemyPawn::AFlyingEnemyPawn()
 void AFlyingEnemyPawn::BeginPlay()
 {
     Super::BeginPlay();
+    if(GameplayManager)
     PlayerActor = Cast<AActor>(GameplayManager->GetPlayerPawn());
     if (GunComponent)
     {
