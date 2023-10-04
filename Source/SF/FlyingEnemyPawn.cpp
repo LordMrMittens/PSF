@@ -82,6 +82,7 @@ void AFlyingEnemyPawn::Steer()
             MoveDirection.Y = PlayerDirection.Y * SteerFactor;
         }
     }
+   
 }
 
 void AFlyingEnemyPawn::Evade()
@@ -131,7 +132,10 @@ void AFlyingEnemyPawn::LeaveLevel()
 {
     GetWorldTimerManager().SetTimer(LeavingDelayTimerHandle, this, &AFlyingEnemyPawn::SteerOffLevel, HoldTimeBeforeLevelExit, false);
     SetLifeSpan(TimeToDestroyWhenLeaving);
-    
+        if(GunComponent){
+        GunComponent->DestroyComponent();
+        GunComponent->SetActive(false);
+    }
 }
 
 void AFlyingEnemyPawn::SteerOffLevel()
