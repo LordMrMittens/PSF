@@ -62,7 +62,7 @@ void AFlyingEnemyPawn::Steer()
 {
     if (LeavingLevel)
     {
-        SteerOffLevel();
+       // SteerOffLevel();
     }
     if (DetectObstacles()||PerformEvasiveManouevres)
     {
@@ -131,7 +131,7 @@ bool AFlyingEnemyPawn::DetectObstacles()
 void AFlyingEnemyPawn::LeaveLevel()
 {
     GetWorldTimerManager().SetTimer(LeavingDelayTimerHandle, this, &AFlyingEnemyPawn::SteerOffLevel, HoldTimeBeforeLevelExit, false);
-    SetLifeSpan(TimeToDestroyWhenLeaving);
+    //SetLifeSpan(TimeToDestroyWhenLeaving);
         if(GunComponent){
         GunComponent->DestroyComponent();
         GunComponent->SetActive(false);
@@ -141,16 +141,17 @@ void AFlyingEnemyPawn::LeaveLevel()
 void AFlyingEnemyPawn::SteerOffLevel()
 {
     LeavingLevel = true;
-    CurrentSpeed = Speed * 0.25f;
+    //CurrentSpeed = Speed * 0.25f;
     if (ObstacleAvoidanceDirection == 0)
     {
+        OnDeath();
         int32 RandomDirection = FMath::RandRange(0, 1);
         ZObstacleAvoidanceStrength = FMath::RandRange(0.4f, 0.7f);
         ObstacleAvoidanceDirection = (RandomDirection == 0) ? -1 : 1;
     }
     MoveDirection.Y = ObstacleAvoidanceDirection * ZObstacleAvoidanceStrength;
     MoveDirection.Z = 1 * ZObstacleAvoidanceStrength;
-
+    
 }
 
 void AFlyingEnemyPawn::OnOverlapStart(class UPrimitiveComponent *OverlappedComp, class AActor *OtherActor, class UPrimitiveComponent *OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult)

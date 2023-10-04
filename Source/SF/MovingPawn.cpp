@@ -76,8 +76,7 @@ void AMovingPawn::OnDeath()
         GunComponent->SetActive(false);
     }
     SetActorHiddenInGame(true);
-    SetActorEnableCollision(false);     
-    SetLifeSpan(3.0f);
+    SetActorEnableCollision(false);
 }
 
 void AMovingPawn::Move()
