@@ -22,6 +22,7 @@ void UGunComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	GameplayManager = Cast<AGameplayManager>(UGameplayStatics::GetActorOfClass(GetWorld(),AGameplayManager::StaticClass()));
+	bIsAlive = true;
 	if(GameplayManager==nullptr){
 		UE_LOG(LogTemp, Error, TEXT("GameplayManager is null"));
 	}
@@ -56,7 +57,7 @@ void UGunComponent::SetupGunComponent(FGunComponentConfig* GunConfig)
 
 void UGunComponent::FireLasers()
 {
-	if (AvailableAmmo != 0)
+	if (AvailableAmmo != 0 && bIsAlive)
 	{
 		if (DoubleLaser)
 		{
@@ -81,7 +82,7 @@ void UGunComponent::FireLasers()
 }
 void UGunComponent::FireBombs()
 {
-	if (AvailableBombs != 0)
+	if (AvailableBombs != 0 && bIsAlive)
 	{
 		SpawnBombs(SingleLaserSpawnPoint);
 		if (AvailableBombs > 0)
@@ -92,7 +93,8 @@ void UGunComponent::FireBombs()
 }
 void UGunComponent::SpawnBombs(USceneComponent *SpawnPoint)
 {
-	if(BombClass==nullptr){
+	if(bIsAlive)
+	{if(BombClass==nullptr){
 		UE_LOG(LogTemp, Error, TEXT("BombClass is null"));
 		return;
 	}
@@ -109,10 +111,11 @@ void UGunComponent::SpawnBombs(USceneComponent *SpawnPoint)
 	if (Bomb != nullptr)
 	{
 		Bomb->SetSpeed(Speed * ShotSpeedMultiplier);
-	}
+	}}
 }
 void UGunComponent::SpawnLaser(USceneComponent *SpawnPoint)
 {
+	if(bIsAlive){
 	struct FActorSpawnParameters params;
 	params.Owner = OwnerActor;
 	AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
@@ -122,11 +125,12 @@ void UGunComponent::SpawnLaser(USceneComponent *SpawnPoint)
 	if (Projectile != nullptr)
 	{
 		Projectile->SetSpeed(Speed * ShotSpeedMultiplier);
-	}
+	}}
 }
 
 void UGunComponent::Aim(void (UGunComponent::*FireFunctionPtr)())
 {
+	if(bIsAlive){
 	if (!GameplayManager)
     {
         UE_LOG(LogTemp, Error, TEXT("GameplayManager is null"));
@@ -144,7 +148,7 @@ void UGunComponent::Aim(void (UGunComponent::*FireFunctionPtr)())
     {
         SetRelativeRotation(NewRotation);
     }
-    (this->*FireFunctionPtr)();
+    (this->*FireFunctionPtr)();}
 }
 
 void UGunComponent::AddBomb(int32 BombsToAdd){

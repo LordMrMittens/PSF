@@ -14,6 +14,7 @@ AEnemyPawn::AEnemyPawn()
 void AEnemyPawn::OnDeath()
 {
     SpawnerComponent->SpawnObject(GetActorLocation(), GetActorRotation());
+    GunComponent->bIsAlive = false;
     Super::OnDeath();
 }
 

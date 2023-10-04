@@ -47,6 +47,11 @@ void AFlyingEnemyPawn::Move()
     CurrentSpeed = Speed * CalculateTargetVelocity();
 }
 
+void AFlyingEnemyPawn::OnDeath()
+{
+    Super::OnDeath();
+}
+
 void AFlyingEnemyPawn::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
@@ -125,6 +130,7 @@ bool AFlyingEnemyPawn::DetectObstacles()
 void AFlyingEnemyPawn::LeaveLevel()
 {
     GetWorldTimerManager().SetTimer(LeavingDelayTimerHandle, this, &AFlyingEnemyPawn::SteerOffLevel, HoldTimeBeforeLevelExit, false);
+    SetLifeSpan(TimeToDestroyWhenLeaving);
     
 }
 
@@ -140,10 +146,7 @@ void AFlyingEnemyPawn::SteerOffLevel()
     }
     MoveDirection.Y = ObstacleAvoidanceDirection * ZObstacleAvoidanceStrength;
     MoveDirection.Z = 1 * ZObstacleAvoidanceStrength;
-    TimeToDestroyWhenLeaving -= GetWorld()->GetDeltaSeconds();
-    if(TimeToDestroyWhenLeaving<0){
-        Destroy();
-    }
+
 }
 
 void AFlyingEnemyPawn::OnOverlapStart(class UPrimitiveComponent *OverlappedComp, class AActor *OtherActor, class UPrimitiveComponent *OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult)

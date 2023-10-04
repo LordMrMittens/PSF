@@ -42,6 +42,7 @@ void UPlayerGunComponent::SpawnLaser(USceneComponent *SpawnPoint)
 {
     struct FActorSpawnParameters params;
 	params.Owner = OwnerActor;
+	if(ActiveProjectileClass){
 	AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ActiveProjectileClass,
 																  SpawnPoint->GetComponentLocation(),
 																  this->GetComponentRotation(),
@@ -49,6 +50,6 @@ void UPlayerGunComponent::SpawnLaser(USceneComponent *SpawnPoint)
 	if (Projectile != nullptr)
 	{
 		Projectile->SetSpeed(Speed * ShotSpeedMultiplier);
-	}
+	}}
 }
 
