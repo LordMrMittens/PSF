@@ -62,7 +62,7 @@ void AFlyingEnemyPawn::Steer()
 {
     if (LeavingLevel)
     {
-       // SteerOffLevel();
+        SteerOffLevel();
     }
     if (DetectObstacles()||PerformEvasiveManouevres)
     {
@@ -141,7 +141,7 @@ void AFlyingEnemyPawn::LeaveLevel()
 void AFlyingEnemyPawn::SteerOffLevel()
 {
     LeavingLevel = true;
-    //CurrentSpeed = Speed * 0.25f;
+    CurrentSpeed = Speed * 0.25f;
     if (ObstacleAvoidanceDirection == 0)
     {
         OnDeath();
