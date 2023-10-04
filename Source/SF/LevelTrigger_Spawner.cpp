@@ -5,24 +5,29 @@
 #include "Kismet/GameplayStatics.h"
 #include "EnemyPawn.h"
 #include "SpawnerComponent.h"
+#include "GameplayManager.h"
+#include "ObjectPooler.h"
 
-
-void ALevelTrigger_Spawner::OnOverlapStart(AActor* OverlappedActor, AActor* OtherActor)
+void ALevelTrigger_Spawner::OnOverlapStart(AActor *OverlappedActor, AActor *OtherActor)
 {
-        if(OtherActor == UGameplayStatics::GetPlayerPawn(GetWorld(),0)){
-            for (AActor* SpawnPoint : SpawnPoints)
+    if (OtherActor == UGameplayStatics::GetPlayerPawn(GetWorld(), 0))
     {
-        SpawnEnemy(SpawnPoint->GetActorLocation(), OtherActor->GetActorRotation());
-    }
+        for (AActor *SpawnPoint : SpawnPoints)
+        {
+            SpawnEnemy(SpawnPoint->GetActorLocation(), OtherActor->GetActorRotation());
+        }
     }
 }
 void ALevelTrigger_Spawner::SpawnEnemy(FVector LocationToSpawn, FRotator RotationToSpawn)
 {
-    AEnemyPawn* Enemy = GetWorld()->SpawnActor<AEnemyPawn>(EnemyClass,
-												LocationToSpawn,
-												RotationToSpawn
-												);
-    if (Enemy && NumberOfEnemiesSpawningPowerUps > 0)
+    AEnemyPawn* Enemy = Cast<AEnemyPawn>(GameplayManager->FlyingEnemyObjectPooler->GetObject(LocationToSpawn, RotationToSpawn));
+    if(Enemy == nullptr)
+    {
+        UE_LOG(LogTemp, Error, TEXT("Enemy is null"));
+        return;
+    }
+    Enemy->ResetPawn();
+    if (NumberOfEnemiesSpawningPowerUps > 0)
     {
         UE_LOG(LogTemp, Warning, TEXT("OneEnemy Should Spawn PowerUp"));
         Enemy->GetSpawnerComponent()->SetShouldSpawn(true);

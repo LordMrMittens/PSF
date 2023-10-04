@@ -4,6 +4,8 @@
 #include "GameplayManager.h"
 #include "Kismet/GameplayStatics.h"
 #include "PlayerPawn.h"
+#include "ObjectPooler.h"
+#include "FlyingEnemyPawn.h"
 
 // Sets default values
 AGameplayManager::AGameplayManager()
@@ -17,12 +19,16 @@ AGameplayManager::AGameplayManager()
 void AGameplayManager::BeginPlay()
 {
 	Super::BeginPlay();
-	
+    FlyingEnemyObjectPooler = NewObject<UObjectPooler>();
+    FlyingEnemyObjectPooler->ObjectClass = PoolActorClass;
+    FlyingEnemyObjectPooler->PoolSize = 10;
+    FlyingEnemyObjectPooler->Initialize(GetWorld());
 }
 
 // Called every frame
 void AGameplayManager::Tick(float DeltaTime)
 {
+	
 	Super::Tick(DeltaTime);
 	if(PlayerPawn==nullptr){
 		PlayerPawn = Cast<APlayerPawn>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));

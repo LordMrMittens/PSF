@@ -7,6 +7,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "GameplayManager.h"
 #include "GunComponent.h"
+#include "ObjectPooler.h"
 
 // Sets default values
 AMovingPawn::AMovingPawn()
@@ -145,5 +146,10 @@ void AMovingPawn::CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& Move
         MovementDelta.Y = 100;
         MoveDirection.Y =1;
     }
+}
+
+void AMovingPawn::ResetPawn()
+{
+    //Reset health, gun ammo, etc.
 }
 

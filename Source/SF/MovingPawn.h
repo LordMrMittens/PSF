@@ -31,6 +31,7 @@ protected:
 	virtual void SetLevelBoundary();
 	virtual void LimitMovement(FVector CurrentActorLocation, FVector& MovementDelta);
 	virtual void CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& MovementDelta);
+	
 	UFUNCTION()
 	virtual void OnDeath();
 
@@ -52,7 +53,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	virtual void ResetPawn();
 	float Speed;
 	float CurrentSpeed;
 	FVector MoveDirection;

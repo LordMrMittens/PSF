@@ -6,6 +6,7 @@
 #include "LevelTriggerVolume.h"
 #include "LevelTrigger_Spawner.generated.h"
 
+class AGameplayManager;
 /**
  * 
  */
@@ -24,6 +25,9 @@ UPROPERTY(EditAnywhere, Category = "Spawning")
 TSubclassOf<AActor> EnemyClass;
 UPROPERTY(EditAnywhere, Category="PowerUps")
 int32 NumberOfEnemiesSpawningPowerUps = 1;
+
+UPROPERTY()
+AGameplayManager* GameplayManager;
 
 void SpawnEnemy(FVector LocationToSpawn, FRotator RotationToSpawn);
 

@@ -7,6 +7,8 @@
 #include "GameplayManager.generated.h"
 
 class APlayerPawn;
+class UObjectPooler;
+class AFlyingEnemyPawn;
 
 UCLASS()
 class SF_API AGameplayManager : public AActor
@@ -31,7 +33,10 @@ public:
 	APlayerPawn* GetPlayerPawn(){
 		return PlayerPawn;
 	}
-
+	UPROPERTY()
+	UObjectPooler* FlyingEnemyObjectPooler;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	TSubclassOf<AActor> PoolActorClass;
 private:
 	//Player Related Variables
 	UPROPERTY(VisibleAnywhere, Category = "Player")
