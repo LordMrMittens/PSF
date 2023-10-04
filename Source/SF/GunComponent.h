@@ -56,6 +56,7 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+	UPROPERTY()
 	AGameplayManager* GameplayManager;
 	bool bUsesWorldRotationWhenAiming= false;
 
@@ -78,9 +79,14 @@ public:
 	void AddBomb(int32 BombsToAdd);
 	bool bIsAlive = true;
 
+
+	UPROPERTY()
 	USceneComponent *SingleLaserSpawnPoint;
+	UPROPERTY()
 	TArray<USceneComponent *> LaserSpawnPoints;
+	UPROPERTY()
 	AActor *OwnerActor;
+	UPROPERTY()
 	AActor *PlayerActor;
 
 
@@ -93,11 +99,11 @@ public:
 	float ShotLeadErrorMin = 1.5f;
 
 	float ShotLeadErrorMax = 1.5f; // 1 for dead on player
-
+	UPROPERTY()
 	TSubclassOf<AProjectile> ProjectileClass;
-
+	UPROPERTY()
 	TSubclassOf<AProjectile> SecondaryProjectileClass;
-
+	UPROPERTY()
 	TSubclassOf<ABomb> BombClass;
 
 	int32 AvailableAmmo = -1; //negative number for infinite

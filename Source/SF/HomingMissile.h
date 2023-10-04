@@ -32,7 +32,7 @@ class SF_API AHomingMissile : public AProjectile
 	float MinTrackingDistance = 500.0f;
 	bool bIsHoming = true;
 	private:
-	AGameplayManager* GameplayManager = nullptr;
+	UPROPERTY()
 	UHealthComponent* HealthComponent = nullptr;
 	UPROPERTY(EditAnywhere, Category = "Health")
 	FHealthComponentConfig HealthConfiguration;

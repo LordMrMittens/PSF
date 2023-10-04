@@ -131,11 +131,7 @@ bool AFlyingEnemyPawn::DetectObstacles()
 void AFlyingEnemyPawn::LeaveLevel()
 {
     GetWorldTimerManager().SetTimer(LeavingDelayTimerHandle, this, &AFlyingEnemyPawn::SteerOffLevel, HoldTimeBeforeLevelExit, false);
-    //SetLifeSpan(TimeToDestroyWhenLeaving);
-        if(GunComponent){
-        GunComponent->DestroyComponent();
-        GunComponent->SetActive(false);
-    }
+    GetWorldTimerManager().SetTimer(DeactivateTimerHandle, this, &AFlyingEnemyPawn::DeactivatePawn, TimeToDestroyWhenLeaving, false);
 }
 
 void AFlyingEnemyPawn::SteerOffLevel()

@@ -38,6 +38,7 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Evasion")
 	float ObstacleDetectionFrequency = 1;
+	UPROPERTY()
 	FTimerHandle ObstacleDetectionTimerHandle;
 
 	UPROPERTY(EditAnywhere, Category = "Evasion")
@@ -76,7 +77,7 @@ private:
 	UFUNCTION()
 	void LeaveLevel();
 	void SteerOffLevel();
-
+	
 
 	UFUNCTION()
 	void OnOverlapStart(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

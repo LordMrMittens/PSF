@@ -46,6 +46,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Components")
 	UGunComponent *GunComponent;
 
+	void DeactivatePawn();
+	FTimerHandle DeactivateTimerHandle;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -72,6 +75,7 @@ public:
 
 	FVector MinBoundary;
     FVector MaxBoundary;
+	UPROPERTY()
 	AGameplayManager* GameplayManager;
 
 };

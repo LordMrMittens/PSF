@@ -69,13 +69,13 @@ void AMovingPawn::Tick(float DeltaTime)
 }
 void AMovingPawn::OnDeath()
 {
-    UE_LOG(LogTemp, Error, TEXT("Death"));
-    GunComponent->bIsAlive = false;
-        if(GunComponent){
-        GunComponent->DestroyComponent();
-        GunComponent->SetActive(false);
-    }
-    SetActorHiddenInGame(true);
+
+    DeactivatePawn();
+}
+
+void AMovingPawn::DeactivatePawn()
+{
+        SetActorHiddenInGame(true);
     SetActorEnableCollision(false);
 }
 
