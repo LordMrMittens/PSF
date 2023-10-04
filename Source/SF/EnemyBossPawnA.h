@@ -93,10 +93,13 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Tertiary gun Behaviour")
 	float TertiaryGunShotFrequency;
 	UPROPERTY(EditAnywhere, Category = "Tertiary gun Behaviour")
-	float TertiaryGunWarningDuration;
+	int32 TertiaryGunShotsInBurst =5;
+	int32 TertiaryGunShotsFired = 0;
 	UPROPERTY(EditAnywhere, Category = "Tertiary gun Behaviour")
-	float TertiaryGunSutainedDuration;
+	float TimeBetweenMissiles =.5f;
+	float TimeOfLastMissile = 0;
 	float TertiaryGunTimeOfLastShot = 0;
+	bool bIsAttackingWithMissiles = false;
 		UPROPERTY(EditAnywhere, Category = "Tertiary gun Behaviour")
 	bool bShouldTertiaryGunFire = true;
 

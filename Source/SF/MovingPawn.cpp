@@ -70,7 +70,10 @@ void AMovingPawn::Tick(float DeltaTime)
 void AMovingPawn::OnDeath()
 {
     UE_LOG(LogTemp, Error, TEXT("Death"));
-    Destroy();
+    GunComponent->bIsAlive = false;
+    SetActorHiddenInGame(true);
+    SetActorEnableCollision(false);
+    SetLifeSpan(3.0f);
 }
 
 void AMovingPawn::Move()
