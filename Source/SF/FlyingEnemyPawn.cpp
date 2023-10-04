@@ -140,7 +140,6 @@ void AFlyingEnemyPawn::SteerOffLevel()
     CurrentSpeed = Speed * 0.25f;
     if (ObstacleAvoidanceDirection == 0)
     {
-        OnDeath();
         int32 RandomDirection = FMath::RandRange(0, 1);
         ZObstacleAvoidanceStrength = FMath::RandRange(0.4f, 0.7f);
         ObstacleAvoidanceDirection = (RandomDirection == 0) ? -1 : 1;
