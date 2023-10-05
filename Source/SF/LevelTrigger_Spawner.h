@@ -26,8 +26,7 @@ TSubclassOf<AActor> EnemyClass;
 UPROPERTY(EditAnywhere, Category="PowerUps")
 int32 NumberOfEnemiesSpawningPowerUps = 1;
 
-UPROPERTY()
-AGameplayManager* GameplayManager;
+
 
 void SpawnEnemy(FVector LocationToSpawn, FRotator RotationToSpawn);
 

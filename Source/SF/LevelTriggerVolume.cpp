@@ -2,11 +2,15 @@
 
 
 #include "LevelTriggerVolume.h"
+#include "GameplayManager.h"
+#include "Kismet/GameplayStatics.h"
 
 void ALevelTriggerVolume::BeginPlay()
 {
     Super::BeginPlay();
     OnActorBeginOverlap.AddDynamic(this, &ALevelTriggerVolume::OnOverlapStart);
+    GameplayManager = Cast<AGameplayManager>(UGameplayStatics::GetActorOfClass(GetWorld(),AGameplayManager::StaticClass()));
+
 }
 
 

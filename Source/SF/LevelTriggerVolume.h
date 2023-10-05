@@ -6,6 +6,7 @@
 #include "Engine/TriggerBox.h"
 #include "LevelTriggerVolume.generated.h"
 
+class AGameplayManager;
 /**
  * 
  */
@@ -20,6 +21,9 @@ UFUNCTION()
 virtual void OnOverlapStart(AActor* OverlappedActor, AActor* OtherActor);
 
 public:
+
+UPROPERTY()
+AGameplayManager* GameplayManager;
 
 private:
 

@@ -58,6 +58,14 @@ void AFlyingEnemyPawn::Tick(float DeltaTime)
     Steer();
 }
 
+void AFlyingEnemyPawn::ResetPawn()
+{
+    Super::ResetPawn();
+    LeavingLevel = false;
+    PerformEvasiveManouevres = false;
+    CanSteerTowardsPlayer = true;
+}
+
 void AFlyingEnemyPawn::Steer()
 {
     if (LeavingLevel)

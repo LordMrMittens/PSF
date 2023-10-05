@@ -150,6 +150,14 @@ void AMovingPawn::CheckIfOutOfBounds(FVector CurrentActorLocation, FVector& Move
 
 void AMovingPawn::ResetPawn()
 {
-    //Reset health, gun ammo, etc.
+    if(HealthComponent)
+    {
+        HealthComponent->SetUpHealthComponent(&HealthConfiguration);
+    }
+    if(GunComponent)
+    {
+        GunComponent->SetupGunComponent(&GunConfiguration);
+        GunComponent->bIsAlive = true;
+    }
 }
 
