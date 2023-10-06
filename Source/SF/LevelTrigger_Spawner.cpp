@@ -20,6 +20,7 @@ void ALevelTrigger_Spawner::OnOverlapStart(AActor *OverlappedActor, AActor *Othe
 }
 void ALevelTrigger_Spawner::SpawnEnemy(FVector LocationToSpawn, FRotator RotationToSpawn)
 {
+    /*
     AEnemyPawn* Enemy = Cast<AEnemyPawn>(GameplayManager->FlyingEnemyObjectPooler->GetObject(LocationToSpawn, RotationToSpawn));
     if(Enemy == nullptr)
     {
@@ -33,5 +34,5 @@ void ALevelTrigger_Spawner::SpawnEnemy(FVector LocationToSpawn, FRotator Rotatio
         Enemy->GetSpawnerComponent()->SetShouldSpawn(true);
         NumberOfEnemiesSpawningPowerUps--;
     }
-    
+    */
 }

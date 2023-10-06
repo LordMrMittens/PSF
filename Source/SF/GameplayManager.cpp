@@ -19,14 +19,7 @@ AGameplayManager::AGameplayManager()
 void AGameplayManager::BeginPlay()
 {
 	Super::BeginPlay();
-	CreateObjectPool(FlyingEnemyObjectPooler, FlyingEnemyPoolActorClass, FlyingEnemyPoolSize);
-	CreateObjectPool(LaserObjectPooler, LaserPoolActorClass, LaserPoolSize);
-	CreateObjectPool(PowerLaserObjectPooler, PowerLaserPoolActorClass, PowerLaserPoolSize);
-	CreateObjectPool(EnemyLaserObjectPooler, EnemyLaserPoolActorClass, EnemyLaserPoolSize);
-	CreateObjectPool(HomingMissileObjectPooler, HomingMissilePoolActorClass, HomingMissilePoolSize);
-	CreateObjectPool(EnemyFlakObjectPooler, EnemyFlakPoolActorClass, EnemyFlakPoolSize);
-	CreateObjectPool(BombsObjectPooler, BombsPoolActorClass, BombsPoolSize);
-
+	CreateObjectPools();
 }
 
 // Called every frame
@@ -47,11 +40,15 @@ void AGameplayManager::UpdatePlayerLocation()
 	PlayerLocation = PlayerPawn->GetActorLocation();
 }
 
-void AGameplayManager::CreateObjectPool(UObjectPooler*& OutObjectPooler, TSubclassOf<AActor> PoolActorClass, int32 PoolSize)
+void AGameplayManager::CreateObjectPools()
 {
-    OutObjectPooler = NewObject<UObjectPooler>();
-    OutObjectPooler->ObjectClass = PoolActorClass;
-    OutObjectPooler->PoolSize = PoolSize;
-    OutObjectPooler->Initialize(GetWorld());
+    for (auto& Pair : ObjectPoolerProperties)
+    {
+        FObjectPoolerProperties& Properties = Pair.Value;
+        Properties.ObjectPooler = NewObject<UObjectPooler>();
+        Properties.ObjectPooler->ObjectClass = Pair.Key;
+        Properties.ObjectPooler->PoolSize = Properties.PoolSize;
+        Properties.ObjectPooler->Initialize(GetWorld());
+    }
 }
 

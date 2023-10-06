@@ -10,6 +10,20 @@ class APlayerPawn;
 class UObjectPooler;
 class AFlyingEnemyPawn;
 
+USTRUCT(BlueprintType)
+struct FObjectPoolerProperties
+{
+    GENERATED_BODY()
+
+	public:
+
+    UPROPERTY(EditAnywhere, Category = "Pooling")
+    UObjectPooler* ObjectPooler;
+
+    UPROPERTY(EditAnywhere, Category = "Pooling")
+    int32 PoolSize;
+};
+
 UCLASS()
 class SF_API AGameplayManager : public AActor
 {
@@ -33,6 +47,8 @@ public:
 	APlayerPawn* GetPlayerPawn(){
 		return PlayerPawn;
 	}
+	
+	/*
 	UPROPERTY(EditAnywhere, Category = "Pooling")
 	UObjectPooler* FlyingEnemyObjectPooler;
 	UPROPERTY(EditAnywhere, Category = "Pooling")
@@ -75,6 +91,10 @@ public:
 	TSubclassOf<AActor> BombsPoolActorClass;
 	UPROPERTY(EditAnywhere, Category = "Pooling")
 	int32 BombsPoolSize;
+*/
+
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	TMap<TSubclassOf<AActor>, FObjectPoolerProperties> ObjectPoolerProperties;
 	
 private:
 	//Player Related Variables
@@ -84,6 +104,6 @@ private:
 	FVector PlayerLocation;
 
 	void UpdatePlayerLocation();
-	void CreateObjectPool(UObjectPooler*& OutObjectPooler, TSubclassOf<AActor> PoolActorClass, int32 PoolSize);
+	void CreateObjectPools();
 
 };
