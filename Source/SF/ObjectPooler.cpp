@@ -8,20 +8,15 @@ AActor* UObjectPooler::GetObject(FVector Location, FRotator Rotation)
 {
     for (AActor* Object : ObjectPool)
     {
-        UE_LOG(LogTemp, Display, TEXT("Looping Actor"));
-        UE_LOG(LogTemp, Error, TEXT("Object is hidden %s"), Object->IsHidden() ? TEXT("true") : TEXT("false"));
-        UE_LOG(LogTemp, Error, TEXT("Object is being destroyed %s"), Object->IsActorBeingDestroyed() ? TEXT("true") : TEXT("false"));
         if (!Object->IsActorBeingDestroyed() && Object->IsHidden())
         {
             Object->SetActorLocation(Location);
             Object->SetActorRotation(Rotation);
             Object->SetActorHiddenInGame(false);
             Object->SetActorEnableCollision(true);
-            UE_LOG(LogTemp, Display, TEXT("Returning Object %s"), *Object->GetName());
             return Object;
         }
     }
-    UE_LOG(LogTemp, Display, TEXT("Returning null"),);
     return nullptr;
 }
 

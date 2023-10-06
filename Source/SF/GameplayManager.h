@@ -33,10 +33,49 @@ public:
 	APlayerPawn* GetPlayerPawn(){
 		return PlayerPawn;
 	}
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, Category = "Pooling")
 	UObjectPooler* FlyingEnemyObjectPooler;
 	UPROPERTY(EditAnywhere, Category = "Pooling")
-	TSubclassOf<AActor> PoolActorClass;
+	TSubclassOf<AActor> FlyingEnemyPoolActorClass;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	int32 FlyingEnemyPoolSize;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	UObjectPooler* LaserObjectPooler;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	TSubclassOf<AActor> LaserPoolActorClass;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	int32 LaserPoolSize;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	UObjectPooler* PowerLaserObjectPooler;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	TSubclassOf<AActor> PowerLaserPoolActorClass;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	int32 PowerLaserPoolSize;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	UObjectPooler* EnemyLaserObjectPooler;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	TSubclassOf<AActor> EnemyLaserPoolActorClass;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	int32 EnemyLaserPoolSize;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	UObjectPooler* HomingMissileObjectPooler;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	TSubclassOf<AActor> HomingMissilePoolActorClass;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	int32 HomingMissilePoolSize;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	UObjectPooler* EnemyFlakObjectPooler;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	TSubclassOf<AActor> EnemyFlakPoolActorClass;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	int32 EnemyFlakPoolSize;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	UObjectPooler* BombsObjectPooler;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	TSubclassOf<AActor> BombsPoolActorClass;
+	UPROPERTY(EditAnywhere, Category = "Pooling")
+	int32 BombsPoolSize;
+	
 private:
 	//Player Related Variables
 	UPROPERTY(VisibleAnywhere, Category = "Player")
@@ -45,5 +84,6 @@ private:
 	FVector PlayerLocation;
 
 	void UpdatePlayerLocation();
+	void CreateObjectPool(UObjectPooler*& OutObjectPooler, TSubclassOf<AActor> PoolActorClass, int32 PoolSize);
 
 };
