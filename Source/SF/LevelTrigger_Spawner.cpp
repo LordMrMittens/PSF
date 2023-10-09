@@ -20,19 +20,28 @@ void ALevelTrigger_Spawner::OnOverlapStart(AActor *OverlappedActor, AActor *Othe
 }
 void ALevelTrigger_Spawner::SpawnEnemy(FVector LocationToSpawn, FRotator RotationToSpawn)
 {
-    /*
-    AEnemyPawn* Enemy = Cast<AEnemyPawn>(GameplayManager->FlyingEnemyObjectPooler->GetObject(LocationToSpawn, RotationToSpawn));
-    if(Enemy == nullptr)
+    if (GameplayManager != nullptr)
     {
-        UE_LOG(LogTemp, Error, TEXT("Enemy is null"));
-        return;
+        if (GameplayManager->ObjectPoolerProperties.Contains(EnemyClass))
+        {
+            UE_LOG(LogTemp, Warning, TEXT("EnemyClass is in ObjectPoolerProperties"));
+            AEnemyPawn *Enemy = Cast<AEnemyPawn>(GameplayManager->ObjectPoolerProperties[EnemyClass].ObjectPooler->GetObject(LocationToSpawn, RotationToSpawn));
+            if (Enemy == nullptr)
+            {
+                UE_LOG(LogTemp, Error, TEXT("Enemy is null"));
+                return;
+            }
+            Enemy->ResetPawn();
+            if (NumberOfEnemiesSpawningPowerUps > 0)
+            {
+                UE_LOG(LogTemp, Warning, TEXT("OneEnemy Should Spawn PowerUp"));
+                Enemy->GetSpawnerComponent()->SetShouldSpawn(true);
+                NumberOfEnemiesSpawningPowerUps--;
+            }
+        }
+        else
+        {
+            UE_LOG(LogTemp, Warning, TEXT("EnemyClass is not in ObjectPoolerProperties"));
+        }
     }
-    Enemy->ResetPawn();
-    if (NumberOfEnemiesSpawningPowerUps > 0)
-    {
-        UE_LOG(LogTemp, Warning, TEXT("OneEnemy Should Spawn PowerUp"));
-        Enemy->GetSpawnerComponent()->SetShouldSpawn(true);
-        NumberOfEnemiesSpawningPowerUps--;
-    }
-    */
 }

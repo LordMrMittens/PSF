@@ -34,7 +34,6 @@ void AGameplayManager::Tick(float DeltaTime)
 	}
 
 }
-
 void AGameplayManager::UpdatePlayerLocation()
 {
 	PlayerLocation = PlayerPawn->GetActorLocation();
