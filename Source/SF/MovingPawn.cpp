@@ -66,7 +66,8 @@ void AMovingPawn::BeginPlay()
 void AMovingPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-    Move();
+    if(bIsActive){
+    Move();}
 }
 void AMovingPawn::OnDeath()
 {
@@ -76,8 +77,11 @@ void AMovingPawn::OnDeath()
 
 void AMovingPawn::DeactivatePawn()
 {
+    UE_LOG(LogTemp, Error, TEXT("Pawn Deactivated %s"), *GetName());
         SetActorHiddenInGame(true);
     SetActorEnableCollision(false);
+    bIsActive = false;
+    GunComponent->bIsAlive = false;
 }
 
 void AMovingPawn::Move()
@@ -159,5 +163,6 @@ void AMovingPawn::ResetPawn()
         GunComponent->SetupGunComponent(&GunConfiguration);
         GunComponent->bIsAlive = true;
     }
+    bIsActive = true;
 }
 

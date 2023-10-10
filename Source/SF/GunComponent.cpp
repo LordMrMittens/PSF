@@ -22,7 +22,6 @@ void UGunComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	GameplayManager = Cast<AGameplayManager>(UGameplayStatics::GetActorOfClass(GetWorld(),AGameplayManager::StaticClass()));
-	bIsAlive = true;
 	if(GameplayManager==nullptr){
 		UE_LOG(LogTemp, Error, TEXT("GameplayManager is null"));
 	}

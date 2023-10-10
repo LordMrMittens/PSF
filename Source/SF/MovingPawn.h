@@ -49,11 +49,13 @@ protected:
 
 	void DeactivatePawn();
 	FTimerHandle DeactivateTimerHandle;
+	bool bIsActive = false;
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual void ResetPawn();
+	void SetActive(bool IsActive) { bIsActive = IsActive; }
 	float Speed;
 	float CurrentSpeed;
 	FVector MoveDirection;

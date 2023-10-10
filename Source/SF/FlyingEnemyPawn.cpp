@@ -50,12 +50,18 @@ void AFlyingEnemyPawn::Move()
 void AFlyingEnemyPawn::OnDeath()
 {
     Super::OnDeath();
+    GetWorldTimerManager().ClearAllTimersForObject(this); //this might cause timer issues
 }
 
 void AFlyingEnemyPawn::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    Steer();
+    if (bIsActive)
+    {
+        Steer();
+    }
+    
+    
 }
 
 void AFlyingEnemyPawn::ResetPawn()
@@ -64,6 +70,7 @@ void AFlyingEnemyPawn::ResetPawn()
     LeavingLevel = false;
     PerformEvasiveManouevres = false;
     CanSteerTowardsPlayer = true;
+    
 }
 
 void AFlyingEnemyPawn::Steer()
