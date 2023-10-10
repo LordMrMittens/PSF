@@ -20,11 +20,11 @@ void ALevelTrigger_Spawner::OnOverlapStart(AActor *OverlappedActor, AActor *Othe
 }
 void ALevelTrigger_Spawner::SpawnEnemy(FVector LocationToSpawn, FRotator RotationToSpawn)
 {
+    UE_LOG(LogTemp, Display, TEXT("SpawnEnemy"));
     if (GameplayManager != nullptr)
     {
         if (GameplayManager->ObjectPoolerProperties.Contains(EnemyClass))
         {
-            UE_LOG(LogTemp, Warning, TEXT("EnemyClass is in ObjectPoolerProperties"));
             AEnemyPawn *Enemy = Cast<AEnemyPawn>(GameplayManager->ObjectPoolerProperties[EnemyClass].ObjectPooler->GetObject(LocationToSpawn, RotationToSpawn));
             if (Enemy == nullptr)
             {
@@ -41,7 +41,7 @@ void ALevelTrigger_Spawner::SpawnEnemy(FVector LocationToSpawn, FRotator Rotatio
         }
         else
         {
-            UE_LOG(LogTemp, Warning, TEXT("EnemyClass is not in ObjectPoolerProperties"));
+            UE_LOG(LogTemp, Warning, TEXT("Class is not in ObjectPoolerProperties"));
         }
     }
 }

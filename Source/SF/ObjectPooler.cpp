@@ -6,7 +6,7 @@
 
 AActor* UObjectPooler::GetObject(FVector Location, FRotator Rotation)
 {
-    for (AActor* Object : ObjectPool)
+    for (AActor *Object : ObjectPool)
     {
         if (!Object->IsActorBeingDestroyed() && Object->IsHidden())
         {
@@ -20,7 +20,7 @@ AActor* UObjectPooler::GetObject(FVector Location, FRotator Rotation)
     return nullptr;
 }
 
-void UObjectPooler::ReturnObject(AActor* Object)
+void UObjectPooler::ReturnObject(AActor *Object)
 {
     Object->SetActorHiddenInGame(true);
     Object->SetActorEnableCollision(false);
