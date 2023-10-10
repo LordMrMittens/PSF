@@ -134,10 +134,10 @@ void ALandEnemyPawn::AimAndShoot()
 {
     if (IsPlayerInRange())
     {
-        GunComponent->bIsAlive = true;
+        GunComponent->bIsActive = true;
         GunComponent->Aim(&UGunComponent::FireLasers);
     } else{
-        GunComponent->bIsAlive = false;
+        GunComponent->bIsActive = false;
     }
 }
 

@@ -77,7 +77,7 @@ public:
 	virtual void Aim(void (UGunComponent::*FireFunctionPtr)());
 
 	void AddBomb(int32 BombsToAdd);
-	bool bIsAlive = false;
+	bool bIsActive = false;
 
 
 	UPROPERTY()

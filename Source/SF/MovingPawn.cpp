@@ -81,7 +81,7 @@ void AMovingPawn::DeactivatePawn()
         SetActorHiddenInGame(true);
     SetActorEnableCollision(false);
     bIsActive = false;
-    GunComponent->bIsAlive = false;
+    GunComponent->bIsActive = false;
 }
 
 void AMovingPawn::Move()
@@ -161,7 +161,7 @@ void AMovingPawn::ResetPawn()
     if(GunComponent)
     {
         GunComponent->SetupGunComponent(&GunConfiguration);
-        GunComponent->bIsAlive = true;
+        GunComponent->bIsActive = true;
     }
     bIsActive = true;
 }

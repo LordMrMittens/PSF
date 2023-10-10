@@ -56,7 +56,7 @@ void UGunComponent::SetupGunComponent(FGunComponentConfig* GunConfig)
 
 void UGunComponent::FireLasers()
 {
-	if (AvailableAmmo != 0 && bIsAlive)
+	if (AvailableAmmo != 0 && bIsActive)
 	{
 		if (DoubleLaser)
 		{
@@ -74,6 +74,7 @@ void UGunComponent::FireLasers()
 			AvailableAmmo--;
 			if (AvailableAmmo == 0)
 			{
+				UE_LOG(LogTemp, Warning, TEXT("Pawn %s is out of ammo"), *GetOwner()->GetName());
 				OutOfAmmoDelegate.Broadcast();
 			}
 		}
@@ -81,7 +82,7 @@ void UGunComponent::FireLasers()
 }
 void UGunComponent::FireBombs()
 {
-	if (AvailableBombs != 0 && bIsAlive)
+	if (AvailableBombs != 0 && bIsActive)
 	{
 		SpawnBombs(SingleLaserSpawnPoint);
 		if (AvailableBombs > 0)
@@ -92,7 +93,7 @@ void UGunComponent::FireBombs()
 }
 void UGunComponent::SpawnBombs(USceneComponent *SpawnPoint)
 {
-	if(bIsAlive)
+	if(bIsActive)
 	{if(BombClass==nullptr){
 		UE_LOG(LogTemp, Error, TEXT("BombClass is null"));
 		return;
@@ -114,7 +115,7 @@ void UGunComponent::SpawnBombs(USceneComponent *SpawnPoint)
 }
 void UGunComponent::SpawnLaser(USceneComponent *SpawnPoint)
 {
-	if(bIsAlive){
+	if(bIsActive){
 	struct FActorSpawnParameters params;
 	params.Owner = OwnerActor;
 	AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
@@ -129,7 +130,7 @@ void UGunComponent::SpawnLaser(USceneComponent *SpawnPoint)
 
 void UGunComponent::Aim(void (UGunComponent::*FireFunctionPtr)())
 {
-	if(bIsAlive){
+	if(bIsActive){
 	if (!GameplayManager)
     {
         UE_LOG(LogTemp, Error, TEXT("GameplayManager is null"));

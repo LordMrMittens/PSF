@@ -116,7 +116,7 @@ void APlayerPawn::SetUpPlayerPawn()
         GunConfiguration._LaserSpawnPoints = LaserSpawnPoints;
         GunConfiguration._Speed = Speed;
         PlayerGunComponent->SetupGunComponent(&GunConfiguration);
-        PlayerGunComponent->bIsAlive = true;
+        PlayerGunComponent->bIsActive = true;
     }
     BoostComponent = Cast<UBoostComponent>(GetComponentByClass(UBoostComponent::StaticClass()));
     if(BoostComponent != nullptr){
