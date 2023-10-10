@@ -2,7 +2,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\Bomb.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -10,7 +10,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\Bomb.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -18,7 +18,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\BombEnemyFlak.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -26,7 +26,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\BombEnemyFlak.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -34,7 +34,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\BoostComponent.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -42,7 +42,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\BoostComponent.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -50,7 +50,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\BossEnemyPawn.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -58,7 +58,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\BossEnemyPawn.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -66,7 +66,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\EnemyBossPawnA.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -74,7 +74,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\EnemyBossPawnA.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -82,7 +82,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\EnemyPawn.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -90,7 +90,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\EnemyPawn.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -98,7 +98,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\Explosion.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -106,7 +106,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\Explosion.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -114,7 +114,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\Explosion_Damaging.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -122,7 +122,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\Explosion_Damaging.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -130,7 +130,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\FlakGunComponent.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -138,7 +138,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\FlakGunComponent.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -146,7 +146,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\FlyingEnemyPawn.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -154,7 +154,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\FlyingEnemyPawn.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -162,7 +162,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\GameplayManager.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -170,7 +170,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\GameplayManager.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -178,7 +178,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\GunComponent.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -186,7 +186,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\GunComponent.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -194,7 +194,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\HealthComponent.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -202,7 +202,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\HealthComponent.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -210,7 +210,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\HomingMissile.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -218,7 +218,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\HomingMissile.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -226,7 +226,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\InputDataAsset.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -234,7 +234,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\InputDataAsset.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -242,7 +242,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\LandEnemyPawn.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -250,7 +250,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\LandEnemyPawn.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -258,7 +258,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\LevelTriggerVolume.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -266,7 +266,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\LevelTriggerVolume.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -274,7 +274,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\LevelTrigger_Spawner.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -282,7 +282,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\LevelTrigger_Spawner.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -290,7 +290,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\Mover.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -298,7 +298,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\Mover.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -306,7 +306,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\MovingPawn.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -314,7 +314,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\MovingPawn.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -322,7 +322,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\ObjectPooler.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -330,7 +330,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\ObjectPooler.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -338,7 +338,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\Pickup.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -346,7 +346,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\Pickup.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -354,7 +354,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\PlayerGunComponent.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -362,7 +362,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\PlayerGunComponent.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -370,7 +370,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\PlayerPawn.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -378,7 +378,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\PlayerPawn.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -386,7 +386,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\Projectile.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -394,7 +394,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\Projectile.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -402,7 +402,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\SF.Build.cs",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -410,7 +410,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\SF.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -418,7 +418,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\SF.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -426,7 +426,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\SFGameModeBase.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -434,7 +434,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\SFGameModeBase.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -442,7 +442,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\SpawnerComponent.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
@@ -450,7 +450,7 @@
 	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\SpawnerComponent.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_SF\\SF.261.rsp"
 		],
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
