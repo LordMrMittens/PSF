@@ -40,6 +40,7 @@ void ALandEnemyPawn::Tick(float DeltaTime)
     Super::Tick(DeltaTime);
     if (bStayInPosition == false)
     {
+        bIsActive = IsPlayerInRange();
         Move();
     }
 }
@@ -133,10 +134,11 @@ void ALandEnemyPawn::AimAndShoot()
 {
     if (IsPlayerInRange())
     {
+        GunComponent->bIsAlive = true;
         GunComponent->Aim(&UGunComponent::FireLasers);
+    } else{
+        GunComponent->bIsAlive = false;
     }
-    
-    
 }
 
 
