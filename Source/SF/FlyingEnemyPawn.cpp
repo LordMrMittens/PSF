@@ -70,7 +70,7 @@ void AFlyingEnemyPawn::ResetPawn()
     LeavingLevel = false;
     PerformEvasiveManouevres = false;
     CanSteerTowardsPlayer = true;
-    
+    ResetEvasion();
 }
 
 void AFlyingEnemyPawn::Steer()
@@ -79,7 +79,7 @@ void AFlyingEnemyPawn::Steer()
     {
         SteerOffLevel();
     }
-    if (DetectObstacles()||PerformEvasiveManouevres)
+    if (DetectObstacles() || PerformEvasiveManouevres)
     {
         Evade();
     }
@@ -102,29 +102,36 @@ void AFlyingEnemyPawn::Steer()
 
 void AFlyingEnemyPawn::Evade()
 {
-    ObstacleAvoidanceTimer += GetWorld()->GetDeltaSeconds();
-    CanSteerTowardsPlayer = false;
+    
     if (ObstacleAvoidanceDirection == 0)
     {
+        CanSteerTowardsPlayer = false;
         int32 RandomDirection = FMath::RandRange(0, 1);
         ZObstacleAvoidanceStrength = FMath::RandRange(0.0f, 0.6f);
         ObstacleAvoidanceDirection = (RandomDirection == 0) ? -1 : 1;
     }
+    ObstacleAvoidanceTimer += GetWorld()->GetDeltaSeconds();
+    
     if (ObstacleAvoidanceTimer > ObstacleAvoidanceDuration)
     {
-        ObstacleAvoidanceDirection = 0;
-        ZObstacleAvoidanceStrength = 0;
-        PerformEvasiveManouevres = false;
+        ResetEvasion();
+        return;
     }
-    MoveDirection.Y = ObstacleAvoidanceDirection * SteerFactor * ObstacleAvoidanceStrength;
-    MoveDirection.Z = 1 * SteerFactor * ObstacleAvoidanceStrength * ZObstacleAvoidanceStrength;
-    if (ObstacleAvoidanceTimer > ResetSteeringDuration)
+    else
     {
-        ObstacleAvoidanceTimer = 0;
+        MoveDirection.Y = ObstacleAvoidanceDirection * SteerFactor * ObstacleAvoidanceStrength;
+        MoveDirection.Z = 1 * SteerFactor * ObstacleAvoidanceStrength * ZObstacleAvoidanceStrength;
+    }
+    
+}
+
+void AFlyingEnemyPawn::ResetEvasion()
+{
         ObstacleAvoidanceDirection = 0;
         ZObstacleAvoidanceStrength = 0;
+        ObstacleAvoidanceTimer = 0;
+        PerformEvasiveManouevres = false;
         CanSteerTowardsPlayer = true;
-    }
 }
 
 bool AFlyingEnemyPawn::DetectObstacles()
@@ -132,6 +139,8 @@ bool AFlyingEnemyPawn::DetectObstacles()
     FHitResult HitResult;
     FCollisionQueryParams CollisionParams;
     CollisionParams.AddIgnoredActor(this);
+
+    //change this to a sphere trace
     FVector TraceStart = GetActorLocation();
     FVector TraceEnd = TraceStart + MoveDirection * ObstacleAvoidanceDistance;
     bool bIsHit = GetWorld()->LineTraceSingleByChannel(HitResult,

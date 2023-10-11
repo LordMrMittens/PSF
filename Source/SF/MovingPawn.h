@@ -49,6 +49,7 @@ protected:
 
 	void DeactivatePawn();
 	FTimerHandle DeactivateTimerHandle;
+	UPROPERTY(EditAnywhere)
 	bool bIsActive = false;
 
 public:	
