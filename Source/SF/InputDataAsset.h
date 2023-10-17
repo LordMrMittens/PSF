@@ -19,6 +19,8 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     class UInputAction* InputSteer;
 		UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    class UInputAction* InputMouseSteer;
+		UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     class UInputAction* FireLaser;
 		UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     class UInputAction* FireBombs;
