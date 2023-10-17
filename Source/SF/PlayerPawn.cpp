@@ -66,6 +66,10 @@ void APlayerPawn::SetupPlayerInputComponent(UInputComponent *PlayerInputComponen
         PEI->BindAction(InputActions->Boost,  ETriggerEvent::Completed ,this,&APlayerPawn::FinishBoosting);
         PEI->BindAction(InputActions->Break,  ETriggerEvent::Triggered ,this,&APlayerPawn::Break);
         PEI->BindAction(InputActions->Break,  ETriggerEvent::Completed ,this,&APlayerPawn::FinishBreaking);
+        //setup input from mouse, there will be a target reticule that auto centers on player when no input is being taken
+        //player object attepts to steer in the direction of the reticle
+        //if reticle is out of bounds then only the guns point in that direction
+        //if not out of bounds then the player object will steer in that direction and guns will point forward
     }
 }
 
