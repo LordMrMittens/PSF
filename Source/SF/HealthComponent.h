@@ -37,6 +37,7 @@ public:
 	float GetHealth() const { return CurrentHealth; }
 	float GetHealthPercentage() const { return CurrentHealth / MaxHealth; }
 	void SetUpHealthComponent(FHealthComponentConfig* HealthConfig);
+	void UpdateHealthBar();
 
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOutOfHealthDelegate);
 	UPROPERTY(BlueprintAssignable,Category= "Health")

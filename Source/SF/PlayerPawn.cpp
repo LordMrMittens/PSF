@@ -12,6 +12,7 @@
 #include "PlayerGunComponent.h"
 #include "BoostComponent.h"
 #include "Projectile.h"
+#include "HudUserWidget.h"
 
 // Sets default values
 APlayerPawn::APlayerPawn()
@@ -32,6 +33,11 @@ void APlayerPawn::BeginPlay()
 {
     Super::BeginPlay();
     SetUpPlayerPawn();
+    HudUserWidget = CreateWidget<UHudUserWidget>(GetWorld(),HudUserWidgetClass);
+    if (HudUserWidget)
+    {
+        HudUserWidget->AddToViewport();
+    }
 }
 
 // Called every frame

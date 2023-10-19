@@ -6,9 +6,10 @@
 #include "Components/Image.h"
 
 
-void UHudUserWidget::SetResourcePercent(UProgressBar *ResourceBar,float Resource)
+void UHudUserWidget::SetResourcePercent(UProgressBar *ResourceBar,float ResourcePercent)
 {
-    float ResourcePercent = Resource / 100;
+    //health already sent as a percentage 
+    // stamina needs the same
     ResourceBar->SetPercent(ResourcePercent);
 }
 

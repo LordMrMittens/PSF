@@ -10,6 +10,7 @@ struct FInputActionValue;
 class AProjectile;
 class UPlayerGunComponent;
 class UBoostComponent;
+class UHudUserWidget;
 
 UCLASS()
 class SF_API APlayerPawn : public AMovingPawn
@@ -38,6 +39,12 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
 	class UInputDataAsset* InputActions;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HUD")
+	TSubclassOf<UHudUserWidget> HudUserWidgetClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HUD")
+	UHudUserWidget* HudUserWidget;
 
 	void Steer(const FInputActionValue& Value);
 	

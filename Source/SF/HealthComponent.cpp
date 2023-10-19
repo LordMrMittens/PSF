@@ -2,6 +2,9 @@
 
 
 #include "HealthComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "HudUserWidget.h"
+#include "PlayerPawn.h"
 
 // Sets default values for this component's properties
 UHealthComponent::UHealthComponent()
@@ -45,5 +48,17 @@ void UHealthComponent::SetHealth(){
 void UHealthComponent::SetUpHealthComponent(FHealthComponentConfig* HealthConfig){
 MaxHealth = HealthConfig->MaxHealth;
 SetHealth();
+}
+
+void UHealthComponent::UpdateHealthBar()
+{
+	if(GetOwner() == UGameplayStatics::GetPlayerPawn(GetWorld(),0)){
+		APlayerPawn * PlayerPawn = Cast<APlayerPawn>(GetOwner());
+		UHudUserWidget* UserWidget = PlayerPawn->HudUserWidget;
+		if(UserWidget){
+			UserWidget->SetResourcePercent(UserWidget->HealthBar,GetHealthPercentage());
+			
+		}
+	}
 }
 
