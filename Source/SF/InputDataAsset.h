@@ -16,6 +16,7 @@ class SF_API UInputDataAsset : public UDataAsset
 	GENERATED_BODY()
 
 public:
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     class UInputAction* InputSteer;
 		UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
