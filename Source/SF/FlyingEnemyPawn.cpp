@@ -70,7 +70,7 @@ void AFlyingEnemyPawn::ResetPawn()
     LeavingLevel = false;
     PerformEvasiveManouevres = false;
     CanSteerTowardsPlayer = true;
-    ResetEvasion();
+    FinishEvasion();
 }
 
 void AFlyingEnemyPawn::Steer()
@@ -103,9 +103,10 @@ void AFlyingEnemyPawn::Steer()
 void AFlyingEnemyPawn::Evade()
 {
     
-    if (ObstacleAvoidanceDirection == 0)
+    if (ObstacleAvoidanceDirection == 0 && CanEvade)
     {
         CanSteerTowardsPlayer = false;
+        CanEvade = false;
         int32 RandomDirection = FMath::RandRange(0, 1);
         ZObstacleAvoidanceStrength = FMath::RandRange(0.0f, 0.6f);
         ObstacleAvoidanceDirection = (RandomDirection == 0) ? -1 : 1;
@@ -114,7 +115,7 @@ void AFlyingEnemyPawn::Evade()
     
     if (ObstacleAvoidanceTimer > ObstacleAvoidanceDuration)
     {
-        ResetEvasion();
+        FinishEvasion();
         return;
     }
     else
@@ -125,13 +126,24 @@ void AFlyingEnemyPawn::Evade()
     
 }
 
-void AFlyingEnemyPawn::ResetEvasion()
+void AFlyingEnemyPawn::FinishEvasion()
 {
         ObstacleAvoidanceDirection = 0;
         ZObstacleAvoidanceStrength = 0;
         ObstacleAvoidanceTimer = 0;
         PerformEvasiveManouevres = false;
-        CanSteerTowardsPlayer = true;
+        GetWorldTimerManager().SetTimer(ResetSteeringTimerHandle, this, &AFlyingEnemyPawn::ResetEvasiveState, ResetSteeringDuration, false);
+        
+}
+
+void AFlyingEnemyPawn::ResetEvasiveState()
+{
+    ObstacleAvoidanceDirection = 0;
+    ZObstacleAvoidanceStrength = 0;
+    ObstacleAvoidanceTimer = 0;
+    PerformEvasiveManouevres = false;
+    CanSteerTowardsPlayer = true;
+    CanEvade = true;
 }
 
 bool AFlyingEnemyPawn::DetectObstacles()

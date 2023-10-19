@@ -45,7 +45,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Evasion")
 	float ObstacleAvoidanceDuration = 2;
 	UPROPERTY(EditAnywhere, Category = "Evasion")
-	float ResetSteeringDuration = 2;
+	float ResetSteeringDuration = 1;
+	FTimerHandle ResetSteeringTimerHandle;
 	UPROPERTY(EditAnywhere, Category = "Evasion")
 	float ObstacleAvoidanceStrength = 1.5;
 	UPROPERTY(EditAnywhere, Category = "Steering")
@@ -69,12 +70,14 @@ private:
 	bool CanSteerTowardsPlayer = true;
 	bool LeavingLevel = false;
 	bool PerformEvasiveManouevres = false;
+	bool CanEvade = true;
 
 	int32 ObstacleAvoidanceDirection = 0;
 
 	void Steer();
 	void Evade();
-	void ResetEvasion();
+	void FinishEvasion();
+	void ResetEvasiveState();
 	bool DetectObstacles();
 	UFUNCTION()
 	void LeaveLevel();
