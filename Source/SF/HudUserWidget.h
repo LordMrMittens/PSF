@@ -19,10 +19,25 @@ class SF_API UHudUserWidget : public UUserWidget
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (bindwidget) )
 	class UProgressBar* HealthBar;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (bindwidget))
-	class UProgressBar* StaminaBar;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float HealthPercent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (bindwidget))
-	class UImage* BombIcon;
-	
+	UProgressBar* StaminaBar;
+	float StaminaPercent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<class UImage*> BombIcons;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (bindwidget))
+	UImage *BombIcon1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (bindwidget))
+	UImage *BombIcon2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (bindwidget))
+	UImage *BombIcon3;
+
+	UFUNCTION(BlueprintCallable)
+	void SetResourcePercent(UProgressBar *ResourceBar,float Resource);
+	UFUNCTION(BlueprintCallable)
+	void UpdateNumberOfBombs(int NumberOfBombs);
 };

@@ -2,4 +2,28 @@
 
 
 #include "HudUserWidget.h"
+#include "Components/ProgressBar.h"
+#include "Components/Image.h"
 
+
+void UHudUserWidget::SetResourcePercent(UProgressBar *ResourceBar,float Resource)
+{
+    float ResourcePercent = Resource / 100;
+    ResourceBar->SetPercent(ResourcePercent);
+}
+
+void UHudUserWidget::UpdateNumberOfBombs(int NumberOfBombs)
+{
+    int BombIndex = NumberOfBombs;
+    for (UImage* Image : BombIcons)
+    {
+        if (BombIndex > 0)
+        {
+            Image->SetOpacity(1);
+            BombIndex--;
+        }
+        else{Image->SetOpacity(0);}
+        
+    }
+    
+}
