@@ -2,6 +2,8 @@
 
 
 #include "BoostComponent.h"
+#include "HudUserWidget.h"
+#include "PlayerPawn.h"
 
 // Sets default values for this component's properties
 UBoostComponent::UBoostComponent()
@@ -20,6 +22,7 @@ void UBoostComponent::BeginPlay()
 	Super::BeginPlay();
 	CurrentBoost = MaxBoost;
 	CurrentBreak = MaxBreak;
+	PlayerPawn = Cast<APlayerPawn>(GetOwner());
 	
 }
 
@@ -30,6 +33,9 @@ void UBoostComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	RestoreResource(DeltaTime, CurrentBoost, MaxBoost, RestoringRate, bMustRestoreBoostCompletely, bShouldRestoreBoost);
 	RestoreResource(DeltaTime, CurrentBreak, MaxBreak, RestoringRate, bMustRestoreBreakCompletely, bShouldRestoreBreak);
+	if (PlayerPawn){
+		PlayerPawn->HudUserWidget->SetResourcePercent(PlayerPawn->HudUserWidget->StaminaBar, GetCurrentBoostPercentage());
+	}
 }
 
 bool UBoostComponent::CanChangeVelocity(float &OutResource, float Rate, bool &OutResourceWasDepleted, bool &OutRestoringResource)

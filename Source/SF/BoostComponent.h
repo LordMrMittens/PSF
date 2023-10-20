@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "BoostComponent.generated.h"
 
+class APlayerPawn;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SF_API UBoostComponent : public UActorComponent
@@ -27,6 +28,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	float ConsumptionRate;
 
+	APlayerPawn *PlayerPawn;
+
 	bool bShouldRestoreBoost = false;
 	bool bMustRestoreBoostCompletely = false;
 	bool bShouldRestoreBreak = false;
@@ -39,6 +42,7 @@ public:
 	bool CanChangeVelocity(float &OutResource, float Rate, bool &OutResourceDepleted, bool &OutRestoringResource);
 	void RestoreResource(float DeltaTime, float &OutResource, float MaxResource, float Rate, bool &OutResourceDepleted, bool &OutRestoringResource);
 	void StartRestoringResource(bool &OutResourceToRestore);
+	float GetCurrentBoostPercentage() const { return CurrentBoost / MaxBoost; }
 private:
 	UPROPERTY(EditAnywhere)
 	float MaxBoost = 100;
