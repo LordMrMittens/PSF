@@ -42,10 +42,10 @@ void APlayerPawn::BeginPlay()
 
 // Called every frame
 void APlayerPawn::Tick(float DeltaTime)
+
 {
     Super::Tick(DeltaTime);
     CalculateVelocity();
-    
 }
 
 // Called to bind functionality to input

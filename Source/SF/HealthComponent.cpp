@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "HealthComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "HudUserWidget.h"
@@ -16,49 +15,56 @@ UHealthComponent::UHealthComponent()
 	// ...
 }
 
-
 // Called when the game starts
 void UHealthComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	// ...
-	
 }
 
-void UHealthComponent::TakeDamage(float DamageTaken){
-CurrentHealth -= DamageTaken;
-if(CurrentHealth <= 0){
-	OnOutOfHealth.Broadcast();
-}
+void UHealthComponent::TakeDamage(float DamageTaken)
+{
+	CurrentHealth -= DamageTaken;
+	if (CurrentHealth <= 0)
+	{
+		OnOutOfHealth.Broadcast();
+	}
+	UpdateHealthBar();
 }
 
+void UHealthComponent::RestoreHealth(float HealthRestored)
+{
+	CurrentHealth += HealthRestored;
+	if (CurrentHealth > MaxHealth)
+	{
+		CurrentHealth = MaxHealth;
+	}
+	UpdateHealthBar();
+}
 
-void UHealthComponent::RestoreHealth(float HealthRestored){
-CurrentHealth += HealthRestored;
-if(CurrentHealth > MaxHealth){
+void UHealthComponent::SetHealth()
+{
 	CurrentHealth = MaxHealth;
 }
-}
 
-void UHealthComponent::SetHealth(){
-	CurrentHealth = MaxHealth;
-}
-
-void UHealthComponent::SetUpHealthComponent(FHealthComponentConfig* HealthConfig){
-MaxHealth = HealthConfig->MaxHealth;
-SetHealth();
+void UHealthComponent::SetUpHealthComponent(FHealthComponentConfig *HealthConfig)
+{
+	MaxHealth = HealthConfig->MaxHealth;
+	SetHealth();
+	UpdateHealthBar();
 }
 
 void UHealthComponent::UpdateHealthBar()
 {
-	if(GetOwner() == UGameplayStatics::GetPlayerPawn(GetWorld(),0)){
-		APlayerPawn * PlayerPawn = Cast<APlayerPawn>(GetOwner());
-		UHudUserWidget* UserWidget = PlayerPawn->HudUserWidget;
-		if(UserWidget){
-			UserWidget->SetResourcePercent(UserWidget->HealthBar,GetHealthPercentage());
-			
+	APlayerPawn *PlayerPawn = Cast<APlayerPawn>(GetOwner());
+	if (PlayerPawn)
+	{
+
+		UHudUserWidget *UserWidget = PlayerPawn->HudUserWidget;
+		if (UserWidget)
+		{
+			UserWidget->SetResourcePercent(UserWidget->HealthBar, GetHealthPercentage());
 		}
 	}
 }
-
