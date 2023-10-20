@@ -8,8 +8,7 @@
 
 void UHudUserWidget::SetResourcePercent(UProgressBar *ResourceBar,float ResourcePercent)
 {
-    //health already sent as a percentage 
-    // stamina needs the same
+    UE_LOG(LogTemp, Display, TEXT("ResourcePercent: %f"), ResourcePercent);
     ResourceBar->SetPercent(ResourcePercent);
 }
 
