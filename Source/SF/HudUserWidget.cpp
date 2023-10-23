@@ -8,7 +8,6 @@
 
 void UHudUserWidget::SetResourcePercent(UProgressBar *ResourceBar,float ResourcePercent)
 {
-    UE_LOG(LogTemp, Display, TEXT("ResourcePercent: %f"), ResourcePercent);
     ResourceBar->SetPercent(ResourcePercent);
 }
 
