@@ -8,6 +8,7 @@
 
 void UHudUserWidget::SetResourcePercent(UProgressBar *ResourceBar,float ResourcePercent)
 {
+    
     ResourceBar->SetPercent(ResourcePercent);
 }
 

@@ -71,13 +71,11 @@ void AMovingPawn::Tick(float DeltaTime)
 }
 void AMovingPawn::OnDeath()
 {
-
     DeactivatePawn();
 }
 
 void AMovingPawn::DeactivatePawn()
 {
-    UE_LOG(LogTemp, Error, TEXT("Pawn Deactivated %s"), *GetName());
         SetActorHiddenInGame(true);
     SetActorEnableCollision(false);
     bIsActive = false;
