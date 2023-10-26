@@ -21,7 +21,7 @@ void AEnemyPawn::OnDeath()
 float AEnemyPawn::CalculateTargetVelocity()
 {
     float SpeedModifier = 1;
-    if (GameplayManager)
+    if (GameplayManager && GameplayManager->GetPlayerPawn())
     {
         FVector PlayerLocation = GameplayManager->GetPlayerLocation();
         FVector PlayerLocationWithOffset = FVector(PlayerLocation.X,0, 0);
