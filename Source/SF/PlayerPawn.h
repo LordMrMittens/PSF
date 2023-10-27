@@ -28,6 +28,7 @@ protected:
     class UInputMappingContext* InputMapping;
 	virtual void Move() override;
 	virtual void SetRotation() override;
+	virtual void OnDeath() override;
 
 
 public:	
@@ -56,15 +57,11 @@ public:
 	FVector GetVelocity() const{
 		return Velocity;
 	}
+	void SetSpawningPoint(AActor* SpawnPoint) {RespawningPoint = SpawnPoint;}
 
 private:
 	
-	void SetUpPlayerPawn();
-	void Boost();
-	void FinishBoosting();
-	void Break();
-	void FinishBreaking();
-	void CalculateVelocity();
+
 	
 	FVector PreviousLocation;
 
@@ -76,9 +73,22 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Components")
 	UBoostComponent* BoostComponent;
 
-
+	UPROPERTY()
+	FTimerHandle RespawnTimerHandle;
+	UPROPERTY(EditAnywhere, Category = "Respawn")
+	float RespawnTime = 3;
+	UPROPERTY(EditAnywhere, Category = "Respawn")
+	AActor * RespawningPoint;
 
 	bool RecevingInput = false;
 
 	FVector Velocity;
+
+	void SetUpPlayerPawn();
+	void Boost();
+	void FinishBoosting();
+	void Break();
+	void FinishBreaking();
+	void CalculateVelocity();
+	void Respawn();
 };

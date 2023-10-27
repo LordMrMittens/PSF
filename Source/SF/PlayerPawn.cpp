@@ -111,11 +111,27 @@ void APlayerPawn::SetRotation()
     }
 }
 
+void APlayerPawn::OnDeath()
+{
+    Super::OnDeath();
+    GetWorldTimerManager().SetTimer(RespawnTimerHandle, this, &APlayerPawn::Respawn, RespawnTime, false);
+}
+
 void APlayerPawn::CalculateVelocity()
 {
     FVector CurrentLocation = GetActorLocation();
     Velocity = (CurrentLocation - PreviousLocation) / GetWorld()->GetDeltaSeconds();
     PreviousLocation = CurrentLocation;
+}
+
+void APlayerPawn::Respawn()
+{
+    //Move to respawn location
+    //Delete spawned enemies
+    //Respawn Enemies
+    //Repair Ship
+    //ResetGun
+    //make active
 }
 
 void APlayerPawn::SetUpPlayerPawn()
