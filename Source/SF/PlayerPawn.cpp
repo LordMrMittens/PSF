@@ -34,6 +34,7 @@ void APlayerPawn::BeginPlay()
     Super::BeginPlay();
     SetUpPlayerPawn();
     HudUserWidget = CreateWidget<UHudUserWidget>(GetWorld(),HudUserWidgetClass);
+    //set player spawnpoint on start !!!!
     if (HudUserWidget)
     {
         HudUserWidget->AddToViewport();
@@ -113,8 +114,10 @@ void APlayerPawn::SetRotation()
 
 void APlayerPawn::OnDeath()
 {
+    OnPlayerHasDied.Broadcast();
+    
     Super::OnDeath();
-    GetWorldTimerManager().SetTimer(RespawnTimerHandle, this, &APlayerPawn::Respawn, RespawnTime, false);
+   
 }
 
 void APlayerPawn::CalculateVelocity()
@@ -122,16 +125,6 @@ void APlayerPawn::CalculateVelocity()
     FVector CurrentLocation = GetActorLocation();
     Velocity = (CurrentLocation - PreviousLocation) / GetWorld()->GetDeltaSeconds();
     PreviousLocation = CurrentLocation;
-}
-
-void APlayerPawn::Respawn()
-{
-    //Move to respawn location
-    //Delete spawned enemies
-    //Respawn Enemies
-    //Repair Ship
-    //ResetGun
-    //make active
 }
 
 void APlayerPawn::SetUpPlayerPawn()

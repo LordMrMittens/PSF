@@ -50,6 +50,7 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Pooling")
 	TMap<TSubclassOf<AActor>, FObjectPoolerProperties> ObjectPoolerProperties;
+	void SetSpawningPoint(AActor* SpawnPoint) {RespawningPoint = SpawnPoint;}
 	
 private:
 	//Player Related Variables
@@ -58,7 +59,17 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Player")
 	FVector PlayerLocation;
 
+	UPROPERTY()
+	FTimerHandle RespawnTimerHandle;
+	UPROPERTY(EditAnywhere, Category = "Respawn")
+	float RespawnTime = 3;
+	UPROPERTY(EditAnywhere, Category = "Respawn")
+	AActor * RespawningPoint;
+
 	void UpdatePlayerLocation();
 	void CreateObjectPools();
+	UFUNCTION()
+	void Respawn();
+	
 
 };

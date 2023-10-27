@@ -29,6 +29,11 @@ void AGameplayManager::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	if(PlayerPawn==nullptr){
 		PlayerPawn = Cast<APlayerPawn>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
+		if (PlayerPawn)
+		{
+			PlayerPawn->OnPlayerHasDied.AddDynamic(this, &AGameplayManager::Respawn);
+		}
+		
 	} else {
 		UpdatePlayerLocation();
 	}
@@ -51,3 +56,16 @@ void AGameplayManager::CreateObjectPools()
     }
 }
 
+
+void AGameplayManager::Respawn()
+{
+	   // GetWorldTimerManager().SetTimer(RespawnTimerHandle, this, &AGameplayManager::Respawn, RespawnTime, false);
+    //Move to respawn location
+    //Delete spawned enemies
+    //Respawn Enemies
+    //Repair Ship
+    //ResetGun
+    //make active
+
+    UE_LOG(LogTemp, Display, TEXT("Player Has Respawned"));
+}

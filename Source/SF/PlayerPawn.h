@@ -35,6 +35,9 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPlayerDeath);
+	FOnPlayerDeath OnPlayerHasDied;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 	class USpringArmComponent* SpringArmComponent;
 
@@ -57,7 +60,7 @@ public:
 	FVector GetVelocity() const{
 		return Velocity;
 	}
-	void SetSpawningPoint(AActor* SpawnPoint) {RespawningPoint = SpawnPoint;}
+	
 
 private:
 	
@@ -73,13 +76,6 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Components")
 	UBoostComponent* BoostComponent;
 
-	UPROPERTY()
-	FTimerHandle RespawnTimerHandle;
-	UPROPERTY(EditAnywhere, Category = "Respawn")
-	float RespawnTime = 3;
-	UPROPERTY(EditAnywhere, Category = "Respawn")
-	AActor * RespawningPoint;
-
 	bool RecevingInput = false;
 
 	FVector Velocity;
@@ -90,5 +86,5 @@ private:
 	void Break();
 	void FinishBreaking();
 	void CalculateVelocity();
-	void Respawn();
+	
 };

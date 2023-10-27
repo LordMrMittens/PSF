@@ -76,7 +76,7 @@ void AMovingPawn::OnDeath()
 
 void AMovingPawn::DeactivatePawn()
 {
-        SetActorHiddenInGame(true);
+    SetActorHiddenInGame(true);
     SetActorEnableCollision(false);
     bIsActive = false;
     GunComponent->bIsActive = false;
