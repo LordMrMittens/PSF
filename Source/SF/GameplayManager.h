@@ -69,7 +69,10 @@ private:
 	void UpdatePlayerLocation();
 	void CreateObjectPools();
 	UFUNCTION()
-	void Respawn();
+	void RespawningSequence();
+	UFUNCTION()
+	void RespawnPlayer();
+
 	
 
 };

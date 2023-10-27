@@ -31,7 +31,7 @@ void AGameplayManager::Tick(float DeltaTime)
 		PlayerPawn = Cast<APlayerPawn>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
 		if (PlayerPawn)
 		{
-			PlayerPawn->OnPlayerHasDied.AddDynamic(this, &AGameplayManager::Respawn);
+			PlayerPawn->OnPlayerHasDied.AddDynamic(this, &AGameplayManager::RespawningSequence);
 		}
 		
 	} else {
@@ -57,15 +57,18 @@ void AGameplayManager::CreateObjectPools()
 }
 
 
-void AGameplayManager::Respawn()
+void AGameplayManager::RespawningSequence()
 {
-	   // GetWorldTimerManager().SetTimer(RespawnTimerHandle, this, &AGameplayManager::Respawn, RespawnTime, false);
-    //Move to respawn location
+	GetWorldTimerManager().SetTimer(RespawnTimerHandle, this, &AGameplayManager::RespawnPlayer, RespawnTime, false);
+}
+
+void AGameplayManager::RespawnPlayer()
+{
+	//Move to respawn location
     //Delete spawned enemies
     //Respawn Enemies
     //Repair Ship
     //ResetGun
     //make active
-
-    UE_LOG(LogTemp, Display, TEXT("Player Has Respawned"));
+	UE_LOG(LogTemp, Display, TEXT("Player Has Respawned"));
 }
