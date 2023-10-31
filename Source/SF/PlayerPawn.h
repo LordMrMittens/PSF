@@ -60,7 +60,7 @@ public:
 	FVector GetVelocity() const{
 		return Velocity;
 	}
-	
+	void ResetPlayerPawn();
 
 private:
 	

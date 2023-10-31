@@ -139,11 +139,18 @@ void APlayerPawn::SetUpPlayerPawn()
         PlayerGunComponent->bIsActive = true;
     }
     BoostComponent = Cast<UBoostComponent>(GetComponentByClass(UBoostComponent::StaticClass()));
-    if(BoostComponent != nullptr){
-
-    } else {
-        UE_LOG(LogTemp, Error, TEXT("No boost Component Found"));
+    if(BoostComponent == nullptr){
+         UE_LOG(LogTemp, Error, TEXT("No boost Component Found"));
     }
+}
+void APlayerPawn::ResetPlayerPawn()
+{
+    SetActorHiddenInGame(false);
+    SetActorEnableCollision(true);
+    bIsActive=true;
+    PlayerGunComponent->ResetLasers();
+    PlayerGunComponent->bIsActive = true;
+    HealthComponent->SetHealth();
 }
 
 void APlayerPawn::Boost()

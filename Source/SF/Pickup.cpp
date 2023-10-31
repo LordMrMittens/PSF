@@ -6,6 +6,8 @@
 #include "PlayerPawn.h"
 #include "HealthComponent.h"
 #include "PlayerGunComponent.h"
+#include "GameplayManager.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 APickup::APickup()
@@ -69,9 +71,17 @@ void APickup::OnBeginOverlap(UPrimitiveComponent *OverlappedComponent, AActor *O
 			Player->HealthComponent->RestoreHealth(100);
 			//repair wings if broken when wings are implemented
 			break;
+			case EPickupType::Checkpoint:
+			Player->HealthComponent->RestoreHealth(100);
+			//repair wings if broken when wings are implemented
+			break;
 
 		default:
 			EPickupType::RepairPickup;
+			AGameplayManager* GameplayManager = Cast<AGameplayManager>(UGameplayStatics::GetActorOfClass(GetWorld(), AGameplayManager::StaticClass()));
+			if(GameplayManager){
+				GameplayManager->SetSpawningPoint(this->GetActorLocation());
+			}
 			break;
 		}
 		Destroy();

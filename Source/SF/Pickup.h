@@ -12,6 +12,7 @@ enum class EPickupType : uint8
     LaserUpgrade UMETA(DisplayName = "LaserUpgrade"),
     BombPickup UMETA(DisplayName = "BombPickup"),
     RepairPickup UMETA(DisplayName = "RepairPickup"),
+	Checkpoint UMETA(DisplayName = "Checkpoint"),
 };
 
 UCLASS()

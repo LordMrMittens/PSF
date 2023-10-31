@@ -32,7 +32,7 @@ void AGameplayManager::Tick(float DeltaTime)
 		if (PlayerPawn)
 		{
 			PlayerPawn->OnPlayerHasDied.AddDynamic(this, &AGameplayManager::RespawningSequence);
-			RespawningPoint = DefaultRespawningPoint;
+			RespawningPoint = PlayerPawn->GetActorLocation();
 		}
 		
 	} else {
@@ -65,7 +65,8 @@ void AGameplayManager::RespawningSequence()
 
 void AGameplayManager::RespawnPlayer()
 {
-	//Move to respawn location
+	PlayerPawn->SetActorLocation(RespawningPoint);
+	PlayerPawn->ResetPlayerPawn();
     //Delete spawned enemies
     //Respawn Enemies
     //Repair Ship
