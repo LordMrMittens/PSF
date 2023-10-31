@@ -46,13 +46,13 @@ void UHealthComponent::RestoreHealth(float HealthRestored)
 void UHealthComponent::SetHealth()
 {
 	CurrentHealth = MaxHealth;
+	UpdateHealthBar();
 }
 
 void UHealthComponent::SetUpHealthComponent(FHealthComponentConfig *HealthConfig)
 {
 	MaxHealth = HealthConfig->MaxHealth;
 	SetHealth();
-	UpdateHealthBar();
 }
 
 void UHealthComponent::UpdateHealthBar()
