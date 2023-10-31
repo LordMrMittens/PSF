@@ -132,7 +132,7 @@ bool ALandEnemyPawn::IsPlayerInRange() const
 
 void ALandEnemyPawn::AimAndShoot()
 {
-    if (IsPlayerInRange())
+    if (IsPlayerInRange()&&bIsActive)
     {
         GunComponent->bIsActive = true;
         GunComponent->Aim(&UGunComponent::FireLasers);
