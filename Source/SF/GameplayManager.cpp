@@ -32,6 +32,7 @@ void AGameplayManager::Tick(float DeltaTime)
 		if (PlayerPawn)
 		{
 			PlayerPawn->OnPlayerHasDied.AddDynamic(this, &AGameplayManager::RespawningSequence);
+			RespawningPoint = DefaultRespawningPoint;
 		}
 		
 	} else {

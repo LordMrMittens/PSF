@@ -64,6 +64,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Respawn")
 	float RespawnTime = 3;
 	UPROPERTY(EditAnywhere, Category = "Respawn")
+	AActor * DefaultRespawningPoint;
+	UPROPERTY(EditAnywhere, Category = "Respawn")
 	AActor * RespawningPoint;
 
 	void UpdatePlayerLocation();
