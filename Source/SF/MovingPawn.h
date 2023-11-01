@@ -21,8 +21,8 @@ public:
 	// Sets default values for this pawn's properties
 	AMovingPawn();
 
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDeathDelegate, AActor*, Pawn);
-	FOnDeathDelegate OnActorHasDied;
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDeactivationDelegate, AActor*, Pawn);
+	FOnDeactivationDelegate OnActorHasDeactivated;
 
 protected:
 	

@@ -44,7 +44,7 @@ void UObjectPooler::Initialize(UWorld* World)
         AMovingPawn* MovingPawn = Cast<AMovingPawn>(NewObject);
         if(MovingPawn)
         {
-        MovingPawn->OnActorHasDied.AddDynamic(this, &UObjectPooler::ReturnObject);
+        MovingPawn->OnActorHasDeactivated.AddDynamic(this, &UObjectPooler::ReturnObject);
         }
         NewObject->SetActorHiddenInGame(true);
         NewObject->SetActorEnableCollision(false);
