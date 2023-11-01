@@ -2,6 +2,7 @@
 
 
 #include "ObjectPooler.h"
+#include "MovingPawn.h"
 
 
 AActor* UObjectPooler::GetObject(FVector Location, FRotator Rotation)
@@ -14,6 +15,7 @@ AActor* UObjectPooler::GetObject(FVector Location, FRotator Rotation)
             Object->SetActorRotation(Rotation);
             Object->SetActorHiddenInGame(false);
             Object->SetActorEnableCollision(true);
+            ActiveObjectPool.Add(Object);
             return Object;
         }
     }
@@ -22,8 +24,10 @@ AActor* UObjectPooler::GetObject(FVector Location, FRotator Rotation)
 
 void UObjectPooler::ReturnObject(AActor *Object)
 {
+    UE_LOG(LogTemp, Display, TEXT("Object has returned"));
     Object->SetActorHiddenInGame(true);
     Object->SetActorEnableCollision(false);
+    ActiveObjectPool.Remove(Object);
 }
 
 void UObjectPooler::Initialize(UWorld* World)
@@ -35,8 +39,13 @@ void UObjectPooler::Initialize(UWorld* World)
             UE_LOG(LogTemp, Error, TEXT("Object Class is null"));
             return;
         }
-        
+
         AActor* NewObject = World->SpawnActor<AActor>(ObjectClass);
+        AMovingPawn* MovingPawn = Cast<AMovingPawn>(NewObject);
+        if(MovingPawn)
+        {
+        MovingPawn->OnActorHasDied.AddDynamic(this, &UObjectPooler::ReturnObject);
+        }
         NewObject->SetActorHiddenInGame(true);
         NewObject->SetActorEnableCollision(false);
         ObjectPool.Add(NewObject);

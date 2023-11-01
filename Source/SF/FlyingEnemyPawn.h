@@ -21,8 +21,6 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	virtual void Move() override;
-	virtual void OnDeath() override;
-
 public:
 virtual void Tick(float DeltaTime) override;
 virtual void ResetPawn() override;

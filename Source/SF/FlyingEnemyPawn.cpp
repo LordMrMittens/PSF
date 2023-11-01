@@ -47,12 +47,6 @@ void AFlyingEnemyPawn::Move()
     CurrentSpeed = Speed * CalculateTargetVelocity();
 }
 
-void AFlyingEnemyPawn::OnDeath()
-{
-    Super::OnDeath();
-    GetWorldTimerManager().ClearAllTimersForObject(this); //this might cause timer issues
-}
-
 void AFlyingEnemyPawn::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);

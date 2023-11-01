@@ -31,6 +31,7 @@ class SF_API UObjectPooler : public UObject
 
 private:
     TArray<AActor*> ObjectPool;
+    TArray<AActor*> ActiveObjectPool;
 	    
     
 };

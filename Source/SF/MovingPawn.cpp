@@ -72,10 +72,12 @@ void AMovingPawn::Tick(float DeltaTime)
 void AMovingPawn::OnDeath()
 {
     DeactivatePawn();
+    OnActorHasDied.Broadcast(this);
 }
 
 void AMovingPawn::DeactivatePawn()
 {
+    GetWorldTimerManager().ClearAllTimersForObject(this); //this might cause timer issues
     SetActorHiddenInGame(true);
     SetActorEnableCollision(false);
     bIsActive = false;

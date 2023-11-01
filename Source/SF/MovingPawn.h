@@ -21,6 +21,9 @@ public:
 	// Sets default values for this pawn's properties
 	AMovingPawn();
 
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDeathDelegate, AActor*, Pawn);
+	FOnDeathDelegate OnActorHasDied;
+
 protected:
 	
 	// Called when the game starts or when spawned
@@ -47,7 +50,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Components")
 	UGunComponent *GunComponent;
 
-	void DeactivatePawn();
+	
 	FTimerHandle DeactivateTimerHandle;
 	UPROPERTY(EditAnywhere)
 	bool bIsActive = false;
@@ -57,6 +60,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void ResetPawn();
 	void SetActive(bool IsActive) { bIsActive = IsActive; }
+	void DeactivatePawn();
 	float Speed;
 	float CurrentSpeed;
 	FVector MoveDirection;
