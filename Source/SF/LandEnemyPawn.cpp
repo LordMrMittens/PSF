@@ -111,6 +111,12 @@ void ALandEnemyPawn::Move()
     }
 }
 
+void ALandEnemyPawn::OnDeath()
+{
+    Super::OnDeath();
+    bIsDead = true;
+}
+
 bool ALandEnemyPawn::RotationSet()
 {
     FVector DirectionToTarget = (CurrentTarget->GetActorLocation() - GetActorLocation()).GetSafeNormal();
@@ -132,7 +138,7 @@ bool ALandEnemyPawn::IsPlayerInRange() const
 
 void ALandEnemyPawn::AimAndShoot()
 {
-    if (IsPlayerInRange()&&bIsActive)
+    if (IsPlayerInRange()&& ! bIsDead)
     {
         GunComponent->bIsActive = true;
         GunComponent->Aim(&UGunComponent::FireLasers);

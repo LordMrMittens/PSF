@@ -22,6 +22,7 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	virtual void Move() override;
+	virtual void OnDeath() override;
 	
 
 public:
@@ -55,6 +56,7 @@ private:
 	bool bLoopsPositions = false;
 	bool bReturning = false;
 	bool bStayInPosition = false;
+	bool bIsDead = false;
 
 	FTimerHandle ShotTimerHandle;
 	UPROPERTY(EditAnywhere, Category = "Shooting")
