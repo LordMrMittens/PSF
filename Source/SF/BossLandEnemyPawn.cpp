@@ -51,7 +51,7 @@ void ABossLandEnemyPawn::SustainedLaserAttack()
     GetWorldTimerManager().PauseTimer(AttackTimerHandle);
     GetWorldTimerManager().SetTimer(WarningTimerHandle, this, &ABossLandEnemyPawn::ToggleMainLaser, MainGunWarningDuration, false);
     GetWorldTimerManager().SetTimer(AttackDurationTimerHandle, this, &ABossLandEnemyPawn::ToggleMainLaser, MainGunWarningDuration+MainGunSutainedDuration, false);
-    UNiagaraFunctionLibrary::SpawnSystemAttached(WarningLaser, SingleLaserSpawnPoint, NAME_None, FVector(0,0,0), GunComponent->GetComponentRotation(), EAttachLocation::KeepRelativeOffset, true);
+    UNiagaraFunctionLibrary::SpawnSystemAttached(WarningLaser, SingleLaserSpawnPoint, NAME_None, FVector(0,0,0), FRotator(0,0,0), EAttachLocation::KeepRelativeOffset, true);
     
     bShouldAim = true;
 }

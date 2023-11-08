@@ -23,7 +23,7 @@ protected:
 
 public:
 	virtual void Tick(float DeltaTime) override;
-	bool bShouldAim = true;
+	bool bShouldAim = false;
 
 	private:
 	// Attacking behaviour

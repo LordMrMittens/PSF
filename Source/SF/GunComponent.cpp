@@ -32,7 +32,6 @@ void UGunComponent::BeginPlay()
 void UGunComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	UE_LOG(LogTemp, Display, TEXT("Bisactive is %s"), bIsActive ? TEXT("true") : TEXT("false"));
 	// ...
 }
 
@@ -56,10 +55,8 @@ void UGunComponent::SetupGunComponent(FGunComponentConfig* GunConfig)
 
 void UGunComponent::FireLasers()
 {
-	UE_LOG(LogTemp, Display, TEXT(" Attempting to Fire Lasers"));
 	if (AvailableAmmo != 0 && bIsActive)
 	{
-		UE_LOG(LogTemp, Display, TEXT("Firing Lasers"));
 		if (DoubleLaser)
 		{
 			for (USceneComponent *SpawnPoint : LaserSpawnPoints)
@@ -166,7 +163,6 @@ void UGunComponent::AimAtPlayer(void (UGunComponent::*FireFunctionPtr)() = nullp
 	}
 	FVector GunDirection = GameplayManager->GetPlayerLocation() - GetComponentLocation();
 	FRotator NewRotation = GunDirection.Rotation();
-	UE_LOG(LogTemp, Error, TEXT("GunComponent rotation is %s"), *NewRotation.ToString());
 	if (bUsesWorldRotationWhenAiming)
 	{
 	SetWorldRotation(NewRotation);
