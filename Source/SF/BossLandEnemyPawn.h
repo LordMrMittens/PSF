@@ -19,9 +19,11 @@ public:
 	ABossLandEnemyPawn();
 protected:
 	virtual void BeginPlay() override;
+	virtual void AimAndShoot() override;
 
 public:
 	virtual void Tick(float DeltaTime) override;
+	bool bShouldAim = true;
 
 	private:
 	// Attacking behaviour

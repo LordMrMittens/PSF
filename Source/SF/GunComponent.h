@@ -75,6 +75,7 @@ public:
 	virtual void SpawnBombs(USceneComponent *SpawnPoint);
 
 	virtual void Aim(void (UGunComponent::*FireFunctionPtr)());
+	virtual void AimAtPlayer(void (UGunComponent::*FireFunctionPtr)());
 
 	void AddBomb(int32 BombsToAdd);
 	bool bIsActive = false;

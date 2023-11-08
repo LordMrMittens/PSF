@@ -26,6 +26,7 @@ protected:
 	virtual void AimAndShoot();
 	bool IsPlayerInRange() const;
 	bool bIsDead = false;
+	FTimerHandle ShotTimerHandle;
 	
 public:
 	virtual void Tick(float DeltaTime) override;
@@ -59,7 +60,7 @@ private:
 	bool bStayInPosition = false;
 	
 
-	FTimerHandle ShotTimerHandle;
+	
 	UPROPERTY(EditAnywhere, Category = "Shooting")
 	float ShotFrequency = 1;
 	UPROPERTY(EditAnywhere, Category = "Shooting")
