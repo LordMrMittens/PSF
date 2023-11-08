@@ -62,8 +62,9 @@ void ABossLandEnemyPawn::ToggleMainLaser()
     if(bMainGunIsFiring){
     MainGunTimeOfLastShot = GetWorld()->GetTimeSeconds();
     GetWorldTimerManager().UnPauseTimer(AttackTimerHandle);
-    bShouldAim = false;
+    
     }
     bMainGunIsFiring = !bMainGunIsFiring;
+    bShouldAim = !bShouldAim;
     
 }
