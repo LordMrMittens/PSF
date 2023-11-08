@@ -128,7 +128,7 @@ void UGunComponent::SpawnLaser(USceneComponent *SpawnPoint)
 	}}
 }
 
-void UGunComponent::Aim(void (UGunComponent::*FireFunctionPtr)())
+void UGunComponent::Aim(void (UGunComponent::*FireFunctionPtr)() = nullptr)
 {
 	if(bIsActive){
 	if (!GameplayManager)
@@ -147,8 +147,9 @@ void UGunComponent::Aim(void (UGunComponent::*FireFunctionPtr)())
     else
     {
         SetRelativeRotation(NewRotation);
-    }
+    }if (FireFunctionPtr != nullptr){
     (this->*FireFunctionPtr)();}
+	}
 }
 
 void UGunComponent::AddBomb(int32 BombsToAdd){

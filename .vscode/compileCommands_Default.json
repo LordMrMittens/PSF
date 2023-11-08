@@ -64,6 +64,22 @@
 		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
 	},
 	{
+		"file": "D:\\Unreal\\PSF\\Source\\SF\\BossLandEnemyPawn.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_Default\\SF.261.rsp"
+		],
+		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\Unreal\\PSF\\Source\\SF\\BossLandEnemyPawn.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\Unreal\\PSF\\.vscode\\compileCommands_Default\\SF.261.rsp"
+		],
+		"directory": "D:\\Unreal\\UE_5.2\\Engine\\Source"
+	},
+	{
 		"file": "D:\\Unreal\\PSF\\Source\\SF\\EnemyBossPawnA.cpp",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",

@@ -23,17 +23,18 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void Move() override;
 	virtual void OnDeath() override;
+	virtual void AimAndShoot();
+	bool IsPlayerInRange() const;
+	bool bIsDead = false;
 	
-
 public:
 	virtual void Tick(float DeltaTime) override;
 
 private:
 	AActor* SetTarget();
 	bool RotationSet();
-	bool IsPlayerInRange() const;
+	
 
-	void AimAndShoot();
 
 	UPROPERTY(EditAnywhere)
 	UCapsuleComponent *CapsuleComponent;
@@ -56,7 +57,7 @@ private:
 	bool bLoopsPositions = false;
 	bool bReturning = false;
 	bool bStayInPosition = false;
-	bool bIsDead = false;
+	
 
 	FTimerHandle ShotTimerHandle;
 	UPROPERTY(EditAnywhere, Category = "Shooting")
